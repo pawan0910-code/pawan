@@ -1,0 +1,81 @@
+{%- assign brand_name = section.settings.brand_name | default: shop.name -%}
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <p class="site-footer__brand">{{ brand_name }}</p>
+        {%- if section.settings.text != blank -%}
+          <div class="t-body">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+      {%- for block in section.blocks -%}
+        {%- assign menu = linklists[block.settings.menu] -%}
+        {%- assign nested = false -%}
+        {%- for link in menu.links -%}
+          {%- if link.links.size > 0 -%}{%- assign nested = true -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if nested -%}
+          {%- comment -%} A menu with sub-links renders one column per top-level item {%- endcomment -%}
+          {%- for parent in menu.links -%}
+            <div {% if forloop.first %}{{ block.shopify_attributes }}{% endif %}>
+              <h2 class="site-footer__title t-label-sm">{{ parent.title }}</h2>
+              <ul class="site-footer__links t-body" role="list">
+                {%- for link in parent.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- else -%}
+                  <li><a href="{{ parent.url }}">{{ parent.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div {{ block.shopify_attributes }}>
+            <h2 class="site-footer__title t-label-sm">{{ block.settings.heading | default: menu.title }}</h2>
+            {%- if menu.links.size > 0 -%}
+              <ul class="site-footer__links t-body" role="list">
+                {%- for link in menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="site-footer__bottom t-body-sm">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ brand_name }}</p>
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="site-footer__payments" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'site-footer__payment-icon' }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Store name", "info": "Leave blank to use the store name from Settings." },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "info": "Defaults to the menu title. Menus with nested links show one column per top-level link." },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Footer", "blocks": [{ "type": "menu" }] }]
+}
+{% endschema %}

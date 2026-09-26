@@ -1,0 +1,94 @@
+{%- liquid
+  assign featured = section.settings.product
+  assign art = section.settings.image
+  if art == blank and featured != blank
+    assign art = featured.featured_media
+  endif
+  assign art_alt = art.alt | default: featured.title | default: section.settings.heading
+  assign heading_tag = 'h2'
+-%}
+<section class="section section--md" aria-labelledby="HeroHeading-{{ section.id }}">
+  <div class="container">
+    <div class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__inner">
+        {%- if section.settings.badge_text != blank or section.settings.live_text != blank -%}
+          <div class="hero__top">
+            {%- if section.settings.badge_text != blank -%}
+              <span class="hero__badge badge badge--secondary">
+                {%- if section.settings.badge_icon != blank -%}
+                  <span class="icon icon--12" aria-hidden="true">{{ section.settings.badge_icon | strip }}</span>
+                {%- endif -%}
+                {{ section.settings.badge_text }}
+              </span>
+            {%- endif -%}
+            {%- if section.settings.live_text != blank -%}
+              <span class="hero__live t-label-sm">
+                <span class="hero__live-dot" aria-hidden="true"></span>
+                {{ section.settings.live_text }}
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="hero__body">
+          <div class="hero__copy">
+            <{{ heading_tag }} id="HeroHeading-{{ section.id }}" class="hero__title t-headline">{{ section.settings.heading }}</{{ heading_tag }}>
+            {%- if section.settings.text != blank -%}
+              <p class="hero__text t-body-sm">{{ section.settings.text }}</p>
+            {%- endif -%}
+            {%- if section.settings.button_label != blank -%}
+              {%- assign button_url = section.settings.button_link | default: featured.url | default: routes.all_products_collection_url -%}
+              <a href="{{ button_url }}" class="btn btn--gold">
+                <span>{{ section.settings.button_label }}</span>
+                <span class="icon icon--16" aria-hidden="true">arrow_forward</span>
+              </a>
+            {%- endif -%}
+          </div>
+
+          {%- if art != blank or featured != blank -%}
+            <div class="hero__art">
+              <div class="hero__art-disc" aria-hidden="true"></div>
+              {%- if art != blank -%}
+                {{
+                  art
+                  | image_url: width: 600
+                  | image_tag: class: 'hero__art-img', widths: '192, 336, 480, 600', sizes: '(min-width: 990px) 240px, (min-width: 750px) 168px, 96px', loading: 'eager', fetchpriority: 'high', alt: art_alt
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              {%- if featured != blank and section.settings.show_price -%}
+                <a href="{{ featured.url }}" class="hero__price t-label-sm">
+                  <span class="visually-hidden">{{ featured.title }}, </span>
+                  {{- featured.selected_or_first_available_variant.price | money_without_trailing_zeros -}}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Harvest hero",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "badge_text", "label": "Badge", "default": "Direct from Orchard" },
+    { "type": "text", "id": "badge_icon", "label": "Badge icon (Material Symbols name)", "default": "local_shipping" },
+    { "type": "text", "id": "live_text", "label": "Live label", "default": "Live Harvest", "info": "Shown with a pulsing dot. Leave blank to hide." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Freshly Handpicked at 5:00 AM" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Crisp apples & plump blueberries, delivered by 8:00 AM." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore Orchard Fresh" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the featured product." },
+    { "type": "header", "content": "Featured product artwork" },
+    { "type": "product", "id": "product", "label": "Product", "info": "Supplies the round artwork and the live price tag." },
+    { "type": "image_picker", "id": "image", "label": "Artwork override", "info": "Optional. A transparent PNG works best." },
+    { "type": "checkbox", "id": "show_price", "label": "Show price tag", "default": true }
+  ],
+  "presets": [{ "name": "Harvest hero" }]
+}
+{% endschema %}

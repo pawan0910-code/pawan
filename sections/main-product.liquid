@@ -1,0 +1,144 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign form_id = 'ProductForm-' | append: section.id
+  assign eyebrow = product.metafields.custom.origin.value | default: product.type
+  assign add_label = 'products.product.add_to_cart' | t
+  assign media_count = product.media.size
+-%}
+<div class="container" data-product>
+  <nav class="breadcrumbs t-label" aria-label="{{ 'general.breadcrumbs' | t }}" style="padding-top: var(--space-md);">
+    <a href="{{ routes.root_url }}">{{ 'general.home' | t }}</a>
+    <span aria-hidden="true">/</span>
+    {%- if collection -%}
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <span aria-hidden="true">/</span>
+    {%- endif -%}
+    <span aria-current="page">{{ product.title }}</span>
+  </nav>
+
+  <div class="product">
+    <div class="product__gallery">
+      <ul class="product__slides scroller{% if media_count > 1 %} product__slides--multi{% endif %}" role="list" aria-label="{{ 'products.product.media' | t }}">
+        {%- for media in product.media -%}
+          <li class="product__slide">
+            {%- case media.media_type -%}
+              {%- when 'image' -%}
+                {%- assign loading = 'lazy' -%}
+                {%- assign media_alt = media.alt | default: product.title -%}
+                {%- if forloop.first -%}{%- assign loading = 'eager' -%}{%- endif -%}
+                {{
+                  media
+                  | image_url: width: 1400
+                  | image_tag: loading: loading, widths: '400, 600, 800, 1000, 1400', sizes: '(min-width: 990px) 50vw, 88vw', alt: media_alt
+                }}
+              {%- when 'video', 'external_video' -%}
+                {{ media | media_tag: image_size: '1200x' }}
+              {%- else -%}
+                {{ media | media_tag }}
+            {%- endcase -%}
+          </li>
+        {%- else -%}
+          <li class="product__slide">{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}</li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="product__info">
+      <div>
+        {%- if eyebrow != blank -%}
+          <p class="product__eyebrow t-label-sm">{{ eyebrow }}</p>
+        {%- endif -%}
+        <h1 class="product__title t-display">{{ product.title }}</h1>
+      </div>
+
+      <div>
+        <div class="product__price-row">
+          <span class="product__price" data-price>{{ variant.price | money_without_trailing_zeros }}</span>
+          <s class="product__compare" data-compare-price {% unless variant.compare_at_price > variant.price %}hidden{% endunless %}>
+            {{- variant.compare_at_price | money_without_trailing_zeros -}}
+          </s>
+        </div>
+        {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+          <p class="product__tax t-body-sm">
+            {%- if cart.taxes_included -%}{{ 'products.product.include_taxes' | t }}{%- endif -%}
+            {%- if shop.shipping_policy.body != blank %} {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}{%- endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+
+      {%- form 'product', product, id: form_id, data-product-form: '', data-variant-form: '', data-update-url: '' -%}
+        <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div style="margin-bottom: var(--space-md);">
+              <span class="product__option-label t-label" id="{{ form_id }}-label-{{ option.position }}">{{ option.name }}</span>
+              <div class="pill-options pill-options--lg" role="radiogroup" aria-labelledby="{{ form_id }}-label-{{ option.position }}">
+                {%- for value in option.values -%}
+                  <label class="pill-option">
+                    <input
+                      type="radio"
+                      name="{{ form_id }}-{{ option.position }}"
+                      value="{{ value | escape }}"
+                      data-option-index="{{ forloop.parentloop.index0 }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                    >
+                    <span>{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="product__buy">
+          <div class="qty">
+            <button type="button" data-qty-step="-1" aria-label="{{ 'products.product.quantity.decrease' | t }}"><span class="icon icon--18" aria-hidden="true">remove</span></button>
+            <label class="visually-hidden" for="{{ form_id }}-qty">{{ 'products.product.quantity.label' | t }}</label>
+            <input id="{{ form_id }}-qty" type="number" name="quantity" min="1" value="1" inputmode="numeric">
+            <button type="button" data-qty-step="1" aria-label="{{ 'products.product.quantity.increase' | t }}"><span class="icon icon--18" aria-hidden="true">add</span></button>
+          </div>
+          <button
+            type="submit"
+            name="add"
+            class="btn btn--primary btn--lg"
+            data-add-button
+            data-label-add="{{ add_label | escape }}"
+            {% unless variant.available %}disabled{% endunless %}
+          >
+            <span class="icon icon--18" aria-hidden="true">shopping_bag</span>
+            <span data-label>{% if variant.available %}{{ add_label }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+          </button>
+        </div>
+        <p class="product__error" role="alert" data-form-error></p>
+        {%- if section.settings.show_dynamic_checkout -%}
+          <div style="margin-top: var(--space-sm);">{{ form | payment_button }}</div>
+        {%- endif -%}
+        <script type="application/json" data-variants>
+          {{ product.variants | json }}
+        </script>
+      {%- endform -%}
+
+      {%- if product.description != blank -%}
+        <div class="panel">
+          <h2 class="t-title" style="color: var(--c-primary); margin-bottom: .5rem;">{{ 'products.product.description' | t }}</h2>
+          <div class="rte">{{ product.description }}</div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Product information",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+{%- liquid
+  assign hide_here = false
+  if request.page_type == 'cart'
+    assign hide_here = true
+  endif
+-%}
+{%- unless hide_here -%}
+  <div
+    class="cart-dock"
+    data-cart-dock
+    {% if cart.item_count == 0 %}hidden{% endif %}
+  >
+    <div class="cart-dock__bar">
+      <div class="cart-dock__info">
+        <span class="cart-dock__icon" aria-hidden="true">
+          <span class="icon icon--20">shopping_basket</span>
+        </span>
+        <p class="cart-dock__text">
+          <span class="cart-dock__count t-label" data-cart-dock-count>
+            {%- if cart.item_count == 1 -%}
+              {{ 'cart.dock.items_one' | t: count: cart.item_count }}
+            {%- else -%}
+              {{ 'cart.dock.items_other' | t: count: cart.item_count }}
+            {%- endif -%}
+          </span>
+          <span class="cart-dock__total t-body-sm">
+            <span data-cart-dock-total>{{ cart.total_price | money_without_trailing_zeros }}</span>
+            {%- if section.settings.note != blank -%}
+              <span> • {{ section.settings.note }}</span>
+            {%- endif -%}
+          </span>
+        </p>
+      </div>
+      <a href="{{ routes.cart_url }}" class="btn btn--gold">
+        <span>{{ section.settings.button_label }}</span>
+        <span class="icon icon--16" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Sticky cart bar",
+  "tag": "div",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "View Cart" },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note after total",
+      "info": "e.g. “Free Delivery” — only add this if it is true for every order."
+    },
+    {
+      "type": "paragraph",
+      "content": "Appears once the cart has items, above the mobile tab bar (bottom-right on desktop). Hidden on the cart page."
+    }
+  ],
+  "presets": [{ "name": "Sticky cart bar" }]
+}
+{% endschema %}

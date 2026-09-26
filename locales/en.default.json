@@ -1,0 +1,113 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "home": "Home",
+    "breadcrumbs": "Breadcrumbs",
+    "continue_shopping": "Continue shopping",
+    "navigation": {
+      "main": "Main",
+      "tabs": "Shop sections"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "page": "Page {{ number }}",
+      "next": "Next page",
+      "previous": "Previous page"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search products",
+      "voice": "Search by voice",
+      "listening": "Listening…",
+      "results_count": {
+        "one": "{{ count }} result for “{{ terms }}”",
+        "other": "{{ count }} results for “{{ terms }}”"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "enter": "Enter store"
+    }
+  },
+  "sections": {
+    "product_list": {
+      "empty": "Choose a collection with products in the theme editor."
+    }
+  },
+  "products": {
+    "product": {
+      "add": "ADD",
+      "added": "ADDED",
+      "add_to_cart": "Add to bag",
+      "add_to_cart_aria": "Add {{ title }} {{ variant }} to bag",
+      "added_to_cart": "added to your bag",
+      "add_error": "Sorry, this item couldn’t be added. Please try again.",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "save_percent": "Save {{ percent }}%",
+      "description": "About this product",
+      "media": "Product images",
+      "include_taxes": "Taxes included.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "price": {
+        "regular_price": "Price",
+        "was": "Regular price"
+      },
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity",
+        "decrease": "Decrease quantity"
+      }
+    }
+  },
+  "collections": {
+    "all": "All categories",
+    "empty": "No products found.",
+    "sort_by": "Sort by",
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "filters": {
+      "apply": "Apply",
+      "clear_all": "Clear all",
+      "remove": "Remove filter",
+      "from": "From",
+      "to": "To"
+    }
+  },
+  "cart": {
+    "title": "Your bag",
+    "items": "items",
+    "summary": "Order summary",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "update": "Update",
+    "remove": "Remove",
+    "note": "Order note",
+    "empty": "Your bag is empty.",
+    "taxes_included_shipping_at_checkout": "Taxes included. Shipping calculated at checkout.",
+    "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout.",
+    "dock": {
+      "items_one": "{{ count }} item in bag",
+      "items_other": "{{ count }} items in bag"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Account"
+    }
+  },
+  "blogs": {
+    "all": "All",
+    "back": "Back to {{ title }}"
+  },
+  "templates": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for doesn’t exist."
+    }
+  }
+}

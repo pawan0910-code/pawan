@@ -1,0 +1,49 @@
+<div class="container">
+  <header class="page-head">
+    <h1 class="page-head__title t-display">{{ section.settings.heading | default: page_title }}</h1>
+  </header>
+  {%- paginate collections by 48 -%}
+    <ul class="collection-tiles" role="list">
+      {%- for col in collections -%}
+        {%- if col.products_count > 0 or section.settings.show_empty -%}
+          {%- liquid
+            assign img = col.featured_image
+            if img == blank
+              for p in col.products limit: 8
+                if p.featured_media
+                  assign img = p.featured_media
+                  break
+                endif
+              endfor
+            endif
+          -%}
+          <li>
+            <a href="{{ col.url }}" class="collection-tile">
+              <span class="story__ring">
+                {%- if img -%}
+                  {{ img | image_url: width: 240, height: 240, crop: 'center' | image_tag: alt: '', loading: 'lazy', width: 96, height: 96 }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </span>
+              <span class="t-title">{{ col.title }}</span>
+              <span class="collection-tile__count t-body-sm">{{ 'collections.product_count' | t: count: col.products_count }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+    {%- render 'pagination', paginate: paginate -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Categories" },
+    { "type": "checkbox", "id": "show_empty", "label": "Show empty collections", "default": false }
+  ]
+}
+{% endschema %}

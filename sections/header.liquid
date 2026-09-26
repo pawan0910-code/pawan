@@ -1,0 +1,140 @@
+{%- liquid
+  assign brand_name = section.settings.brand_name | default: shop.name
+  assign menu = linklists[section.settings.menu]
+-%}
+<header class="site-header" data-header>
+  <div class="site-header__inner container">
+    <div class="site-header__brand">
+      {%- if settings.logo != blank -%}
+        <a href="{{ routes.root_url }}" tabindex="-1" aria-hidden="true">
+          {{
+            settings.logo
+            | image_url: width: 160, height: 160, crop: 'center'
+            | image_tag: class: 'site-header__logo', width: 40, height: 40, alt: '', loading: 'eager'
+          }}
+        </a>
+      {%- endif -%}
+      <div class="site-header__id">
+        {%- if request.page_type == 'index' -%}
+          <h1 class="site-header__name"><a href="{{ routes.root_url }}">{{ brand_name }}</a></h1>
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="site-header__name">{{ brand_name }}</a>
+        {%- endif -%}
+
+        {%- if section.settings.location_text != blank -%}
+          {%- capture location_inner -%}
+            <span class="icon icon--14" aria-hidden="true">location_on</span>
+            <span class="site-header__location-text t-label-sm">{{ section.settings.location_text }}</span>
+          {%- endcapture -%}
+          {%- if section.settings.location_link != blank -%}
+            <a href="{{ section.settings.location_link }}" class="site-header__location">
+              {{- location_inner -}}
+              <span class="icon icon--14" aria-hidden="true">expand_more</span>
+            </a>
+          {%- else -%}
+            <p class="site-header__location">{{ location_inner }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if menu.links.size > 0 -%}
+      <nav class="site-header__nav" aria-label="{{ 'general.navigation.main' | t }}">
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="site-header__actions">
+      <a href="{{ routes.search_url }}" class="icon-btn" data-search-toggle aria-label="{{ 'general.search.title' | t }}">
+        <span class="icon" aria-hidden="true">search</span>
+      </a>
+
+      {%- if section.settings.show_notifications -%}
+        {%- assign notifications_url = section.settings.notifications_link | default: routes.account_url -%}
+        <a href="{{ notifications_url }}" class="icon-btn" aria-label="{{ section.settings.notifications_label | escape }}">
+          <span class="icon" aria-hidden="true">notifications</span>
+          {%- if section.settings.show_notification_dot -%}
+            <span class="icon-btn__dot" aria-hidden="true"></span>
+          {%- endif -%}
+        </a>
+      {%- endif -%}
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="icon-btn icon-btn--desktop" aria-label="{{ 'customer.account.title' | t }}">
+          <span class="icon" aria-hidden="true">person</span>
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="{{ 'cart.title' | t }}">
+        <span class="icon" aria-hidden="true">shopping_bag</span>
+        <span class="icon-btn__count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>
+          {{- cart.item_count -}}
+          <span class="visually-hidden"> {{ 'cart.items' | t }}</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Store name",
+      "info": "Leave blank to use the store name from Settings. The logo is set in Theme settings → Logo & favicon."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Desktop menu",
+      "default": "main-menu",
+      "info": "Shown inline on desktop. On mobile, navigation uses the bottom tab bar."
+    },
+    { "type": "header", "content": "Delivery line" },
+    {
+      "type": "text",
+      "id": "location_text",
+      "label": "Text",
+      "default": "Alkapuri, Vadodara • 25 mins ⚡"
+    },
+    {
+      "type": "url",
+      "id": "location_link",
+      "label": "Link",
+      "info": "Optional, e.g. your delivery-area page. Adds the dropdown chevron."
+    },
+    { "type": "header", "content": "Notifications icon" },
+    {
+      "type": "checkbox",
+      "id": "show_notifications",
+      "label": "Show notifications icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "notifications_label",
+      "label": "Accessible label",
+      "default": "Updates"
+    },
+    {
+      "type": "url",
+      "id": "notifications_link",
+      "label": "Link",
+      "info": "Defaults to the customer account (order updates)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_notification_dot",
+      "label": "Show unread dot",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "brand_name": "Baroda Fresh",
+        "menu": "main-menu",
+        "location_text": "Alkapuri, Vadodara • 25 mins ⚡",
+        "location_link": "shopify://pages/shipping-delivery",
+        "show_notifications": true,
+        "notifications_label": "Updates",
+        "notifications_link": "",
+        "show_notification_dot": true
+      }
+    }
+  },
+  "order": ["header"]
+}
