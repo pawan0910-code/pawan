@@ -6,7 +6,7 @@ Online Store 2.0 theme recreating the Baroda Fresh mobile prototype, wired to th
 - `layout/theme.liquid` — design tokens (colours from Theme settings), Google Fonts (Noto Serif + Plus Jakarta Sans), subset Material Symbols icons.
 - `assets/base.css` — the whole design system; `assets/theme.js` — progressive enhancement (AJAX add-to-cart, variant pills, voice search). All forms work without JS.
 - Home page sections (`templates/index.json`): search & quick pills → harvest hero → browse collections → product grid → product carousel (bowls) → product spotlight → product carousel (exotics) → promise list.
-- Header group: header. Footer group: footer, sticky cart bar, mobile tab bar.
+- Header group: header. Footer group: footer, mobile tab bar. Basket drawer (`sections/cart-drawer.liquid`) is rendered from the layout and re-rendered via the Section Rendering API after every add/change; the header bag and any tab linking to `/cart` open it.
 - Inner pages: product, collection (filters + sort), collections list, cart, search, page, blog, article, 404, password.
 
 ## Product data used by cards

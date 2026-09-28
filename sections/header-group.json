@@ -12,9 +12,11 @@
         "show_notifications": true,
         "notifications_label": "Updates",
         "notifications_link": "",
-        "show_notification_dot": true
+        "show_notification_dot": false
       }
     }
   },
-  "order": ["header"]
+  "order": [
+    "header"
+  ]
 }

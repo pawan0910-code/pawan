@@ -1,6 +1,19 @@
 {
   "current": "Default",
   "presets": {
-    "Default": {}
+    "Default": {
+      "sections": {
+        "cart-drawer": {
+          "type": "cart-drawer",
+          "settings": {
+            "free_delivery_threshold": 499,
+            "payment_note": "UPI, cards and cash on delivery accepted at checkout.",
+            "upsell_heading": "Add a fresh juice",
+            "upsell_collection": "cold-pressed-juices",
+            "empty_link": "shopify://collections/fresh-produce"
+          }
+        }
+      }
+    }
   }
 }

@@ -59,7 +59,7 @@
                           type="radio"
                           name="{{ form_id }}-{{ option.position }}"
                           value="{{ value | escape }}"
-                          data-option-index="{{ forloop.parentloop.index0 }}"
+                          data-option-index="{{ option.position | minus: 1 }}"
                           {% if option.selected_value == value %}checked{% endif %}
                         >
                         <span>{{ value }}</span>

@@ -1,0 +1,184 @@
+{%- comment -%}
+  Basket drawer. Rendered once from layout/theme.liquid and re-rendered through the
+  Section Rendering API (sections=cart-drawer) after every add / change, so the
+  markup below is the single source of truth for the basket UI.
+{%- endcomment -%}
+{%- liquid
+  assign threshold = section.settings.free_delivery_threshold | times: 100
+  assign remaining = threshold | minus: cart.total_price
+  assign progress = 100
+  if threshold > 0 and remaining > 0
+    assign progress = cart.total_price | times: 100 | divided_by: threshold
+  endif
+  assign upsell = section.settings.upsell_collection
+-%}
+<dialog class="drawer" id="CartDrawer" data-cart-drawer aria-labelledby="CartDrawerTitle">
+  <div class="drawer__panel" data-cart-drawer-inner data-item-count="{{ cart.item_count }}">
+    <div class="drawer__head">
+      <h2 id="CartDrawerTitle" class="drawer__title t-title-lg">
+        {{- 'cart.title' | t -}}
+        {%- if cart.item_count > 0 %} <span class="drawer__count">({{ cart.item_count }})</span>{% endif -%}
+      </h2>
+      <button type="button" class="icon-btn" data-cart-close aria-label="{{ 'cart.close' | t }}">
+        <span class="icon" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="drawer__empty">
+        <span class="icon" aria-hidden="true">shopping_basket</span>
+        <p class="t-body-lg">{{ 'cart.empty' | t }}</p>
+        <a href="{{ section.settings.empty_link | default: routes.all_products_collection_url }}" class="btn btn--primary btn--lg" data-cart-close>
+          {{- 'general.continue_shopping' | t -}}
+        </a>
+      </div>
+    {%- else -%}
+      <div class="drawer__body">
+        {%- if threshold > 0 -%}
+          <div class="drawer__progress">
+            <p class="t-body-sm">
+              {%- if remaining > 0 -%}
+                {%- assign remaining_money = remaining | money_without_trailing_zeros -%}
+                {{ 'cart.free_delivery_remaining_html' | t: amount: remaining_money }}
+              {%- else -%}
+                <span class="icon icon--16" aria-hidden="true">local_shipping</span> {{ 'cart.free_delivery_unlocked' | t }}
+              {%- endif -%}
+            </p>
+            <div class="drawer__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progress }}" aria-label="{{ 'cart.free_delivery_progress' | t }}">
+              <span style="width: {{ progress }}%;"></span>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <ul class="drawer__items" role="list">
+          {%- for item in cart.items -%}
+            <li class="cart-item drawer__item">
+              <a href="{{ item.url }}" class="cart-item__media" tabindex="-1" aria-hidden="true">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 160 | image_tag: alt: '', loading: 'lazy', width: 80, height: 80 }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </a>
+              <div>
+                <p class="cart-item__title"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart-item__meta t-body-sm">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <p class="cart-item__meta t-body-sm">{{ item.final_price | money_without_trailing_zeros }}</p>
+                {%- for discount in item.line_level_discount_allocations -%}
+                  <p class="t-body-sm c-secondary">{{ discount.discount_application.title }} (−{{ discount.amount | money_without_trailing_zeros }})</p>
+                {%- endfor -%}
+              </div>
+              <div class="cart-item__end">
+                <span class="cart-item__price">{{ item.final_line_price | money_without_trailing_zeros }}</span>
+                <div class="qty qty--sm">
+                  <button type="button" data-cart-key="{{ item.key }}" data-cart-qty="{{ item.quantity | minus: 1 }}" aria-label="{{ 'products.product.quantity.decrease' | t }} — {{ item.product.title | escape }}">
+                    <span class="icon icon--16" aria-hidden="true">remove</span>
+                  </button>
+                  <span class="qty__value" aria-label="{{ 'products.product.quantity.label' | t }}">{{ item.quantity }}</span>
+                  <button type="button" data-cart-key="{{ item.key }}" data-cart-qty="{{ item.quantity | plus: 1 }}" aria-label="{{ 'products.product.quantity.increase' | t }} — {{ item.product.title | escape }}">
+                    <span class="icon icon--16" aria-hidden="true">add</span>
+                  </button>
+                </div>
+                <button type="button" class="cart-item__remove" data-cart-key="{{ item.key }}" data-cart-qty="0">
+                  <span class="icon icon--14" aria-hidden="true">delete</span>{{ 'cart.remove' | t }}
+                  <span class="visually-hidden"> {{ item.product.title }}</span>
+                </button>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if upsell != blank and section.settings.upsell_heading != blank -%}
+          {%- assign shown = 0 -%}
+          {%- capture upsell_items -%}
+            {%- for product in upsell.products limit: 12 -%}
+              {%- if shown >= 2 -%}{%- break -%}{%- endif -%}
+              {%- assign in_cart = false -%}
+              {%- for item in cart.items -%}
+                {%- if item.product_id == product.id -%}{%- assign in_cart = true -%}{%- break -%}{%- endif -%}
+              {%- endfor -%}
+              {%- if in_cart or product.available == false -%}{%- continue -%}{%- endif -%}
+              {%- assign shown = shown | plus: 1 -%}
+              {%- assign up_variant = product.selected_or_first_available_variant -%}
+              <li class="drawer__upsell-item">
+                <a href="{{ product.url }}" class="cart-item__media" tabindex="-1" aria-hidden="true">
+                  {%- if product.featured_media -%}
+                    {{ product.featured_media | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 56, height: 56 }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </a>
+                <div>
+                  <p class="cart-item__title"><a href="{{ product.url }}">{{ product.title }}</a></p>
+                  <p class="cart-item__meta t-body-sm">{{ up_variant.price | money_without_trailing_zeros }}</p>
+                </div>
+                {%- form 'product', product, class: 'card__form', data-product-form: '' -%}
+                  <input type="hidden" name="id" value="{{ up_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" name="add" class="card__add card__add--round" aria-label="{{ 'products.product.add_to_cart_aria' | t: title: product.title, variant: up_variant.title | remove: 'Default Title' | strip | escape }}">
+                    <span class="icon icon--18" aria-hidden="true">add</span>
+                  </button>
+                {%- endform -%}
+              </li>
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if shown > 0 -%}
+            <div class="drawer__upsell">
+              <h3 class="t-label c-primary">{{ section.settings.upsell_heading }}</h3>
+              <ul role="list">{{ upsell_items }}</ul>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      <div class="drawer__foot">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row t-body-sm">
+            <span>{{ discount.title }}</span>
+            <span>−{{ discount.total_allocated_amount | money_without_trailing_zeros }}</span>
+          </div>
+        {%- endfor -%}
+        <div class="cart-summary__row">
+          <span class="t-label-lg">{{ 'cart.subtotal' | t }}</span>
+          <span class="cart-summary__total">{{ cart.total_price | money_without_trailing_zeros }}</span>
+        </div>
+        <p class="t-body-sm c-muted">
+          {%- if cart.taxes_included -%}{{ 'cart.taxes_included_shipping_at_checkout' | t }}{%- else -%}{{ 'cart.taxes_and_shipping_at_checkout' | t }}{%- endif -%}
+          {%- if section.settings.payment_note != blank %} {{ section.settings.payment_note }}{% endif -%}
+        </p>
+        <form action="{{ routes.cart_url }}" method="post" class="drawer__checkout">
+          <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--block">
+            <span class="icon icon--18" aria-hidden="true">shopping_basket</span>
+            {{ 'cart.checkout' | t }}
+          </button>
+        </form>
+        <a href="{{ routes.cart_url }}" class="drawer__view t-label">{{ 'cart.view' | t }}</a>
+      </div>
+    {%- endif -%}
+    <p class="drawer__error t-body-sm" role="alert" data-cart-error></p>
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "Basket drawer",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "number",
+      "id": "free_delivery_threshold",
+      "label": "Free delivery threshold (in your store currency)",
+      "info": "Shows a progress bar toward free delivery. Set to 0 to hide. Must match your shipping rates.",
+      "default": 499
+    },
+    { "type": "text", "id": "payment_note", "label": "Payment note", "info": "e.g. accepted payment methods. Only list methods enabled in Settings → Payments." },
+    { "type": "header", "content": "Add-on suggestion" },
+    { "type": "text", "id": "upsell_heading", "label": "Heading", "default": "Add a fresh juice" },
+    { "type": "collection", "id": "upsell_collection", "label": "Collection", "info": "Shows up to 2 available products that aren’t already in the basket." },
+    { "type": "header", "content": "Empty basket" },
+    { "type": "url", "id": "empty_link", "label": "Continue shopping link" }
+  ]
+}
+{% endschema %}

@@ -40,9 +40,9 @@
     "product": {
       "add": "ADD",
       "added": "ADDED",
-      "add_to_cart": "Add to bag",
-      "add_to_cart_aria": "Add {{ title }} {{ variant }} to bag",
-      "added_to_cart": "added to your bag",
+      "add_to_cart": "Add to basket",
+      "add_to_cart_aria": "Add {{ title }} {{ variant }} to basket",
+      "added_to_cart": "added to your basket",
       "add_error": "Sorry, this item couldn’t be added. Please try again.",
       "sold_out": "Sold out",
       "unavailable": "Unavailable",
@@ -59,7 +59,8 @@
         "label": "Quantity",
         "increase": "Increase quantity",
         "decrease": "Decrease quantity"
-      }
+      },
+      "related": "You may also like"
     }
   },
   "collections": {
@@ -79,7 +80,7 @@
     }
   },
   "cart": {
-    "title": "Your bag",
+    "title": "Your basket",
     "items": "items",
     "summary": "Order summary",
     "subtotal": "Subtotal",
@@ -87,13 +88,15 @@
     "update": "Update",
     "remove": "Remove",
     "note": "Order note",
-    "empty": "Your bag is empty.",
+    "empty": "Your basket is empty.",
     "taxes_included_shipping_at_checkout": "Taxes included. Shipping calculated at checkout.",
     "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout.",
-    "dock": {
-      "items_one": "{{ count }} item in bag",
-      "items_other": "{{ count }} items in bag"
-    }
+    "close": "Close basket",
+    "view": "View full basket",
+    "error": "Sorry, your basket couldn’t be updated. Please try again.",
+    "free_delivery_remaining_html": "Add <strong>{{ amount }}</strong> more for free delivery",
+    "free_delivery_unlocked": "You’ve unlocked free delivery",
+    "free_delivery_progress": "Progress toward free delivery"
   },
   "customer": {
     "account": {
@@ -109,5 +112,13 @@
       "title": "Page not found",
       "subtext": "The page you were looking for doesn’t exist."
     }
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send",
+    "success": "Thanks — we’ve got your message and will reply soon."
   }
 }

@@ -68,6 +68,8 @@
 
     {% sections 'footer-group' %}
 
+    {% section 'cart-drawer' %}
+
     <p class="visually-hidden" id="CartStatus" aria-live="polite" role="status"></p>
 
     <script>
@@ -75,6 +77,7 @@
         moneyFormat: {{ shop.money_format | json }},
         routes: {
           cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }},
           cart: {{ routes.cart_url | json }}
         },
         strings: {
@@ -83,8 +86,7 @@
           soldOut: {{ 'products.product.sold_out' | t | json }},
           unavailable: {{ 'products.product.unavailable' | t | json }},
           addError: {{ 'products.product.add_error' | t | json }},
-          itemsOne: {{ 'cart.dock.items_one' | t: count: '[count]' | json }},
-          itemsOther: {{ 'cart.dock.items_other' | t: count: '[count]' | json }},
+          cartError: {{ 'cart.error' | t | json }},
           listening: {{ 'general.search.listening' | t | json }}
         }
       };

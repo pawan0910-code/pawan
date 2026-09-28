@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" data-cart-page="{{ section.id }}">
   <header class="page-head">
     <h1 class="page-head__title t-display">{{ 'cart.title' | t }}</h1>
   </header>
@@ -36,10 +36,10 @@
               <div class="qty">
                 <button type="button" data-qty-step="-1" aria-label="{{ 'products.product.quantity.decrease' | t }}"><span class="icon icon--16" aria-hidden="true">remove</span></button>
                 <label class="visually-hidden" for="Qty-{{ item.key }}">{{ 'products.product.quantity.label' | t }} — {{ item.product.title }}</label>
-                <input id="Qty-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-autosubmit>
+                <input id="Qty-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-input="{{ item.key }}">
                 <button type="button" data-qty-step="1" aria-label="{{ 'products.product.quantity.increase' | t }}"><span class="icon icon--16" aria-hidden="true">add</span></button>
               </div>
-              <a href="{{ item.url_to_remove }}" class="cart-item__remove">
+              <a href="{{ item.url_to_remove }}" class="cart-item__remove" data-cart-key="{{ item.key }}" data-cart-qty="0">
                 <span class="icon icon--14" aria-hidden="true">delete</span>{{ 'cart.remove' | t }}
                 <span class="visually-hidden"> {{ item.product.title }}</span>
               </a>
@@ -73,7 +73,7 @@
           <span class="icon icon--18" aria-hidden="true">shopping_basket</span>
           {{ 'cart.checkout' | t }}
         </button>
-        <noscript><button type="submit" name="update" class="btn btn--outline btn--block">{{ 'cart.update' | t }}</button></noscript>
+        <button type="submit" name="update" class="btn btn--outline btn--block js-hidden">{{ 'cart.update' | t }}</button>
         {%- if additional_checkout_buttons -%}
           <div>{{ content_for_additional_checkout_buttons }}</div>
         {%- endif -%}
