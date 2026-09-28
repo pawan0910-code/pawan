@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "fruit-guide",
+      "settings": {
+        "eyebrow": "Fruit engine",
+        "heading": "Search any fruit"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

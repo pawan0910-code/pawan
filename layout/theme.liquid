@@ -30,7 +30,7 @@
       list alphabetically sorted). Add more via Theme settings → Icons.
     {%- endcomment -%}
     {%- capture icon_list -%}
-      add,agriculture,all_inclusive,arrow_back,arrow_forward,auto_awesome,bolt,check,chevron_left,chevron_right,close,delete,eco,event_repeat,expand_more,favorite,grid_view,home,local_shipping,location_on,mic,nature,notifications,person,qr_code_scanner,recycling,redeem,remove,restaurant,search,shopping_bag,shopping_basket,storefront,tune,verified
+      add,agriculture,all_inclusive,arrow_back,arrow_forward,auto_awesome,bolt,calendar_month,check,check_circle,chevron_left,chevron_right,close,compare_arrows,delete,eco,emoji_events,event_repeat,expand_more,favorite,grid_view,home,kitchen,lightbulb,local_shipping,location_on,mic,nature,notifications,nutrition,person,qr_code_scanner,quiz,recycling,redeem,remove,restaurant,search,share,shopping_bag,shopping_basket,storefront,swap_horiz,tune,verified
       {%- if settings.extra_icons != blank -%},{{ settings.extra_icons | downcase | remove: ' ' }}{%- endif -%}
     {%- endcapture -%}
     {%- assign icon_names = icon_list | strip | split: ',' | compact | uniq | sort | join: ',' -%}
@@ -78,7 +78,8 @@
         routes: {
           cartAdd: {{ routes.cart_add_url | json }},
           cartChange: {{ routes.cart_change_url | json }},
-          cart: {{ routes.cart_url | json }}
+          cart: {{ routes.cart_url | json }},
+          comparePage: {{ pages['compare-fruits'].url | json }}
         },
         strings: {
           added: {{ 'products.product.added' | t | json }},

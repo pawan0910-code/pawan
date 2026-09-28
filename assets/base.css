@@ -688,3 +688,118 @@ body:has(.site-footer) .main { padding-bottom: 0; }
 .contact__form { display: flex; flex-direction: column; gap: var(--space-md); margin-top: var(--space-md); }
 .contact__form .btn { align-self: flex-start; }
 [data-cart-page][aria-busy='true'] .cart { opacity: .6; pointer-events: none; transition: opacity .2s; }
+
+/* ---------- Fruit tools (compare, guide, season, finder, product panel) ---------- */
+.ft-eyebrow { color: var(--c-secondary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .25rem; }
+.ft-subhead { margin: var(--space-lg) 0 var(--space-sm); }
+.ft-note { margin-top: var(--space-lg); max-width: 48rem; }
+.ft-count { margin: var(--space-sm) 0; }
+.ft-search { margin-bottom: var(--space-sm); }
+.ft-chips, .ft-months { margin-bottom: var(--space-sm); }
+.quick-pill[aria-pressed='true'] { background: var(--c-primary-container); color: var(--c-on-primary); }
+button.quick-pill { border: 0; cursor: pointer; font-family: inherit; }
+.select--block { display: flex; width: 100%; }
+.select--block select { width: 100%; font-size: 14px; padding-block: .75rem; }
+
+.ft-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); }
+@media (min-width: 750px) { .ft-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 990px) { .ft-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); } }
+.ft-grid--compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 750px) { .ft-grid--compact { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.ft-card { display: flex; flex-direction: column; gap: .625rem; height: 100%; }
+.ft-card__top { display: flex; gap: .75rem; align-items: center; }
+.ft-card__img, .cmp-fruit__img, .ft-mini__img { flex-shrink: 0; width: 4rem; height: 4rem; border-radius: var(--radius-md); background: var(--c-surface-container-low); display: flex; align-items: center; justify-content: center; overflow: hidden; color: var(--c-primary-fixed-dim); }
+.ft-card__img img, .cmp-fruit__img img, .ft-mini__img img { width: 100%; height: 100%; object-fit: contain; padding: .25rem; }
+.ft-card__id { display: flex; flex-direction: column; gap: .125rem; align-items: flex-start; min-width: 0; }
+.ft-card__id a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ft-card__stats, .fg-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .375rem; margin: 0; }
+.ft-card__stats > div, .fg-stats > div { background: var(--c-surface-container-low); border-radius: var(--radius-md); padding: .5rem; text-align: center; }
+.ft-card__stats dt, .fg-stats dt { font-size: 10px; line-height: 14px; letter-spacing: .04em; font-weight: 700; color: var(--c-on-surface-variant); text-transform: uppercase; }
+.ft-card__stats dd, .fg-stats dd { margin: 0; font-weight: 700; color: var(--c-primary); font-size: 15px; }
+.fg-stats dd small { font-weight: 600; color: var(--c-on-surface-variant); font-size: 11px; }
+.ft-card__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: auto; }
+.ft-card__actions .btn { padding: .5rem 1rem; }
+.ft-add { margin: 0; }
+.ft-why { display: flex; align-items: center; gap: .375rem; flex-wrap: wrap; font-size: 13px; font-weight: 600; color: var(--c-on-surface); }
+.ft-mini { display: flex; align-items: center; gap: .5rem; padding: .5rem; border-radius: var(--radius-lg); background: var(--c-surface-container-lowest); box-shadow: var(--shadow-sm); }
+.ft-mini__img { width: 2.5rem; height: 2.5rem; }
+.ft-mini:hover { box-shadow: var(--shadow-md); }
+
+.ft-accordion { display: flex; flex-direction: column; gap: var(--space-sm); }
+.ft-details__summary { list-style: none; display: flex; align-items: center; gap: .5rem; cursor: pointer; }
+.ft-details__summary::-webkit-details-marker { display: none; }
+.ft-details__summary > .icon:last-child { margin-left: auto; color: var(--c-on-surface-variant); transition: transform .2s var(--ease); }
+.ft-details[open] > .ft-details__summary > .icon:last-child { transform: rotate(180deg); }
+.ft-details__body { padding-top: .5rem; display: flex; flex-direction: column; gap: .375rem; align-items: flex-start; color: var(--c-on-surface-variant); }
+.ft-details--flat { border-top: 1px solid var(--c-surface-container-high); padding-top: .5rem; }
+.ft-cta { margin-top: var(--space-lg); display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); flex-wrap: wrap; }
+
+.ft-finder { display: flex; flex-direction: column; gap: var(--space-md); }
+.ft-q { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.ft-toggle { display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; }
+.ft-toggle input { accent-color: var(--c-primary-container); width: 1.125rem; height: 1.125rem; }
+
+.ft-tools { display: grid; gap: var(--space-sm); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 750px) { .ft-tools { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ft-tool { display: flex; align-items: center; gap: .75rem; padding: var(--space-md); border-radius: var(--radius-lg); background: var(--c-surface-container-lowest); box-shadow: var(--shadow-sm); height: 100%; transition: box-shadow .2s var(--ease), transform .2s var(--ease); }
+@media (hover: hover) { .ft-tool:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); } }
+.ft-tool__icon { width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--c-primary-fixed); color: var(--c-on-primary-fixed-variant); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ft-tool__text { display: flex; flex-direction: column; gap: .125rem; flex: 1; min-width: 0; }
+
+/* Compare */
+.cmp-pickers { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: .5rem; }
+.cmp-pick { display: flex; flex-direction: column; gap: .375rem; min-width: 0; }
+.cmp-swap { background: var(--c-surface-container-low); color: var(--c-primary); }
+.cmp-popular { display: flex; align-items: center; gap: .5rem; margin-top: var(--space-sm); min-width: 0; }
+.cmp-popular > .t-label { flex-shrink: 0; }
+.cmp-popular .quick-pills { min-width: 0; }
+.cmp-popular .quick-pills { margin-top: 0; }
+.cmp-result { display: flex; flex-direction: column; gap: var(--space-md); margin-top: var(--space-md); }
+.cmp-heads { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: .5rem; align-items: start; }
+.cmp-vs { align-self: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--c-secondary-container); color: var(--c-on-secondary-container); display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
+.cmp-fruit { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .375rem; background: var(--c-surface-container-lowest); border-radius: var(--radius-lg); padding: var(--space-md) var(--space-sm); box-shadow: var(--shadow-sm); height: 100%; }
+.cmp-fruit__img { width: 5rem; height: 5rem; border-radius: 50%; }
+.cmp-fruit .ft-add { width: 100%; margin-top: auto; }
+.cmp-fruit .btn { padding: .625rem .5rem; font-size: 12px; }
+.cmp-fruit__link { color: var(--c-secondary); }
+.cmp-verdict { display: flex; flex-direction: column; gap: var(--space-sm); background: var(--c-primary-container); color: var(--c-on-primary); }
+.cmp-verdict .c-primary, .cmp-verdict h2 { color: #fff; }
+.cmp-verdict h2 { display: flex; align-items: center; gap: .375rem; }
+.cmp-verdict h2 .icon { color: var(--c-secondary-fixed-dim); }
+.cmp-verdict__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md); }
+.cmp-verdict__col ul { display: flex; flex-direction: column; gap: .375rem; margin-top: .375rem; }
+.cmp-verdict__col li { display: flex; gap: .25rem; font-size: 13px; line-height: 18px; color: var(--c-primary-fixed); }
+.cmp-verdict__col li .icon { color: var(--c-secondary-fixed-dim); flex-shrink: 0; margin-top: 1px; }
+.cmp-verdict .c-muted { color: var(--c-on-primary-container); }
+.cmp-table { display: flex; flex-direction: column; gap: 0; padding-inline: var(--space-sm); }
+.cmp-table__per { text-align: center; margin-bottom: .25rem; }
+.cmp-row { display: grid; grid-template-columns: minmax(0, 1fr) 6.5rem minmax(0, 1fr); gap: .5rem; align-items: center; padding: .625rem 0; border-top: 1px solid var(--c-surface-container-high); }
+.cmp-label { display: flex; flex-direction: column; align-items: center; text-align: center; line-height: 1.2; }
+.cmp-label .t-label { color: var(--c-on-surface); }
+.cmp-cell { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.cmp-cell--a { align-items: flex-end; text-align: right; }
+.cmp-cell--b { align-items: flex-start; text-align: left; }
+.cmp-val { font-weight: 700; font-size: 15px; color: var(--c-on-surface); display: inline-flex; align-items: center; gap: .25rem; }
+.cmp-val small { font-weight: 600; font-size: 11px; color: var(--c-on-surface-variant); }
+.cmp-cell.is-win .cmp-val { color: var(--c-primary); }
+.cmp-cell.is-win .icon { color: var(--c-secondary); }
+.cmp-bar { display: block; width: 100%; height: .375rem; border-radius: var(--radius-full); background: var(--c-surface-container-high); overflow: hidden; }
+.cmp-bar span { display: block; height: 100%; border-radius: inherit; background: var(--c-outline-variant); transition: width .3s var(--ease); }
+.cmp-cell--a .cmp-bar span { margin-left: auto; }
+.cmp-cell.is-win .cmp-bar span { background: var(--c-primary-container); }
+.cmp-row--text .t-body { font-size: 13px; line-height: 18px; color: var(--c-on-surface-variant); }
+.cmp-foot { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-sm); margin-top: var(--space-lg); }
+@media (min-width: 990px) {
+  .cmp-row { grid-template-columns: minmax(0, 1fr) 10rem minmax(0, 1fr); padding: .75rem var(--space-md); }
+  .cmp-fruit__img { width: 7rem; height: 7rem; }
+  .cmp-fruit .btn { font-size: 14px; }
+  .cmp-result { max-width: 60rem; }
+}
+
+/* Product page panel */
+.fg-panel { display: flex; flex-direction: column; gap: .75rem; }
+.fg-panel__head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.fg-panel__per { margin-bottom: -.25rem; }
+.fg-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.fg-panel__tips { gap: 0; }

@@ -37,6 +37,7 @@
   };
   // Mirrors Liquid's money_without_trailing_zeros used in the templates.
   const formatPrice = (cents) => formatMoney(cents).replace(/([.,])00(?!\d)/, '');
+  theme.formatPrice = formatPrice; // shared with fruit-tools.js
 
   const announce = (message) => {
     const status = document.getElementById('CartStatus');

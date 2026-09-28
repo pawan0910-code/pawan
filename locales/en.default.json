@@ -120,5 +120,74 @@
     "message": "Message",
     "send": "Send",
     "success": "Thanks — we’ve got your message and will reply soon."
+  },
+  "fruit_tools": {
+    "needs_js": "Please enable JavaScript to use this tool.",
+    "disclaimer": "Values are per 100 g edible portion from USDA FoodData Central or India’s IFCT 2017, and vary with variety and ripeness. General information only — not medical advice. If you have diabetes or kidney disease, ask your doctor about sugar and potassium.",
+    "share": "Share this comparison",
+    "source": "Source",
+    "compare": {
+      "first": "First fruit",
+      "second": "Second fruit",
+      "swap": "Swap fruits",
+      "popular": "Popular:"
+    },
+    "guide": {
+      "search": "Search fruits — e.g. guava, sweet, summer",
+      "filters": "Filter fruits",
+      "all": "All",
+      "in_season": "In season",
+      "vitc": "Vitamin C rich",
+      "fiber": "High fibre",
+      "water": "Hydrating",
+      "light": "Light (≤50 kcal)"
+    },
+    "season": {
+      "months": "Choose a month",
+      "year_round": "Available most of the year",
+      "note": "Seasons are typical for Indian markets; exact timing varies with weather and region."
+    },
+    "finder": {
+      "q_goal": "What do you want from your fruit?",
+      "q_taste": "What taste do you like?",
+      "goal_vitc": "Vitamin C",
+      "goal_fiber": "More fibre",
+      "goal_water": "Hydration",
+      "goal_light": "Fewer calories",
+      "goal_lowsugar": "Less sugar",
+      "goal_energy": "Quick energy",
+      "taste_any": "Anything",
+      "taste_sweet": "Sweet",
+      "taste_tangy": "Tangy",
+      "taste_creamy": "Creamy",
+      "season_only": "Only fruit that’s in season now"
+    },
+    "myths": {
+      "myth": "Myth",
+      "fact": "Fact"
+    },
+    "panel": {
+      "title": "Know your {{ name }}",
+      "in_season": "In season now",
+      "per_100g": "Per 100 g",
+      "choose": "How to choose",
+      "store": "How to store",
+      "eat": "How to eat",
+      "compare": "Compare {{ name }} with another fruit"
+    },
+    "metric": {
+      "kcal": "Calories",
+      "fiber": "Fibre",
+      "sugar": "Sugar",
+      "vitc": "Vitamin C",
+      "potassium": "Potassium",
+      "water": "Water",
+      "gi": "GI"
+    },
+    "gi": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    }
   }
 }

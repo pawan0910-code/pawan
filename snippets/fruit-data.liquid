@@ -1,0 +1,68 @@
+{%- comment -%}
+  Outputs every Fruit Guide metaobject (Shopify admin → Content → Metaobjects → Fruit Guide)
+  as JSON for the fruit tools (compare, guide, season, finder). One source of truth:
+  edit a value in admin and every tool updates.
+
+  Nutrition values are per 100 g edible portion, from the source stored on each entry
+  (USDA FoodData Central or IFCT 2017). Glycemic index is only filled where a published
+  value exists (International GI Tables 2008).
+{%- endcomment -%}
+{%- capture fruit_json -%}
+  [
+  {%- assign sep = '' -%}
+  {%- for g in shop.metaobjects.fruit_guide.values -%}
+    {%- liquid
+      assign img = g.image.value
+      if img == blank
+        for p in g.products.value
+          if p.featured_media
+            assign img = p.featured_media
+            break
+          endif
+        endfor
+      endif
+    -%}
+    {{ sep }}{
+    "handle": {{ g.handle | json }},
+    "name": {{ g.name.value | json }},
+    "img": {% if img %}{{ img | image_url: width: 240 | json }}{% else %}null{% endif %},
+    "taste": {{ g.taste_profile.value | json }},
+    "texture": {{ g.texture.value | json }},
+    "season": {{ g.season.value | json }},
+    "months": {{ g.months.value | json }},
+    "select": {{ g.how_to_select.value | json }},
+    "store": {{ g.how_to_store.value | json }},
+    "eat": {{ g.how_to_eat.value | json }},
+    "bestUse": {{ g.best_use.value | json }},
+    "source": {{ g.nutrition_source.value | json }},
+    "kcal": {{ g.calories.value | json }},
+    "sugar": {{ g.sugar_g.value | json }},
+    "fiber": {{ g.fiber_g.value | json }},
+    "protein": {{ g.protein_g.value | json }},
+    "vitc": {{ g.vitamin_c_mg.value | json }},
+    "potassium": {{ g.potassium_mg.value | json }},
+    "water": {{ g.water_pct.value | json }},
+    "gi": {{ g.glycemic_index.value | json }},
+    "products": [
+      {%- assign psep = '' -%}
+      {%- for p in g.products.value -%}
+        {%- if p -%}
+          {{ psep }}{
+          "id": {{ p.id | json }},
+          "title": {{ p.title | json }},
+          "url": {{ p.url | json }},
+          "available": {{ p.available | json }},
+          "variants": [
+            {%- for v in p.variants limit: 6 -%}
+              {"id": {{ v.id | json }}, "title": {{ v.title | json }}, "price": {{ v.price | json }}, "available": {{ v.available | json }}}{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]}
+          {%- assign psep = ',' -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]}
+    {%- assign sep = ',' -%}
+  {%- endfor -%}
+  ]
+{%- endcapture -%}
+<script type="application/json" data-fruit-data>{{ fruit_json | strip }}</script>

@@ -1,0 +1,43 @@
+{%- assign myths = shop.metaobjects.fruit_myth.values -%}
+<div class="container">
+  <header class="page-head">
+    <p class="ft-eyebrow t-label-sm">{{ section.settings.eyebrow }}</p>
+    <h1 class="page-head__title t-display">{{ section.settings.heading | default: page.title }}</h1>
+    {%- if section.settings.text != blank -%}
+      <p class="page-head__text t-body-lg">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </header>
+  {%- if myths.size > 0 -%}
+    <div class="ft-accordion">
+      {%- for m in myths -%}
+        <details class="panel ft-details" {% if forloop.first %}open{% endif %}>
+          <summary class="ft-details__summary">
+            <span class="badge badge--soft">{{ 'fruit_tools.myths.myth' | t }}</span>
+            <span class="t-title">{{ m.myth.value }}</span>
+            <span class="icon icon--20" aria-hidden="true">expand_more</span>
+          </summary>
+          <div class="ft-details__body">
+            <span class="badge badge--mint">{{ 'fruit_tools.myths.fact' | t }}</span>
+            <p class="t-body">{{ m.truth.value }}</p>
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="rte">{{ page.content }}</div>
+  {%- endif -%}
+  <p class="t-body-sm c-muted ft-note">{{ 'fruit_tools.disclaimer' | t }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Fruit myths",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Myth vs fact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fruit myths, cleared up" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Common beliefs about fruit — and what the evidence actually says. Add more in Content → Metaobjects → Fruit Myth." }
+  ],
+  "presets": [{ "name": "Fruit myths" }]
+}
+{% endschema %}

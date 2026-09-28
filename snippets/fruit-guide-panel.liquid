@@ -1,0 +1,89 @@
+{%- comment -%}
+  Product page "Know your fruit" panel. Finds the Fruit Guide whose Products list contains
+  this product and shows real per-100 g numbers, how to choose/store/eat, and a compare link.
+  Accepts: product {Object}
+{%- endcomment -%}
+{%- liquid
+  assign guide = nil
+  for g in shop.metaobjects.fruit_guide.values
+    for p in g.products.value
+      if p.id == product.id
+        assign guide = g
+        break
+      endif
+    endfor
+    if guide
+      break
+    endif
+  endfor
+  assign compare_page = pages['compare-fruits']
+-%}
+{%- if guide -%}
+  <div class="panel fg-panel">
+    <div class="fg-panel__head">
+      <h2 class="t-title c-primary">{{ 'fruit_tools.panel.title' | t: name: guide.name.value }}</h2>
+      {%- if guide.months.value != blank -%}
+        {%- assign month_now = 'now' | date: '%b' -%}
+        {%- if guide.months.value contains month_now -%}
+          <span class="badge badge--mint">{{ 'fruit_tools.panel.in_season' | t }}</span>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- if guide.calories.value != blank -%}
+      <p class="t-label-sm c-muted fg-panel__per">{{ 'fruit_tools.panel.per_100g' | t }}</p>
+      <dl class="fg-stats">
+        <div><dt>{{ 'fruit_tools.metric.kcal' | t }}</dt><dd>{{ guide.calories.value }}<small> kcal</small></dd></div>
+        {%- if guide.fiber_g.value != blank -%}<div><dt>{{ 'fruit_tools.metric.fiber' | t }}</dt><dd>{{ guide.fiber_g.value }}<small> g</small></dd></div>{%- endif -%}
+        {%- if guide.sugar_g.value != blank -%}<div><dt>{{ 'fruit_tools.metric.sugar' | t }}</dt><dd>{{ guide.sugar_g.value }}<small> g</small></dd></div>{%- endif -%}
+        {%- if guide.vitamin_c_mg.value != blank -%}<div><dt>{{ 'fruit_tools.metric.vitc' | t }}</dt><dd>{{ guide.vitamin_c_mg.value | round }}<small> mg</small></dd></div>{%- endif -%}
+        {%- if guide.potassium_mg.value != blank -%}<div><dt>{{ 'fruit_tools.metric.potassium' | t }}</dt><dd>{{ guide.potassium_mg.value }}<small> mg</small></dd></div>{%- endif -%}
+        {%- if guide.water_pct.value != blank -%}<div><dt>{{ 'fruit_tools.metric.water' | t }}</dt><dd>{{ guide.water_pct.value | round }}<small>%</small></dd></div>{%- endif -%}
+        {%- if guide.glycemic_index.value != blank -%}
+          {%- liquid
+            assign gi = guide.glycemic_index.value
+            if gi <= 55
+              assign gi_band = 'fruit_tools.gi.low' | t
+            elsif gi <= 69
+              assign gi_band = 'fruit_tools.gi.medium' | t
+            else
+              assign gi_band = 'fruit_tools.gi.high' | t
+            endif
+          -%}
+          <div><dt>{{ 'fruit_tools.metric.gi' | t }}</dt><dd>{{ gi }}<small> {{ gi_band }}</small></dd></div>
+        {%- endif -%}
+      </dl>
+      {%- if guide.nutrition_source.value != blank -%}
+        <p class="t-body-sm c-muted">{{ 'fruit_tools.source' | t }}: {{ guide.nutrition_source.value }}</p>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="ft-accordion fg-panel__tips">
+      {%- if guide.how_to_select.value != blank -%}
+        <details class="ft-details ft-details--flat" open>
+          <summary class="ft-details__summary"><span class="icon icon--20 c-secondary" aria-hidden="true">verified</span><span class="t-label-lg">{{ 'fruit_tools.panel.choose' | t }}</span><span class="icon icon--20" aria-hidden="true">expand_more</span></summary>
+          <div class="ft-details__body"><p class="t-body">{{ guide.how_to_select.value }}</p></div>
+        </details>
+      {%- endif -%}
+      {%- if guide.how_to_store.value != blank -%}
+        <details class="ft-details ft-details--flat">
+          <summary class="ft-details__summary"><span class="icon icon--20 c-secondary" aria-hidden="true">kitchen</span><span class="t-label-lg">{{ 'fruit_tools.panel.store' | t }}</span><span class="icon icon--20" aria-hidden="true">expand_more</span></summary>
+          <div class="ft-details__body"><p class="t-body">{{ guide.how_to_store.value }}</p></div>
+        </details>
+      {%- endif -%}
+      {%- if guide.how_to_eat.value != blank -%}
+        <details class="ft-details ft-details--flat">
+          <summary class="ft-details__summary"><span class="icon icon--20 c-secondary" aria-hidden="true">restaurant</span><span class="t-label-lg">{{ 'fruit_tools.panel.eat' | t }}</span><span class="icon icon--20" aria-hidden="true">expand_more</span></summary>
+          <div class="ft-details__body"><p class="t-body">{{ guide.how_to_eat.value }}</p></div>
+        </details>
+      {%- endif -%}
+    </div>
+
+    {%- if compare_page != blank and guide.calories.value != blank -%}
+      <a href="{{ compare_page.url }}?a={{ guide.handle }}" class="btn btn--outline btn--block">
+        <span class="icon icon--18" aria-hidden="true">compare_arrows</span>
+        {{ 'fruit_tools.panel.compare' | t: name: guide.name.value }}
+      </a>
+    {%- endif -%}
+  </div>
+{%- endif -%}

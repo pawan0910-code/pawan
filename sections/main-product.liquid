@@ -119,6 +119,10 @@
         </script>
       {%- endform -%}
 
+      {%- if section.settings.show_fruit_guide -%}
+        {%- render 'fruit-guide-panel', product: product -%}
+      {%- endif -%}
+
       {%- if product.description != blank -%}
         <div class="panel">
           <h2 class="t-title" style="color: var(--c-primary); margin-bottom: .5rem;">{{ 'products.product.description' | t }}</h2>
@@ -138,7 +142,8 @@
   "name": "Product information",
   "tag": "section",
   "settings": [
-    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false }
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout buttons", "default": false },
+    { "type": "checkbox", "id": "show_fruit_guide", "label": "Show “Know your fruit” panel", "info": "Nutrition and tips from the Fruit Guide metaobject that lists this product.", "default": true }
   ]
 }
 {% endschema %}

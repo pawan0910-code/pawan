@@ -3,12 +3,49 @@
     "search": {
       "type": "search-pills",
       "blocks": {
-        "pill-delivery": { "type": "pill", "settings": { "label": "20 Min Delivery", "icon": "bolt", "link": "shopify://pages/shipping-delivery", "style": "amber" } },
-        "pill-season": { "type": "pill", "settings": { "label": "🍉 In Season", "icon": "", "link": "shopify://collections/in-season-now", "style": "neutral" } },
-        "pill-fruits": { "type": "pill", "settings": { "label": "🍎 Fresh Fruits", "icon": "", "link": "shopify://collections/fresh-produce", "style": "neutral" } },
-        "pill-bestsellers": { "type": "pill", "settings": { "label": "Bestsellers", "icon": "verified", "link": "shopify://collections/bestsellers", "style": "mint" } }
+        "pill-delivery": {
+          "type": "pill",
+          "settings": {
+            "label": "20 Min Delivery",
+            "icon": "bolt",
+            "link": "shopify://pages/shipping-delivery",
+            "style": "amber"
+          }
+        },
+        "pill-season": {
+          "type": "pill",
+          "settings": {
+            "label": "🍉 In Season",
+            "icon": "",
+            "link": "shopify://collections/in-season-now",
+            "style": "neutral"
+          }
+        },
+        "pill-fruits": {
+          "type": "pill",
+          "settings": {
+            "label": "🍎 Fresh Fruits",
+            "icon": "",
+            "link": "shopify://collections/fresh-produce",
+            "style": "neutral"
+          }
+        },
+        "pill-bestsellers": {
+          "type": "pill",
+          "settings": {
+            "label": "Bestsellers",
+            "icon": "verified",
+            "link": "shopify://collections/bestsellers",
+            "style": "mint"
+          }
+        }
       },
-      "block_order": ["pill-delivery", "pill-season", "pill-fruits", "pill-bestsellers"],
+      "block_order": [
+        "pill-delivery",
+        "pill-season",
+        "pill-fruits",
+        "pill-bestsellers"
+      ],
       "settings": {
         "placeholder": "Search apples, kiwi, blueberries, fruit bowls...",
         "show_voice": true,
@@ -33,14 +70,57 @@
     "browse": {
       "type": "collection-stories",
       "blocks": {
-        "exotics": { "type": "collection", "settings": { "collection": "superfoods-pantry", "label": "Exotics" } },
-        "fruits": { "type": "collection", "settings": { "collection": "fresh-produce", "label": "Fresh Fruits" } },
-        "season": { "type": "collection", "settings": { "collection": "in-season-now", "label": "In Season" } },
-        "bowls": { "type": "collection", "settings": { "collection": "healthy-snacks", "label": "Fruit Bowls" } },
-        "juices": { "type": "collection", "settings": { "collection": "cold-pressed-juices", "label": "Juices" } },
-        "boxes": { "type": "collection", "settings": { "collection": "dairy-eggs", "label": "Fruit Boxes" } }
+        "exotics": {
+          "type": "collection",
+          "settings": {
+            "collection": "superfoods-pantry",
+            "label": "Exotics"
+          }
+        },
+        "fruits": {
+          "type": "collection",
+          "settings": {
+            "collection": "fresh-produce",
+            "label": "Fresh Fruits"
+          }
+        },
+        "season": {
+          "type": "collection",
+          "settings": {
+            "collection": "in-season-now",
+            "label": "In Season"
+          }
+        },
+        "bowls": {
+          "type": "collection",
+          "settings": {
+            "collection": "healthy-snacks",
+            "label": "Fruit Bowls"
+          }
+        },
+        "juices": {
+          "type": "collection",
+          "settings": {
+            "collection": "cold-pressed-juices",
+            "label": "Juices"
+          }
+        },
+        "boxes": {
+          "type": "collection",
+          "settings": {
+            "collection": "dairy-eggs",
+            "label": "Fruit Boxes"
+          }
+        }
       },
-      "block_order": ["exotics", "fruits", "season", "bowls", "juices", "boxes"],
+      "block_order": [
+        "exotics",
+        "fruits",
+        "season",
+        "bowls",
+        "juices",
+        "boxes"
+      ],
       "settings": {
         "heading": "Browse Harvest",
         "view_all_label": "View All",
@@ -101,16 +181,92 @@
     "purity": {
       "type": "purity-code",
       "blocks": {
-        "ripening": { "type": "point", "settings": { "icon": "nature", "title": "Zero Artificial Ripening", "text": "Naturally matured on branches; 100% ethylene and carbide free guarantee." } },
-        "sourcing": { "type": "point", "settings": { "icon": "agriculture", "title": "Direct Sourcing from Valley Farmers", "text": "Harvested daily from certified agro-orchards in Gujarat, Kashmir, and Maharashtra." } },
-        "packaging": { "type": "point", "settings": { "icon": "recycling", "title": "Bio-Degradable Unbleached Packaging", "text": "Packed in zero-plastic woven cornstarch bags and ventilated kraft trays." } }
+        "ripening": {
+          "type": "point",
+          "settings": {
+            "icon": "nature",
+            "title": "Zero Artificial Ripening",
+            "text": "Naturally matured on branches; 100% ethylene and carbide free guarantee."
+          }
+        },
+        "sourcing": {
+          "type": "point",
+          "settings": {
+            "icon": "agriculture",
+            "title": "Direct Sourcing from Valley Farmers",
+            "text": "Harvested daily from certified agro-orchards in Gujarat, Kashmir, and Maharashtra."
+          }
+        },
+        "packaging": {
+          "type": "point",
+          "settings": {
+            "icon": "recycling",
+            "title": "Bio-Degradable Unbleached Packaging",
+            "text": "Packed in zero-plastic woven cornstarch bags and ventilated kraft trays."
+          }
+        }
       },
-      "block_order": ["ripening", "sourcing", "packaging"],
+      "block_order": [
+        "ripening",
+        "sourcing",
+        "packaging"
+      ],
       "settings": {
         "heading": "The Baroda Fresh Purity Code",
         "icon": "eco"
       }
+    },
+    "fruit-tools": {
+      "type": "fruit-tools-promo",
+      "blocks": {
+        "t1": {
+          "type": "tool",
+          "settings": {
+            "icon": "compare_arrows",
+            "title": "Compare fruits",
+            "text": "Any two fruits, side by side — who wins for what",
+            "link": "shopify://pages/compare-fruits"
+          }
+        },
+        "t2": {
+          "type": "tool",
+          "settings": {
+            "icon": "quiz",
+            "title": "Find my fruit",
+            "text": "Two taps: your goal and your taste",
+            "link": "shopify://pages/quiz"
+          }
+        },
+        "t3": {
+          "type": "tool",
+          "settings": {
+            "icon": "calendar_month",
+            "title": "What’s in season",
+            "text": "Fresher, tastier and better value",
+            "link": "shopify://pages/whats-in-season"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Pick smarter",
+        "subheading": "Real nutrition numbers, simple answers"
+      }
     }
   },
-  "order": ["search", "hero", "browse", "harvest-of-the-day", "fruit-bowls", "spotlight", "exotics", "purity"]
+  "order": [
+    "search",
+    "hero",
+    "browse",
+    "harvest-of-the-day",
+    "fruit-bowls",
+    "spotlight",
+    "exotics",
+    "fruit-tools",
+    "purity"
+  ]
 }
