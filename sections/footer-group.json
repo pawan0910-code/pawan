@@ -1,0 +1,83 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-footer": {
+          "type": "menu",
+          "settings": {
+            "heading": "",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "menu-footer"
+      ],
+      "settings": {
+        "brand_name": "Baroda Fresh",
+        "text": "",
+        "show_payment_icons": true
+      }
+    },
+    "bottom-nav": {
+      "type": "bottom-nav",
+      "blocks": {
+        "tab-shop": {
+          "type": "tab",
+          "settings": {
+            "label": "Shop",
+            "icon": "eco",
+            "link": "/"
+          }
+        },
+        "tab-categories": {
+          "type": "tab",
+          "settings": {
+            "label": "Categories",
+            "icon": "grid_view",
+            "link": "shopify://collections"
+          }
+        },
+        "tab-fresh": {
+          "type": "tab",
+          "settings": {
+            "label": "Farm Fresh",
+            "icon": "auto_awesome",
+            "link": "shopify://collections/in-season-now"
+          }
+        },
+        "tab-boxes": {
+          "type": "tab",
+          "settings": {
+            "label": "Basket",
+            "icon": "shopping_basket",
+            "link": "/cart"
+          }
+        },
+        "tab-account": {
+          "type": "tab",
+          "settings": {
+            "label": "Account",
+            "icon": "person",
+            "link": "/account"
+          }
+        }
+      },
+      "block_order": [
+        "tab-shop",
+        "tab-categories",
+        "tab-fresh",
+        "tab-boxes",
+        "tab-account"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer",
+    "bottom-nav"
+  ]
+}

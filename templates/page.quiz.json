@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "fruit-finder",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

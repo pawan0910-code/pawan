@@ -1,0 +1,53 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {}
+    },
+    "fruit-tools": {
+      "type": "fruit-tools-promo",
+      "blocks": {
+        "t1": {
+          "type": "tool",
+          "settings": {
+            "icon": "compare_arrows",
+            "title": "Compare fruits",
+            "text": "Nutrition, vitamins & minerals side by side",
+            "link": "shopify://pages/compare-fruits"
+          }
+        },
+        "t2": {
+          "type": "tool",
+          "settings": {
+            "icon": "search",
+            "title": "Fruit guide",
+            "text": "Search by need — vitamin C, low sugar, iron…",
+            "link": "shopify://pages/engine"
+          }
+        },
+        "t3": {
+          "type": "tool",
+          "settings": {
+            "icon": "calendar_month",
+            "title": "What’s in season",
+            "text": "Fresher, tastier and better value",
+            "link": "shopify://pages/whats-in-season"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Pick smarter",
+        "subheading": "Free tools to choose the right fruit"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "fruit-tools"
+  ]
+}

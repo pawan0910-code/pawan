@@ -1,0 +1,26 @@
+{
+  "current": {
+    "default_city": "Vadodara",
+    "free_delivery_threshold": 499,
+    "upsell_heading": "Add a fresh juice",
+    "upsell_collection": "cold-pressed-juices",
+    "perk_1": "Fresh or refund in 24 h",
+    "perk_2": "Secure checkout",
+    "perk_3": "UPI · Cards · COD",
+    "cart_note": true,
+    "empty_menu": "footer-shop"
+  },
+  "presets": {
+    "Default": {
+      "default_city": "Vadodara",
+      "free_delivery_threshold": 499,
+      "upsell_heading": "Add a fresh juice",
+      "upsell_collection": "cold-pressed-juices",
+      "perk_1": "Fresh or refund in 24 h",
+      "perk_2": "Secure checkout",
+      "perk_3": "UPI · Cards · COD",
+      "cart_note": true,
+      "empty_menu": "footer-shop"
+    }
+  }
+}

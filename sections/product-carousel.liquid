@@ -1,0 +1,64 @@
+{%- assign col = section.settings.collection -%}
+<section class="section" aria-labelledby="RailHeading-{{ section.id }}">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2 id="RailHeading-{{ section.id }}" class="section-head__title t-headline">
+          {{- section.settings.heading | default: col.title -}}
+          {%- if section.settings.heading_icon != blank -%}
+            <span class="icon icon--20" aria-hidden="true">{{ section.settings.heading_icon | strip }}</span>
+          {%- endif -%}
+        </h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-head__sub t-body-sm">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.view_all_label != blank and col != blank -%}
+        <a href="{{ col.url }}" class="section-head__link t-label">
+          {{- section.settings.view_all_label -}}
+          <span class="visually-hidden"> — {{ section.settings.heading | default: col.title }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if col != blank and col.products_count > 0 -%}
+      <ul class="rail scroller" role="list" style="--cols-desktop: {{ section.settings.columns_desktop }};">
+        {%- for product in col.products limit: section.settings.limit -%}
+          <li class="rail__item">
+            {%- render 'product-card', product: product, style: section.settings.card_style, show_description: section.settings.show_description -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="section-head__sub t-body-sm">{{ 'sections.product_list.empty' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product carousel",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Freshly Cut Fruit Bowls", "info": "Defaults to the collection title." },
+    { "type": "text", "id": "heading_icon", "label": "Heading icon (Material Symbols name)", "default": "restaurant" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Zero Prep • Washed & Hand-cut Fresh Daily" },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View All" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "default": "bowl",
+      "options": [
+        { "value": "bowl", "label": "Photo card with contents line" },
+        { "value": "compact", "label": "Compact product card" }
+      ]
+    },
+    { "type": "checkbox", "id": "show_description", "label": "Show contents line (photo card)", "info": "Uses the text after “What’s inside” in the product description.", "default": true },
+    { "type": "range", "id": "limit", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns_desktop", "label": "Columns on desktop", "min": 3, "max": 6, "step": 1, "default": 4, "info": "Mobile swipes horizontally." }
+  ],
+  "presets": [{ "name": "Product carousel" }]
+}
+{% endschema %}

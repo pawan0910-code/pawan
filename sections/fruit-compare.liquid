@@ -1,0 +1,69 @@
+{%- comment -%}
+  Compare two fruits side by side. Data: Fruit Guide metaobjects (snippets/fruit-data).
+  Shareable URLs: /pages/compare-fruits?a=apple&b=banana (fruit guide handles).
+{%- endcomment -%}
+<div class="container" data-fruit-compare data-default-a="{{ section.settings.default_a }}" data-default-b="{{ section.settings.default_b }}">
+  <header class="page-head">
+    <p class="ft-eyebrow t-label-sm">{{ section.settings.eyebrow }}</p>
+    <h1 class="page-head__title t-display">{{ section.settings.heading | default: page.title }}</h1>
+    {%- if section.settings.text != blank -%}
+      <p class="page-head__text t-body-lg">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="panel cmp-pickers">
+    <div class="cmp-pick">
+      <label class="t-label c-muted" for="CmpA-{{ section.id }}">{{ 'fruit_tools.compare.first' | t }}</label>
+      <div class="select select--block">
+        <select id="CmpA-{{ section.id }}" data-cmp-select="a"></select>
+        <span class="icon icon--18" aria-hidden="true">expand_more</span>
+      </div>
+    </div>
+    <button type="button" class="cmp-swap icon-btn" data-cmp-swap aria-label="{{ 'fruit_tools.compare.swap' | t }}">
+      <span class="icon" aria-hidden="true">swap_horiz</span>
+    </button>
+    <div class="cmp-pick">
+      <label class="t-label c-muted" for="CmpB-{{ section.id }}">{{ 'fruit_tools.compare.second' | t }}</label>
+      <div class="select select--block">
+        <select id="CmpB-{{ section.id }}" data-cmp-select="b"></select>
+        <span class="icon icon--18" aria-hidden="true">expand_more</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cmp-popular" data-cmp-popular hidden>
+    <span class="t-label c-muted">{{ 'fruit_tools.compare.popular' | t }}</span>
+    <ul class="scroller quick-pills" role="list" data-cmp-popular-list></ul>
+  </div>
+
+  <div class="cmp-result" data-cmp-result aria-live="polite">
+    <noscript><p class="t-body c-muted">{{ 'fruit_tools.needs_js' | t }}</p></noscript>
+  </div>
+
+  <div class="cmp-foot">
+    <button type="button" class="btn btn--outline" data-share hidden>
+      <span class="icon icon--18" aria-hidden="true">share</span>
+      <span data-share-label>{{ 'fruit_tools.share' | t }}</span>
+    </button>
+    <p class="t-body-sm c-muted">{{ 'fruit_tools.disclaimer' | t }}</p>
+  </div>
+</div>
+
+{% render 'fruit-data' %}
+<script src="{{ 'fruit-tools.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Fruit compare",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Compare" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Compare fruits" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Pick any two fruits to see their nutrition facts, vitamins and minerals side by side — lab values per 100 g." },
+    { "type": "text", "id": "default_a", "label": "First fruit (Fruit Guide handle)", "default": "apple" },
+    { "type": "text", "id": "default_b", "label": "Second fruit (Fruit Guide handle)", "default": "guava" },
+    { "type": "paragraph", "content": "Fruits and numbers come from Content → Metaobjects → Fruit Guide. Only fruits with nutrition values appear here." }
+  ],
+  "presets": [{ "name": "Fruit compare" }]
+}
+{% endschema %}

@@ -1,0 +1,313 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Baroda Fresh",
+    "theme_version": "1.0.0",
+    "theme_author": "Baroda Fresh",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Logo & favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "Shown as a 32px circle beside the store name (40px on desktop). Square images work best."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 × 32px .png recommended"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Defaults match the Baroda Fresh reference design."
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (headings, prices)",
+        "default": "#002912"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_container",
+        "label": "Primary container (buttons, hero, cart bar)",
+        "default": "#134024"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary (accents, badges)",
+        "default": "#7e5700"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_container",
+        "label": "Secondary container (highlight pills)",
+        "default": "#fdc668"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Background",
+        "default": "#f4fbf3"
+      },
+      {
+        "type": "color",
+        "id": "color_surface_low",
+        "label": "Surface (search, image wells)",
+        "default": "#eef6ed"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#161d18"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted text",
+        "default": "#414942"
+      }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The corner badge comes from product tags — the first rule that matches wins. With no match, products with a compare-at price show a “Save %” badge. Optional product metafields: custom.origin (eyebrow, e.g. “Patan Valley”; falls back to product type), custom.highlight (image chip, e.g. “14° Brix Sweet”), custom.unit (pack size for single-variant products)."
+      },
+      {
+        "type": "header",
+        "content": "Badge rule 1"
+      },
+      {
+        "type": "text",
+        "id": "badge_1_tag",
+        "label": "Product tag",
+        "default": "bestseller"
+      },
+      {
+        "type": "text",
+        "id": "badge_1_label",
+        "label": "Badge text",
+        "default": "Bestseller"
+      },
+      {
+        "type": "select",
+        "id": "badge_1_style",
+        "label": "Badge style",
+        "default": "secondary",
+        "options": [
+          {
+            "value": "secondary",
+            "label": "Amber"
+          },
+          {
+            "value": "primary",
+            "label": "Green"
+          },
+          {
+            "value": "amber",
+            "label": "Light amber"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "soft",
+            "label": "Neutral"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Badge rule 2"
+      },
+      {
+        "type": "text",
+        "id": "badge_2_tag",
+        "label": "Product tag",
+        "default": "new"
+      },
+      {
+        "type": "text",
+        "id": "badge_2_label",
+        "label": "Badge text",
+        "default": "⚡ New"
+      },
+      {
+        "type": "select",
+        "id": "badge_2_style",
+        "label": "Badge style",
+        "default": "primary",
+        "options": [
+          {
+            "value": "secondary",
+            "label": "Amber"
+          },
+          {
+            "value": "primary",
+            "label": "Green"
+          },
+          {
+            "value": "amber",
+            "label": "Light amber"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "soft",
+            "label": "Neutral"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Badge rule 3"
+      },
+      {
+        "type": "text",
+        "id": "badge_3_tag",
+        "label": "Product tag",
+        "default": "in-season"
+      },
+      {
+        "type": "text",
+        "id": "badge_3_label",
+        "label": "Badge text",
+        "default": "In Season"
+      },
+      {
+        "type": "select",
+        "id": "badge_3_style",
+        "label": "Badge style",
+        "default": "amber",
+        "options": [
+          {
+            "value": "secondary",
+            "label": "Amber"
+          },
+          {
+            "value": "primary",
+            "label": "Green"
+          },
+          {
+            "value": "amber",
+            "label": "Light amber"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "soft",
+            "label": "Neutral"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Icons",
+    "settings": [
+      {
+        "type": "text",
+        "id": "extra_icons",
+        "label": "Extra icon names",
+        "info": "The theme loads only the Material Symbols icons it uses. If you type a new icon name in a section (e.g. local_florist), add it here, comma-separated. Browse names at fonts.google.com/icons."
+      }
+    ]
+  },
+  {
+    "name": "Basket",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Used by the basket drawer and the cart page."
+      },
+      {
+        "type": "text",
+        "id": "default_city",
+        "label": "Default delivery city",
+        "default": "Vadodara"
+      },
+      {
+        "type": "number",
+        "id": "free_delivery_threshold",
+        "label": "Free delivery threshold (₹)",
+        "info": "Shows a progress bar toward free delivery. Set 0 to hide. Must match your shipping rates.",
+        "default": 499
+      },
+      {
+        "type": "header",
+        "content": "Add-on products"
+      },
+      {
+        "type": "text",
+        "id": "upsell_heading",
+        "label": "Heading",
+        "default": "Add a fresh juice"
+      },
+      {
+        "type": "collection",
+        "id": "upsell_collection",
+        "label": "Collection",
+        "info": "Shows up to 6 available products that aren’t already in the basket."
+      },
+      {
+        "type": "header",
+        "content": "Trust badges"
+      },
+      {
+        "type": "text",
+        "id": "perk_1",
+        "label": "Badge 1",
+        "default": "Fresh or refund in 24 h"
+      },
+      {
+        "type": "text",
+        "id": "perk_2",
+        "label": "Badge 2",
+        "default": "Secure checkout"
+      },
+      {
+        "type": "text",
+        "id": "perk_3",
+        "label": "Badge 3",
+        "info": "Only list payment methods you have enabled.",
+        "default": "UPI · Cards · COD"
+      },
+      {
+        "type": "header",
+        "content": "Other"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_note",
+        "label": "Show delivery instructions box",
+        "default": true
+      },
+      {
+        "type": "link_list",
+        "id": "empty_menu",
+        "label": "Empty basket quick links",
+        "default": "footer-shop"
+      }
+    ]
+  }
+]

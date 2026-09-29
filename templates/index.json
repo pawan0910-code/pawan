@@ -1,0 +1,282 @@
+{
+  "sections": {
+    "search": {
+      "type": "search-pills",
+      "blocks": {
+        "pill-delivery": {
+          "type": "pill",
+          "settings": {
+            "label": "20 Min Delivery",
+            "icon": "bolt",
+            "link": "shopify://pages/shipping-delivery",
+            "style": "amber"
+          }
+        },
+        "pill-season": {
+          "type": "pill",
+          "settings": {
+            "label": "🍉 In Season",
+            "icon": "",
+            "link": "shopify://collections/in-season-now",
+            "style": "neutral"
+          }
+        },
+        "pill-fruits": {
+          "type": "pill",
+          "settings": {
+            "label": "🍎 Fresh Fruits",
+            "icon": "",
+            "link": "shopify://collections/fresh-produce",
+            "style": "neutral"
+          }
+        },
+        "pill-bestsellers": {
+          "type": "pill",
+          "settings": {
+            "label": "Bestsellers",
+            "icon": "verified",
+            "link": "shopify://collections/bestsellers",
+            "style": "mint"
+          }
+        }
+      },
+      "block_order": [
+        "pill-delivery",
+        "pill-season",
+        "pill-fruits",
+        "pill-bestsellers"
+      ],
+      "settings": {
+        "placeholder": "Search apples, kiwi, blueberries, fruit bowls...",
+        "show_voice": true,
+        "scan_link": "",
+        "scan_label": "Scan"
+      }
+    },
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "badge_text": "Direct from Orchard",
+        "badge_icon": "local_shipping",
+        "live_text": "Live Harvest",
+        "heading": "Freshly Handpicked at 5:00 AM",
+        "text": "Crisp apples & plump blueberries, delivered by 8:00 AM.",
+        "button_label": "Explore Orchard Fresh",
+        "button_link": "shopify://collections/fresh-produce",
+        "product": "blueberries",
+        "show_price": true
+      }
+    },
+    "browse": {
+      "type": "collection-stories",
+      "blocks": {
+        "exotics": {
+          "type": "collection",
+          "settings": {
+            "collection": "superfoods-pantry",
+            "label": "Exotics"
+          }
+        },
+        "fruits": {
+          "type": "collection",
+          "settings": {
+            "collection": "fresh-produce",
+            "label": "Fresh Fruits"
+          }
+        },
+        "season": {
+          "type": "collection",
+          "settings": {
+            "collection": "in-season-now",
+            "label": "In Season"
+          }
+        },
+        "bowls": {
+          "type": "collection",
+          "settings": {
+            "collection": "healthy-snacks",
+            "label": "Fruit Bowls"
+          }
+        },
+        "juices": {
+          "type": "collection",
+          "settings": {
+            "collection": "cold-pressed-juices",
+            "label": "Juices"
+          }
+        },
+        "boxes": {
+          "type": "collection",
+          "settings": {
+            "collection": "dairy-eggs",
+            "label": "Fruit Boxes"
+          }
+        }
+      },
+      "block_order": [
+        "exotics",
+        "fruits",
+        "season",
+        "bowls",
+        "juices",
+        "boxes"
+      ],
+      "settings": {
+        "heading": "Browse Harvest",
+        "view_all_label": "View All",
+        "view_all_link": "shopify://collections"
+      }
+    },
+    "harvest-of-the-day": {
+      "type": "product-grid",
+      "settings": {
+        "heading": "Harvest of the Day",
+        "heading_icon": "verified",
+        "caption": "View All",
+        "caption_links_to_collection": true,
+        "collection": "bestsellers",
+        "limit": 4,
+        "columns_desktop": 4
+      }
+    },
+    "fruit-bowls": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Freshly Cut Fruit Bowls",
+        "heading_icon": "restaurant",
+        "subheading": "Zero Prep • Washed & Hand-cut Fresh Daily",
+        "view_all_label": "View All",
+        "collection": "healthy-snacks",
+        "card_style": "bowl",
+        "show_description": true,
+        "limit": 4,
+        "columns_desktop": 4
+      }
+    },
+    "spotlight": {
+      "type": "product-spotlight",
+      "settings": {
+        "product": "apple",
+        "eyebrow": "Orchard Direct",
+        "heading": "",
+        "badge": "Residue Free",
+        "text": "",
+        "button_label": "Add"
+      }
+    },
+    "exotics": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Exotics & Immunity",
+        "heading_icon": "",
+        "subheading": "Packed with antioxidants, fresh arrival",
+        "view_all_label": "See More",
+        "collection": "superfoods-pantry",
+        "card_style": "compact",
+        "show_description": false,
+        "limit": 4,
+        "columns_desktop": 4
+      }
+    },
+    "purity": {
+      "type": "purity-code",
+      "blocks": {
+        "ripening": {
+          "type": "point",
+          "settings": {
+            "icon": "nature",
+            "title": "Zero Artificial Ripening",
+            "text": "Naturally matured on branches; 100% ethylene and carbide free guarantee."
+          }
+        },
+        "sourcing": {
+          "type": "point",
+          "settings": {
+            "icon": "agriculture",
+            "title": "Direct Sourcing from Valley Farmers",
+            "text": "Harvested daily from certified agro-orchards in Gujarat, Kashmir, and Maharashtra."
+          }
+        },
+        "packaging": {
+          "type": "point",
+          "settings": {
+            "icon": "recycling",
+            "title": "Bio-Degradable Unbleached Packaging",
+            "text": "Packed in zero-plastic woven cornstarch bags and ventilated kraft trays."
+          }
+        }
+      },
+      "block_order": [
+        "ripening",
+        "sourcing",
+        "packaging"
+      ],
+      "settings": {
+        "heading": "The Baroda Fresh Purity Code",
+        "icon": "eco"
+      }
+    },
+    "fruit-tools": {
+      "type": "fruit-tools-promo",
+      "blocks": {
+        "t1": {
+          "type": "tool",
+          "settings": {
+            "icon": "compare_arrows",
+            "title": "Compare fruits",
+            "text": "Nutrition, vitamins & minerals side by side",
+            "link": "shopify://pages/compare-fruits"
+          }
+        },
+        "t2": {
+          "type": "tool",
+          "settings": {
+            "icon": "search",
+            "title": "Fruit guide",
+            "text": "Search by need — vitamin C, low sugar, iron…",
+            "link": "shopify://pages/engine"
+          }
+        },
+        "t3": {
+          "type": "tool",
+          "settings": {
+            "icon": "calendar_month",
+            "title": "What’s in season",
+            "text": "Fresher, tastier and better value",
+            "link": "shopify://pages/whats-in-season"
+          }
+        },
+        "t4": {
+          "type": "tool",
+          "settings": {
+            "icon": "quiz",
+            "title": "Find my fruit",
+            "text": "Two taps: your goal and your taste",
+            "link": "shopify://pages/quiz"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t4",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Pick smarter",
+        "subheading": "Real nutrition numbers, simple answers"
+      }
+    }
+  },
+  "order": [
+    "search",
+    "hero",
+    "browse",
+    "harvest-of-the-day",
+    "fruit-bowls",
+    "spotlight",
+    "exotics",
+    "fruit-tools",
+    "purity"
+  ]
+}

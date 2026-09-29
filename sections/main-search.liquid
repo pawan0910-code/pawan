@@ -1,0 +1,50 @@
+<div class="container">
+  <header class="page-head">
+    <h1 class="page-head__title t-display">{{ 'general.search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="searchbar" data-searchbar style="margin-top: var(--space-md);">
+      <span class="icon icon--20" aria-hidden="true">search</span>
+      <label class="visually-hidden" for="SearchPage">{{ 'general.search.title' | t }}</label>
+      <input id="SearchPage" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off" enterkeyhint="search">
+      <input type="hidden" name="options[prefix]" value="last">
+    </form>
+  </header>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="t-body-sm c-muted" style="margin-bottom: var(--space-sm);" role="status">
+        {{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms }}
+      </p>
+      {%- if search.results_count > 0 -%}
+        <ul class="product-grid" role="list">
+          {%- for item in search.results -%}
+            <li>
+              {%- if item.object_type == 'product' -%}
+                {%- render 'product-card', product: item, style: 'grid' -%}
+              {%- else -%}
+                <a href="{{ item.url }}" class="panel" style="display: block; height: 100%;">
+                  <p class="t-label-sm c-secondary" style="text-transform: uppercase;">{{ item.object_type }}</p>
+                  <h2 class="t-title">{{ item.title }}</h2>
+                  <p class="t-body-sm c-muted">{{ item.content | strip_html | truncate: 100 }}</p>
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+        {%- render 'pagination', paginate: paginate -%}
+      {%- else -%}
+        <div class="empty-state">
+          <span class="icon" aria-hidden="true">search</span>
+          <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">{{ 'general.continue_shopping' | t }}</a>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

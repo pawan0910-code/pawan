@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="empty-state">
+    <span class="icon" aria-hidden="true">eco</span>
+    <h1 class="t-display c-primary">{{ 'templates.404.title' | t }}</h1>
+    <p class="t-body-lg">{{ 'templates.404.subtext' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--lg">{{ 'general.continue_shopping' | t }}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "404",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

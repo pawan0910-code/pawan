@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "settings": { "show_dynamic_checkout": true } },
+    "related": { "type": "product-recommendations", "settings": { "heading": "You may also like", "limit": 6 } }
+  },
+  "order": ["main", "related"]
+}
