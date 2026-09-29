@@ -69,6 +69,7 @@
     const hadFocus = current.contains(document.activeElement);
     current.replaceWith(next);
     setCount(Number(next.dataset.itemCount || 0));
+    applyLocation();
     if (hadFocus) (next.querySelector('[data-cart-close]') || next).focus({ preventScroll: true });
   };
 
@@ -76,7 +77,7 @@
     const current = document.querySelector('[data-cart-page]');
     if (!html || !current) return;
     const next = parse(html).querySelector('[data-cart-page]');
-    if (next) current.replaceWith(next);
+    if (next) { current.replaceWith(next); applyLocation(); }
   };
 
   const sectionsParam = () => {
@@ -308,6 +309,141 @@
     }
   });
 
+  /* ---------- Sheets (location, account) ---------- */
+  const openSheet = (id, opener) => {
+    const sheet = document.getElementById(id);
+    if (!sheet || typeof sheet.showModal !== 'function') return false;
+    if (!sheet.open) { sheet._opener = opener || document.activeElement; sheet.showModal(); }
+    return true;
+  };
+  document.addEventListener('close', (event) => {
+    const el = event.target;
+    if (!el.matches || !el.matches('dialog.drawer') || el.matches('[data-cart-drawer]')) return;
+    if (el._opener && el._opener.isConnected) el._opener.focus({ preventScroll: true });
+    el._opener = null;
+  }, true);
+
+  /* ---------- Delivery location ---------- */
+  const LOC_KEY = 'bf-location';
+  const readLocation = () => { try { return JSON.parse(window.localStorage.getItem(LOC_KEY)); } catch (e) { return null; } };
+  const writeLocation = (loc) => { try { window.localStorage.setItem(LOC_KEY, JSON.stringify(loc)); } catch (e) { /* private mode */ } };
+  function applyLocation() {
+    const loc = readLocation();
+    document.querySelectorAll('[data-location-label]').forEach((el) => {
+      el.textContent = loc && loc.label ? loc.label : (el.dataset.default || el.textContent);
+    });
+    document.querySelectorAll('[data-location-pin-value]').forEach((el) => { el.textContent = loc && loc.pincode ? ` · ${loc.pincode}` : ''; });
+  }
+  const locationSheet = () => document.querySelector('[data-location-sheet]');
+  const pincodeAllowed = (pin, spec) => String(spec || '').split(/[\s,]+/).filter(Boolean).some((part) => {
+    const [from, to] = part.split('-').map((x) => parseInt(x, 10));
+    const n = parseInt(pin, 10);
+    return to ? n >= from && n <= to : n === from;
+  });
+  const setLocStatus = (text, ok) => {
+    const el = document.querySelector('[data-location-status]');
+    if (!el) return;
+    el.hidden = !text;
+    el.textContent = text || '';
+    el.classList.toggle('is-ok', ok === true);
+    el.classList.toggle('is-error', ok === false);
+  };
+  const syncLocationToCart = (loc) => {
+    if (!loc || !window.fetch) return Promise.resolve();
+    return fetch(`${routes.cartUpdate || '/cart/update'}.js`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ attributes: { 'Delivery area': loc.label || '', 'Delivery pincode': loc.pincode || '' } }),
+    }).catch(() => {});
+  };
+  const saveLocation = (loc, message) => {
+    const saved = { ...loc, ts: Date.now() };
+    writeLocation(saved);
+    applyLocation();
+    setLocStatus(message, true);
+    syncLocationToCart(saved);
+    const sheet = locationSheet();
+    if (sheet && sheet.open) window.setTimeout(() => { if (sheet.open) sheet.close(); }, 900);
+  };
+  const distanceKm = (a, b) => {
+    const R = 6371; const rad = (d) => (d * Math.PI) / 180;
+    const dLat = rad(b[0] - a[0]); const dLng = rad(b[1] - a[1]);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a[0])) * Math.cos(rad(b[0])) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  };
+  const useGps = (button) => {
+    const sheet = locationSheet();
+    if (!sheet) return;
+    const city = sheet.dataset.city || 'Vadodara';
+    if (!navigator.geolocation) { setLocStatus(strings.locNoGps || 'Location isn’t available on this device — enter your pincode or pick your area.', false); return; }
+    button.setAttribute('aria-busy', 'true');
+    setLocStatus(strings.locFinding || 'Finding your location…');
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const here = [pos.coords.latitude, pos.coords.longitude];
+      const center = (sheet.dataset.center || '').split(',').map(Number);
+      const radius = Number(sheet.dataset.radius || 15);
+      const km = center.length === 2 && center.every(Number.isFinite) ? distanceKm(here, center) : 0;
+      if (km > radius) {
+        button.removeAttribute('aria-busy');
+        setLocStatus(`You’re about ${Math.round(km)} km from ${city}. We currently deliver only within ${city}.`, false);
+        return;
+      }
+      let area = null; let pincode = null;
+      if (sheet.dataset.reverseGeocode === 'true') {
+        try {
+          const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=16&addressdetails=1&accept-language=en&lat=${here[0]}&lon=${here[1]}`, { headers: { Accept: 'application/json' } });
+          const data = await r.json();
+          const a = data.address || {};
+          area = a.suburb || a.neighbourhood || a.quarter || a.city_district || a.residential || a.road || null;
+          pincode = a.postcode ? String(a.postcode).replace(/\s/g, '') : null;
+        } catch (e) { /* area name is optional */ }
+      }
+      button.removeAttribute('aria-busy');
+      const label = area ? `${area}, ${city}` : (strings.locCurrent || `Current location, ${city}`);
+      saveLocation({ label, area, pincode, source: 'gps' }, `✓ We deliver to ${label}.`);
+    }, (err) => {
+      button.removeAttribute('aria-busy');
+      setLocStatus(err && err.code === 1
+        ? 'Location permission was blocked — enter your pincode or pick your area instead.'
+        : 'Couldn’t get your location — enter your pincode or pick your area instead.', false);
+    }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+  };
+
+  document.addEventListener('submit', (event) => {
+    const form = event.target.closest && event.target.closest('[data-location-pin]');
+    if (!form) return;
+    event.preventDefault();
+    const sheet = locationSheet();
+    const pin = (form.elements.pincode.value || '').replace(/\D/g, '');
+    const city = (sheet && sheet.dataset.city) || 'Vadodara';
+    if (pin.length !== 6) { setLocStatus('Please enter a 6-digit pincode.', false); form.elements.pincode.focus(); return; }
+    if (pincodeAllowed(pin, sheet && sheet.dataset.pincodes)) {
+      const current = readLocation();
+      const label = current && current.area ? `${current.area}, ${city}` : `${city} ${pin}`;
+      saveLocation({ label, area: current && current.area, pincode: pin, source: 'pincode' }, `✓ Great — we deliver to ${pin}.`);
+    } else {
+      setLocStatus(`Sorry, we don’t deliver to ${pin} yet. We deliver across ${city}.`, false);
+    }
+  }, true);
+
+  document.addEventListener('input', (event) => {
+    const filter = event.target.closest && event.target.closest('[data-location-filter]');
+    if (filter) {
+      const q = filter.value.trim().toLowerCase();
+      document.querySelectorAll('[data-location-area]').forEach((b) => { b.parentElement.hidden = q && !b.dataset.locationArea.toLowerCase().includes(q); });
+      return;
+    }
+    const note = event.target.closest && event.target.closest('[data-cart-note]');
+    if (note) {
+      window.clearTimeout(note._timer);
+      note._timer = window.setTimeout(() => {
+        fetch(`${routes.cartUpdate || '/cart/update'}.js`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ note: note.value }),
+        }).catch(() => {});
+      }, 500);
+    }
+  });
+
   /* ---------- Delegated click handler ---------- */
   document.addEventListener('click', (event) => {
     const target = event.target;
@@ -318,6 +454,28 @@
     if (opener) {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0 || onCartPage()) return;
       if (openDrawer(opener)) event.preventDefault();
+      return;
+    }
+
+    // Open a sheet (location, account). Modified clicks on links keep native behaviour.
+    const sheetOpener = target.closest('[data-sheet-open]');
+    if (sheetOpener) {
+      if (sheetOpener.tagName === 'A' && (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0)) return;
+      if (openSheet(sheetOpener.dataset.sheetOpen, sheetOpener)) event.preventDefault();
+      return;
+    }
+    const openSheetEl = target.closest('dialog.drawer:not([data-cart-drawer])');
+    if (openSheetEl && openSheetEl.open) {
+      if (target === openSheetEl || target.closest('[data-sheet-close]')) { openSheetEl.close(); return; }
+    }
+    const gps = target.closest('[data-location-gps]');
+    if (gps) { useGps(gps); return; }
+    const area = target.closest('[data-location-area]');
+    if (area) {
+      const sheet = locationSheet();
+      const city = (sheet && sheet.dataset.city) || 'Vadodara';
+      const current = readLocation();
+      saveLocation({ label: `${area.dataset.locationArea}, ${city}`, area: area.dataset.locationArea, pincode: current && current.pincode, source: 'area' }, `✓ We deliver to ${area.dataset.locationArea}.`);
       return;
     }
 
@@ -415,6 +573,7 @@
     try { recognition.start(); } catch (e) { recognition.onend(); }
   };
   revealVoice();
+  applyLocation();
 
   /* ---------- Product recommendations ("You may also like") ---------- */
   const loadRecommendations = async () => {
@@ -439,6 +598,7 @@
     closeFilters();
     document.querySelectorAll('[aria-busy="true"]').forEach((el) => el.removeAttribute('aria-busy'));
     refreshCart();
+    applyLocation();
   });
 
   // Theme Editor: re-apply progressive enhancements after a section is re-rendered.

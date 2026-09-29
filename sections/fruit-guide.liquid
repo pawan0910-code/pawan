@@ -13,16 +13,18 @@
   <div class="searchbar ft-search">
     <span class="icon icon--20" aria-hidden="true">search</span>
     <label class="visually-hidden" for="GuideSearch-{{ section.id }}">{{ 'fruit_tools.guide.search' | t }}</label>
-    <input id="GuideSearch-{{ section.id }}" type="search" placeholder="{{ 'fruit_tools.guide.search' | t }}" autocomplete="off" data-guide-search>
+    <input id="GuideSearch-{{ section.id }}" type="search" placeholder="{{ 'fruit_tools.guide.search' | t }}" autocomplete="off" enterkeyhint="search" data-guide-search>
   </div>
 
-  <div class="scroller quick-pills ft-chips" role="group" aria-label="{{ 'fruit_tools.guide.filters' | t }}" data-guide-filters>
-    <button type="button" class="quick-pill quick-pill--neutral" data-filter="all" aria-pressed="true">{{ 'fruit_tools.guide.all' | t }}</button>
-    <button type="button" class="quick-pill quick-pill--neutral" data-filter="season" aria-pressed="false">🌿 {{ 'fruit_tools.guide.in_season' | t }}</button>
-    <button type="button" class="quick-pill quick-pill--neutral" data-filter="vitc" aria-pressed="false">🍊 {{ 'fruit_tools.guide.vitc' | t }}</button>
-    <button type="button" class="quick-pill quick-pill--neutral" data-filter="fiber" aria-pressed="false">🌾 {{ 'fruit_tools.guide.fiber' | t }}</button>
-    <button type="button" class="quick-pill quick-pill--neutral" data-filter="water" aria-pressed="false">💧 {{ 'fruit_tools.guide.water' | t }}</button>
-    <button type="button" class="quick-pill quick-pill--neutral" data-filter="light" aria-pressed="false">🪶 {{ 'fruit_tools.guide.light' | t }}</button>
+  <div class="scroller quick-pills ft-chips" role="group" aria-label="{{ 'fruit_tools.guide.filters' | t }}">
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="" aria-pressed="true">{{ 'fruit_tools.guide.all' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="in season" aria-pressed="false">🌿 {{ 'fruit_tools.guide.in_season' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="vitamin c" aria-pressed="false">🍊 {{ 'fruit_tools.guide.vitc' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="high fibre" aria-pressed="false">🌾 {{ 'fruit_tools.guide.fiber' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="low sugar" aria-pressed="false">🍃 {{ 'fruit_tools.guide.low_sugar' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="hydrating" aria-pressed="false">💧 {{ 'fruit_tools.guide.water' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="iron" aria-pressed="false">🩸 {{ 'fruit_tools.guide.iron' | t }}</button>
+    <button type="button" class="quick-pill quick-pill--neutral" data-query="low calorie" aria-pressed="false">🪶 {{ 'fruit_tools.guide.light' | t }}</button>
   </div>
 
   <p class="t-body-sm c-muted ft-count" data-guide-count aria-live="polite"></p>
@@ -40,9 +42,9 @@
   "name": "Fruit guide",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Know your fruit" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Every fruit, explained simply" },
-    { "type": "textarea", "id": "text", "label": "Intro", "default": "Search any fruit to see how to pick it, store it and what’s inside — real numbers per 100 g." }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fruit guide" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find the right fruit in seconds" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Type what you need — “vitamin C”, “low sugar”, “iron”, “summer” — or a fruit name. Tap any fruit for full nutrition, how to choose, store and eat it." }
   ],
   "presets": [{ "name": "Fruit guide" }]
 }

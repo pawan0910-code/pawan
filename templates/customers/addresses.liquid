@@ -1,0 +1,27 @@
+<div class="container acct-page">
+  <header class="page-head"><a href="{{ routes.account_url }}" class="c-secondary t-label">← {{ 'customer.account.title' | t }}</a><h1 class="page-head__title t-display">{{ 'customer.account.addresses' | t }}</h1></header>
+  <div class="acct-grid">
+    {%- paginate customer.addresses by 10 -%}
+      {%- for address in customer.addresses -%}
+        <div class="panel"><p class="t-body">{{ address | format_address }}</p>{%- if address == customer.default_address -%}<span class="badge badge--mint">{{ 'customer.addresses.default' | t }}</span>{%- endif -%}
+          <form method="post" action="{{ address.url }}"><input type="hidden" name="_method" value="delete"><button type="submit" class="btn btn--outline" onclick="return confirm('{{ 'customer.addresses.delete_confirm' | t }}')">{{ 'customer.addresses.delete' | t }}</button></form></div>
+      {%- endfor -%}
+    {%- endpaginate -%}
+    <div class="panel">
+      <h2 class="t-title-lg c-primary">{{ 'customer.addresses.add' | t }}</h2>
+      {%- form 'customer_address', customer.new_address, class: 'acct-form' -%}
+        {{ form.errors | default_errors }}
+        <div class="field"><label class="t-label" for="AddrName">{{ 'customer.fields.first_name' | t }}</label><input id="AddrName" name="address[first_name]" autocomplete="given-name"></div>
+        <div class="field"><label class="t-label" for="AddrLast">{{ 'customer.fields.last_name' | t }}</label><input id="AddrLast" name="address[last_name]" autocomplete="family-name"></div>
+        <div class="field"><label class="t-label" for="Addr1">{{ 'customer.fields.address1' | t }}</label><input id="Addr1" name="address[address1]" autocomplete="address-line1" required></div>
+        <div class="field"><label class="t-label" for="Addr2">{{ 'customer.fields.address2' | t }}</label><input id="Addr2" name="address[address2]" autocomplete="address-line2"></div>
+        <div class="field"><label class="t-label" for="AddrCity">{{ 'customer.fields.city' | t }}</label><input id="AddrCity" name="address[city]" value="Vadodara" autocomplete="address-level2"></div>
+        <div class="field"><label class="t-label" for="AddrZip">{{ 'customer.fields.zip' | t }}</label><input id="AddrZip" name="address[zip]" inputmode="numeric" autocomplete="postal-code"></div>
+        <div class="field"><label class="t-label" for="AddrPhone">{{ 'customer.fields.phone' | t }}</label><input id="AddrPhone" name="address[phone]" type="tel" autocomplete="tel"></div>
+        <input type="hidden" name="address[country]" value="India"><input type="hidden" name="address[province]" value="Gujarat">
+        <label class="ft-toggle t-body"><input type="checkbox" name="address[default]" value="1"> {{ 'customer.addresses.set_default' | t }}</label>
+        <button type="submit" class="btn btn--primary btn--block">{{ 'customer.addresses.save' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>

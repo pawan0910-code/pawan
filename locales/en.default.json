@@ -29,7 +29,8 @@
     "password": {
       "label": "Password",
       "enter": "Enter store"
-    }
+    },
+    "close": "Close"
   },
   "sections": {
     "product_list": {
@@ -88,19 +89,91 @@
     "update": "Update",
     "remove": "Remove",
     "note": "Order note",
-    "empty": "Your basket is empty.",
+    "empty": "Your basket is empty",
     "taxes_included_shipping_at_checkout": "Taxes included. Shipping calculated at checkout.",
     "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout.",
     "close": "Close basket",
     "view": "View full basket",
     "error": "Sorry, your basket couldn’t be updated. Please try again.",
-    "free_delivery_remaining_html": "Add <strong>{{ amount }}</strong> more for free delivery",
-    "free_delivery_unlocked": "You’ve unlocked free delivery",
-    "free_delivery_progress": "Progress toward free delivery"
+    "free_delivery_remaining_html": "Add <strong>{{ amount }}</strong> more for <strong>free delivery</strong>",
+    "free_delivery_unlocked": "Yay! You’ve unlocked free delivery 🎉",
+    "free_delivery_progress": "Progress toward free delivery",
+    "each": "{{ price }} each",
+    "you_save": "You save {{ amount }}",
+    "delivering_to": "Delivering to",
+    "change": "Change",
+    "empty_sub": "Fresh fruit, bowls and juices are a tap away.",
+    "note_toggle": "Add delivery instructions",
+    "note_placeholder": "e.g. Ring the bell, leave with security, call on arrival",
+    "items_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    }
   },
   "customer": {
     "account": {
-      "title": "Account"
+      "title": "Account",
+      "log_in": "Log in",
+      "log_in_signup": "Log in or sign up",
+      "log_out": "Log out",
+      "orders": "My orders",
+      "addresses": "Saved addresses",
+      "hello": "Hi, {{ name }}",
+      "signed_in_as": "Signed in as {{ name }}",
+      "intro_title": "Log in for a faster checkout",
+      "perk_orders": "Track your orders and delivery",
+      "perk_address": "Save your delivery address",
+      "perk_reorder": "Reorder your favourites in one tap",
+      "guest_note": "No account? No problem — you can also check out as a guest.",
+      "no_orders": "You haven’t placed any orders yet.",
+      "manage_addresses": "Manage addresses"
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "address1": "House / flat, street",
+      "address2": "Area / landmark",
+      "city": "City",
+      "zip": "Pincode",
+      "phone": "Phone"
+    },
+    "login": {
+      "title": "Log in",
+      "submit": "Log in",
+      "forgot": "Forgot your password?",
+      "new": "New here?",
+      "guest": "Continue as guest"
+    },
+    "recover": {
+      "submit": "Send reset link",
+      "sent": "We’ve emailed you a link to reset your password."
+    },
+    "register": {
+      "title": "Create account",
+      "submit": "Create account",
+      "have_account": "Already have an account?"
+    },
+    "order": {
+      "ship_to": "Delivering to"
+    },
+    "addresses": {
+      "default": "Default",
+      "delete": "Delete",
+      "delete_confirm": "Delete this address?",
+      "add": "Add a new address",
+      "set_default": "Set as default address",
+      "save": "Save address"
+    },
+    "activate": {
+      "title": "Activate your account",
+      "submit": "Activate account"
+    },
+    "reset": {
+      "title": "Reset your password",
+      "submit": "Reset password"
     }
   },
   "blogs": {
@@ -133,14 +206,16 @@
       "popular": "Popular:"
     },
     "guide": {
-      "search": "Search fruits — e.g. guava, sweet, summer",
+      "search": "Try “vitamin C”, “low sugar”, “iron” or a fruit name",
       "filters": "Filter fruits",
       "all": "All",
       "in_season": "In season",
-      "vitc": "Vitamin C rich",
+      "vitc": "Vitamin C",
       "fiber": "High fibre",
       "water": "Hydrating",
-      "light": "Light (≤50 kcal)"
+      "light": "Low calorie",
+      "low_sugar": "Low sugar",
+      "iron": "Iron"
     },
     "season": {
       "months": "Choose a month",
@@ -189,5 +264,16 @@
       "medium": "Medium",
       "high": "High"
     }
+  },
+  "location": {
+    "deliver_to": "Deliver to",
+    "title": "Where should we deliver?",
+    "current": "Delivering to",
+    "use_gps": "Use my current location",
+    "pincode_label": "Check your pincode",
+    "check": "Check",
+    "areas": "Or pick your area in {{ city }}",
+    "search_area": "Search your area",
+    "note": "You’ll enter your full address at checkout. We deliver fresh across Vadodara."
   }
 }

@@ -1,0 +1,56 @@
+{%- comment -%}
+  One basket line (drawer + cart page). Accepts: item {Object}
+  Quantity/remove buttons are handled by theme.js (data-cart-key / data-cart-qty);
+  the remove link also works without JavaScript.
+{%- endcomment -%}
+{%- liquid
+  assign compare_each = item.variant.compare_at_price | default: 0
+  assign saving = 0
+  if compare_each > item.final_price
+    assign saving = compare_each | minus: item.final_price | times: item.quantity
+  endif
+-%}
+<li class="bl" data-line>
+  <a href="{{ item.url }}" class="bl__media" tabindex="-1" aria-hidden="true">
+    {%- if item.image -%}
+      {{ item.image | image_url: width: 200 | image_tag: alt: '', loading: 'lazy', width: 88, height: 88 }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <div class="bl__info">
+    <a href="{{ item.url }}" class="bl__title">{{ item.product.title }}</a>
+    {%- unless item.product.has_only_default_variant or item.variant.title == 'Default Title' -%}
+      <span class="bl__variant">{{ item.variant.title }}</span>
+    {%- endunless -%}
+    {%- assign each_price = item.final_price | money_without_trailing_zeros -%}
+    <span class="bl__unit t-body-sm">{{ 'cart.each' | t: price: each_price }}</span>
+    {%- for discount in item.line_level_discount_allocations -%}
+      <span class="bl__save t-body-sm">{{ discount.discount_application.title }} −{{ discount.amount | money_without_trailing_zeros }}</span>
+    {%- endfor -%}
+    {%- if saving > 0 -%}
+      {%- assign saving_money = saving | money_without_trailing_zeros -%}
+      <span class="bl__save t-body-sm">{{ 'cart.you_save' | t: amount: saving_money }}</span>
+    {%- endif -%}
+    <div class="bl__row">
+      <div class="qty qty--sm">
+        <button type="button" data-cart-key="{{ item.key }}" data-cart-qty="{{ item.quantity | minus: 1 }}" aria-label="{{ 'products.product.quantity.decrease' | t }} — {{ item.product.title | escape }}">
+          <span class="icon icon--16" aria-hidden="true">{% if item.quantity == 1 %}delete{% else %}remove{% endif %}</span>
+        </button>
+        <span class="qty__value" aria-label="{{ 'products.product.quantity.label' | t }}">{{ item.quantity }}</span>
+        <button type="button" data-cart-key="{{ item.key }}" data-cart-qty="{{ item.quantity | plus: 1 }}" aria-label="{{ 'products.product.quantity.increase' | t }} — {{ item.product.title | escape }}">
+          <span class="icon icon--16" aria-hidden="true">add</span>
+        </button>
+      </div>
+      <span class="bl__price">
+        {%- if item.original_line_price > item.final_line_price -%}
+          <s class="bl__was">{{ item.original_line_price | money_without_trailing_zeros }}</s>
+        {%- endif -%}
+        {{ item.final_line_price | money_without_trailing_zeros }}
+      </span>
+    </div>
+  </div>
+  <a href="{{ item.url_to_remove }}" class="bl__remove" data-cart-key="{{ item.key }}" data-cart-qty="0" aria-label="{{ 'cart.remove' | t }} {{ item.product.title | escape }}">
+    <span class="icon icon--18" aria-hidden="true">close</span>
+  </a>
+</li>

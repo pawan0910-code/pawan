@@ -80,7 +80,7 @@
     </div>
 
     {%- if compare_page != blank and guide.calories.value != blank -%}
-      <a href="{{ compare_page.url }}?a={{ guide.handle }}" class="btn btn--outline btn--block">
+      <a href="{{ compare_page.url }}?a={{ guide.system.handle }}" class="btn btn--outline btn--block">
         <span class="icon icon--18" aria-hidden="true">compare_arrows</span>
         {{ 'fruit_tools.panel.compare' | t: name: guide.name.value }}
       </a>

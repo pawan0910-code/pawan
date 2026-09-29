@@ -42,8 +42,11 @@
       {%- liquid
         assign url = block.settings.link | default: routes.root_url
         assign is_cart = false
+        assign is_account = false
         if url == routes.cart_url
           assign is_cart = true
+        elsif url == routes.account_url and shop.customer_accounts_enabled
+          assign is_account = true
         endif
       -%}
       <li class="bottom-nav__item" {{ block.shopify_attributes }}>
@@ -52,6 +55,7 @@
           class="bottom-nav__link"
           {% if forloop.index == current_block %}aria-current="page"{% endif %}
           {% if is_cart %}data-cart-open aria-haspopup="dialog" aria-controls="CartDrawer"{% endif %}
+          {% if is_account %}data-sheet-open="AccountSheet" aria-haspopup="dialog" aria-controls="AccountSheet"{% endif %}
         >
           <span class="bottom-nav__icon">
             <span class="icon" aria-hidden="true">{{ block.settings.icon | strip }}</span>

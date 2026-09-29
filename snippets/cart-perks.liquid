@@ -1,0 +1,6 @@
+{%- comment -%} Trust row under the checkout button. {%- endcomment -%}
+<ul class="bperks" role="list">
+  {%- if settings.perk_1 != blank -%}<li><span class="icon icon--20" aria-hidden="true">verified</span><span>{{ settings.perk_1 }}</span></li>{%- endif -%}
+  {%- if settings.perk_2 != blank -%}<li><span class="icon icon--20" aria-hidden="true">lock</span><span>{{ settings.perk_2 }}</span></li>{%- endif -%}
+  {%- if settings.perk_3 != blank -%}<li><span class="icon icon--20" aria-hidden="true">payments</span><span>{{ settings.perk_3 }}</span></li>{%- endif -%}
+</ul>

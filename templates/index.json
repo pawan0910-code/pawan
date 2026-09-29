@@ -224,17 +224,17 @@
           "settings": {
             "icon": "compare_arrows",
             "title": "Compare fruits",
-            "text": "Any two fruits, side by side — who wins for what",
+            "text": "Nutrition, vitamins & minerals side by side",
             "link": "shopify://pages/compare-fruits"
           }
         },
         "t2": {
           "type": "tool",
           "settings": {
-            "icon": "quiz",
-            "title": "Find my fruit",
-            "text": "Two taps: your goal and your taste",
-            "link": "shopify://pages/quiz"
+            "icon": "search",
+            "title": "Fruit guide",
+            "text": "Search by need — vitamin C, low sugar, iron…",
+            "link": "shopify://pages/engine"
           }
         },
         "t3": {
@@ -245,11 +245,21 @@
             "text": "Fresher, tastier and better value",
             "link": "shopify://pages/whats-in-season"
           }
+        },
+        "t4": {
+          "type": "tool",
+          "settings": {
+            "icon": "quiz",
+            "title": "Find my fruit",
+            "text": "Two taps: your goal and your taste",
+            "link": "shopify://pages/quiz"
+          }
         }
       },
       "block_order": [
         "t1",
         "t2",
+        "t4",
         "t3"
       ],
       "settings": {

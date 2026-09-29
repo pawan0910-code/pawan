@@ -7,12 +7,15 @@
       "settings": {
         "brand_name": "Baroda Fresh",
         "menu": "main-menu",
-        "location_text": "Alkapuri, Vadodara • 25 mins ⚡",
-        "location_link": "shopify://pages/shipping-delivery",
-        "show_notifications": true,
-        "notifications_label": "Updates",
-        "notifications_link": "",
-        "show_notification_dot": false
+        "show_location": true,
+        "location_default": "Vadodara",
+        "delivery_eta": "Same-day delivery",
+        "city": "Vadodara",
+        "pincodes": "390001-390025",
+        "center_lat": "22.3072",
+        "center_lng": "73.1812",
+        "radius_km": 15,
+        "reverse_geocode": true
       }
     }
   },
