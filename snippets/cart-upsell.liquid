@@ -1,7 +1,13 @@
 {%- comment -%}
   Add-on rail: up to 6 available products from the chosen collection that aren't in the basket.
 {%- endcomment -%}
-{%- assign upsell = settings.upsell_collection -%}
+{%- liquid
+  assign upsell = settings.upsell_collection
+  # A freshly uploaded theme can return the stored handle instead of the collection object.
+  if upsell != blank and upsell.handle == blank
+    assign upsell = collections[upsell]
+  endif
+-%}
 {%- if upsell != blank and settings.upsell_heading != blank -%}
   {%- assign shown = 0 -%}
   {%- capture upsell_items -%}
