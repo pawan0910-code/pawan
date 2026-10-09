@@ -1,0 +1,3 @@
+date,idea_id,idea,source,source_link,source_signal,best_angle,score,status,picked_by,reason,produced_link,others_who_made_it,their_result
+2026-10-09,I-0001,Example: Grok Bot launches always-on agents,x-triage,https://example.com,viral post (5x account median),"I gave one agent my whole inbox",78,shortlisted,,,,,
+2026-10-09,I-0002,Example: minor model version bump,news-triage,https://example.com,news,,31,rejected,,low fit with buckets,,@someone,check in 7 days
