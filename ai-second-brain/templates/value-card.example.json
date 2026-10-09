@@ -1,0 +1,43 @@
+{
+  "video_id": "LqY6hFLMEJw",
+  "url": "https://youtu.be/LqY6hFLMEJw",
+  "title": "How AI Makes Him Crores: Second Brain, Automations & Systems | Vaibhav Sisinty | FO557 Raj Shamani",
+  "channel": "Raj Shamani",
+  "published": "2026-09-03",
+  "watched": "2026-10-09",
+  "duration_min": 103,
+  "transcript_available": true,
+  "topics": ["ai-agents", "second-brain", "content-system"],
+  "summary": "Vaibhav Sisinty explains how GrowthSchool grew 10x with AI by giving agents his full context (a second brain), turning his processes into skills, and running many narrow agents, while keeping final judgment human.",
+  "key_ideas": [
+    "AI does the operational ~80%; humans keep the ~20% judgment layer, or output becomes 'AI slop'.",
+    "A second brain feeds AI what you consume and discuss: YouTube cards, Slack triage, meeting transcripts, AI chat exports.",
+    "Use graph memory (Cognee) to avoid context rot: retrieve only what the task needs.",
+    "One agent per smallest, sharpest task, all sharing the same context layer.",
+    "Score ideas 1-100 against your own past winners (DNA playbook) and others' winners, then a human picks.",
+    "Never let an agent grade itself: separate, isolated examiners, ideally a different model."
+  ],
+  "quotes": [
+    { "t": "00:11", "text": "AI can do everything today and you should not get AI to do everything today." },
+    { "t": "23:09", "text": "No team can beat this, no AI can beat this, because this is you. This is context." }
+  ],
+  "tools_mentioned": [
+    { "name": "Cognee", "use": "graph memory layer" },
+    { "name": "Hermes Agent", "use": "free open-source agent system with bots" },
+    { "name": "Grok Bot", "use": "paid always-on agents, easiest setup" },
+    { "name": "Apify / Supadata", "use": "social media data, primary + backup" },
+    { "name": "Metricool", "use": "all social analytics via API" }
+  ],
+  "numbers": [
+    { "claim": "10x revenue in 2.5 years", "status": "claimed" },
+    { "claim": "~45% ROI lift from sales-call analysis", "status": "claimed" }
+  ],
+  "relevance_to_me": "[Filled by the agent using AGENTS.md goals]",
+  "action_ideas": [
+    "Set up a daily digest agent for my niche this week.",
+    "Start a DNA playbook sheet of my last 50 pieces of work."
+  ],
+  "content_angles": [
+    "Why your team got worse after adopting AI, and the 80/20 fix."
+  ]
+}
