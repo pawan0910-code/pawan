@@ -1,0 +1,20 @@
+# AI Changelog (newest first)
+Every agent appends here after each work session.
+
+## Template
+```
+## YYYY-MM-DD — <Claude|Codex> — <branch>
+**Task:** what was asked
+**Changed:** files + 1-line why each
+**Tests:** what was run, result
+**Open / unfinished:** anything left
+**Next agent should:** concrete next step
+```
+
+## Entries
+## 2026-10-12 — Claude — claude/team-setup-guide-33obi2
+**Task:** Set up shared Claude + Codex workflow.
+**Changed:** AGENTS.md, CLAUDE.md, docs/ai/* (handoff scaffolding).
+**Tests:** n/a (docs only)
+**Open / unfinished:** PROJECT_STATE.md still needs real project details.
+**Next agent should:** fill PROJECT_STATE.md once the first project is defined.
