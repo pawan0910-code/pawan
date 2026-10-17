@@ -9,15 +9,13 @@
 
 Rule: jo banaye, uska review dusra kare.
 
-## Folder layout (PC par)
+## Folder layout
+Detail aur data rules: `docs/ai/DATA.md`.
 ```
-C:\Work\
-  Projects\        <- har project ka apna folder + apna git repo
-    BarodaFresh\
-    PrismResearch\
-  _Archive\        <- purane/ruke hue ideas (Fruit App Idea). Delete nahi.
-  _Personal\       <- accounts.md (NO passwords), kabhi GitHub par nahi
-  _Template\       <- naye project ka starter (AGENTS.md + docs/ai/)
+C:\Work\Projects\   <- har project ka apna git repo (Drive ke andar NAHI)
+C:\Work\_Template\  <- naye project ka starter
+G:\My Drive\Pawan\_Personal\  <- accounts.md (NO passwords)
+G:\My Drive\Pawan\_Archive\   <- purane ideas. Delete nahi.
 ```
 
 ## Roz ka loop (semi-auto)

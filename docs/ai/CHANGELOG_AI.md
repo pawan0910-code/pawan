@@ -12,6 +12,13 @@ Every agent appends here after each work session.
 ```
 
 ## Entries
+## 2026-10-17 — Claude — claude/team-setup-guide-33obi2
+**Task:** Simple data-saving plan for PC + phone.
+**Changed:** docs/ai/DATA.md (new); scripts/setup-workspace.ps1 (personal/archive folders go to Google Drive path, -Drive param); WORKFLOW.md layout; DECISIONS.md.
+**Tests:** scripts still untested (no pwsh in cloud).
+**Open:** PR #3 still open/draft - Pawan thought it was merged.
+**Next agent should:** none.
+
 ## 2026-10-13 — Claude — claude/team-setup-guide-33obi2
 **Task:** Full two-agent workflow setup (local Windows PC, semi-auto, file-based chat).
 **Changed:** docs/ai/WORKFLOW.md, PROMPTS.md; template/ (new-project starter); scripts/*.ps1 (setup, new-project, show-chat, status-all); .claude/commands (start, handoff, review); .gitignore.
