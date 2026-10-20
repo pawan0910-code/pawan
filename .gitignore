@@ -1,0 +1,13 @@
+# Secrets — kabhi commit nahi
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+secrets*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
