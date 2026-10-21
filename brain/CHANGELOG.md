@@ -4,6 +4,9 @@ Saare project mein kab kya badla. **Append-only** — nayi entry sabse upar.
 
 | Date | Project | Kya hua | Asar |
 |---|---|---|---|
+| 2026-10-21 | Accounts | `PROJECT.md` bana — scope, abhi ki capability, future, 9 open items | Accounts brain |
+| 2026-10-21 | Accounts | `AGENTS.md` bana — AI rules, `bal`/`stock`/`billSeq` ke niyam | Accounts brain |
+| 2026-10-21 | Accounts | Drive ka duplicate `CHANGELOG.md` trash kiya | repo wala single source |
 | 2026-10-21 | Brain system | `skill-capture` skill bani — kaam khatam hone par tareeqa skill ban jaata hai | `.claude/skills/skill-capture/` |
 | 2026-10-21 | Brain system | `drive-brain-docs` skill bani — Drive ki append limitation aur uska tareeqa | `.claude/skills/drive-brain-docs/` |
 | 2026-10-21 | Brain system | Trigger table mein skill-capture ka row juda | `CLAUDE.md` |

@@ -7,6 +7,9 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-21 | Accounts | Project ka scope kya hai | Pawan ka khud ka CRM aur central hisaab-kitaab. Jo bhi accounts, project ya hisaab se juda hai — sab isi ke andar. Aage updates, calendar, reports bhi | Pawan | Accounts `PROJECT.md` |
+| 2026-10-21 | Accounts | Drive ka `CHANGELOG.md` rakhein? | Nahi — trash. Repo wala `brain/CHANGELOG.md` hi single source | Pawan | Drive file trash |
+| 2026-10-21 | Brain system | Skills user-level pe copy karein? | Nahi — repo mein hi rahengi. Repo har session clone hota hai; user-level git mein nahi jaata aur copy se do ghar ban jaate | Claude (proposed) | koi change nahi — **Pawan ki confirmation baaki** |
 | 2026-10-21 | Brain system | Skill har task par banegi? | Nahi — teeno test (non-obvious, dobara aayega, bhool jaayega) paas hone par. Pawan ne "every time" kaha tha | Claude (proposed) | `skill-capture` — **Pawan ki confirmation baaki** |
 | 2026-10-21 | Brain system | Skills kahan rahengi | Sirf repo `.claude/skills/`. Drive mein rakhi file skill ki tarah load nahi hoti | Claude | `skill-capture` |
 | 2026-10-21 | Brain system | Pending → Confirmed kab? | Sirf Pawan ke approve ya proof pe. Waqt se nahi | Claude (proposed) | `CLAUDE.md` — Pawan ki confirmation baaki |
