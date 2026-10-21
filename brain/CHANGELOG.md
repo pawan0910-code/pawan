@@ -4,6 +4,9 @@ Saare project mein kab kya badla. **Append-only** — nayi entry sabse upar.
 
 | Date | Project | Kya hua | Asar |
 |---|---|---|---|
+| 2026-10-21 | Brain system | `skill-capture` skill bani — kaam khatam hone par tareeqa skill ban jaata hai | `.claude/skills/skill-capture/` |
+| 2026-10-21 | Brain system | `drive-brain-docs` skill bani — Drive ki append limitation aur uska tareeqa | `.claude/skills/drive-brain-docs/` |
+| 2026-10-21 | Brain system | Trigger table mein skill-capture ka row juda | `CLAUDE.md` |
 | 2026-10-21 | Brain system | `CLAUDE.md` mein brain system + update trigger add kiya | Har session mein rules lागू |
 | 2026-10-21 | Brain system | `brain/DECISIONS.md` aur `brain/CHANGELOG.md` bane (repo mein) | Faisle aur history ek jagah |
 | 2026-10-21 | Khanderao Market | brain mein 6 docs bane — README, PROJECT, BRAND, AGENTS, CONTENT-PLAN, POSTING-SOP | Scaffold taiyaar. 16 open items |

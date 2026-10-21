@@ -7,6 +7,8 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-21 | Brain system | Skill har task par banegi? | Nahi — teeno test (non-obvious, dobara aayega, bhool jaayega) paas hone par. Pawan ne "every time" kaha tha | Claude (proposed) | `skill-capture` — **Pawan ki confirmation baaki** |
+| 2026-10-21 | Brain system | Skills kahan rahengi | Sirf repo `.claude/skills/`. Drive mein rakhi file skill ki tarah load nahi hoti | Claude | `skill-capture` |
 | 2026-10-21 | Brain system | Pending → Confirmed kab? | Sirf Pawan ke approve ya proof pe. Waqt se nahi | Claude (proposed) | `CLAUDE.md` — Pawan ki confirmation baaki |
 | 2026-10-21 | Brain system | Update trigger kahan rakhna | `CLAUDE.md` mein, taaki har session mein lागू ho | Pawan | `CLAUDE.md` |
 | 2026-10-21 | Brain system | Standard kya hoga | 6 status label + 5 core file per brain | Pawan | `brain/BRAIN-SYSTEM.md` |

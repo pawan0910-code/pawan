@@ -49,6 +49,7 @@ Bina label ki baat `Pending` maano. Har doc ke top pe header:
 |---|---|
 | Koi faisla hua | `DECISIONS.md` mein turant: date, sawaal, faisla, kisne, kaunsi file badli |
 | Kaam khatam | `CHANGELOG.md` mein ek line: date, kya hua, asar |
+| Kaam naye tareeqe se hua | `skill-capture` skill chalao — teeno test paas ho to skill banao |
 | Pending resolve hua | label badlo — proof ho to `Confirmed`, warna `Assumed` |
 | Koi doc badla | us doc ki `Last verified` date aaj ki karo |
 
