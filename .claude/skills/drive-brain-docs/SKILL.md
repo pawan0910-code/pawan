@@ -27,10 +27,23 @@ patch ya revision-upload **nahi hai** — dhoondhne mein waqt mat barbaad karo.
 | Category | Kahan rakhni | Badalne ka tareeqa |
 |---|---|---|
 | Roz badalti (`DECISIONS.md`, `CHANGELOG.md`) | **repo** `brain/` | seedha edit — Drive mein rakhna hi galti hai |
-| Chhoti + maine likhi (1–5 KB) | Drive | recreate: nayi banao → verify → purani trash |
-| Lambi + Pawan ne likhi (jaise `PROJECT.md` 27 KB) | Drive | **recreate mat karo** |
+| Drive ki koi bhi doc | Drive | **badal hi nahi sakte** — na line, na poori file |
 
-## Lambi file mein ek chhota change — mat karo
+## ⛔ Drive doc badalna — ab bilkul nahi
+
+**Pawan ka rule (21 Oct 2026): koi file trash nahi karni, aur poori file recreate
+nahi karni. Sirf jo line badalni ho wahi badlo.**
+
+Drive mein line badalne ka koi tool nahi hai. Dono baatein mila ke matlab:
+**Drive ki doc ab read-only hai.** Usme kuch badalna ho to do hi raaste:
+
+1. Pawan khud editor mein badle
+2. Wo doc repo mein shift ho jaaye — wahan line edit normal kaam hai
+
+Teesra raasta nahi hai. Recreate-aur-trash **band hai**, chahe file chhoti ho
+aur chahe maine hi likhi ho.
+
+## Lambi file mein ek chhota change
 
 Pawan ki likhi lambi doc mein ek shabd theek karna ho to **recreate ka suggest
 hi nahi karna.** Us doc mein pricing formula, policy, timing, checklist hote hain.
@@ -79,6 +92,7 @@ Isse ghabrao nahi aur dobara move/create mat karo — pehle metadata se confirm 
 - `update_file` se content badalne ki koshish kabhi nahi — field hi nahi hai
 - `disableConversionToGoogleType: true` har markdown create mein
 - Pawan ki lambi doc recreate nahi — usko khud edit karne do
-- Recreate karo to **pehle verify, phir trash** — ulta nahi
+- **Koi file trash nahi karni.** Ye Pawan ka saaf rule hai
+- Trash mein padi file ko haath nahi lagana
 - Move ya create ke baad verify `get_file_metadata` se, `search_files` se nahi
 - Roz badalne wali file Drive mein kabhi na banao — wo repo mein jaati hai

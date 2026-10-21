@@ -62,6 +62,17 @@ aur open items mein rakho.
 Mera khud ka andaaza kabhi `Confirmed` nahi — wo `Assumed` hai. `DECISIONS.md`
 mein saaf likho faisla Pawan ka tha ya mera.
 
+### Drive ki file — trash aur recreate band
+
+Pawan ka rule (21 Oct 2026): **koi file trash nahi karni, aur poori file recreate
+nahi karni.** Sirf jo line badalni ho wahi badlo.
+
+Drive connector mein line badalne ka tool nahi hai. Isliye **Drive ki doc
+read-only hai** — usme kuch badalna ho to Pawan khud kare, ya wo doc repo mein
+shift ho. Recreate-aur-trash ka raasta band hai.
+
+Trash mein padi file ko haath nahi lagana.
+
 ### Ek fact, ek ghar
 
 Ek baat ek hi file mein. Dusri jagah zarurat ho to link karo, copy mat karo.
