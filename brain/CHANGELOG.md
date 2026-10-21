@@ -4,6 +4,7 @@ Saare project mein kab kya badla. **Append-only** — nayi entry sabse upar.
 
 | Date | Project | Kya hua | Asar |
 |---|---|---|---|
+| 2026-10-21 | Khanderao | Core scope confirm hua — `PROJECT.md` v1.0, `CONTENT-PLAN.md` aur `BRAND.md` bhare | 5 blocker khatam. 5 content pillar, weekly calendar draft, voice tay |
 | 2026-10-21 | Tool configs | 3 folder rename, jhoothi `.mcp.json` hatai, README aur NOTES dobara likhe | `mcp-configs/` |
 | 2026-10-21 | Accounts | `PROJECT.md` mein asli setup add kiya — PC source, Netlify, phone, PC ka Claude Code. Open items 9 se 10 hue (source ka backup) | Accounts brain |
 | 2026-10-21 | Baroda Fresh, Khanderao | brain `README.md` mein tools ka link juda (`mcp-configs/<project>/`) | dono brain |

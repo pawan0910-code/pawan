@@ -7,6 +7,12 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-21 | Khanderao | Page kiska hai | **Poore market ka** — kisi ek shop ka nahi, Pawan ki business ka nahi. (Isne pehle ke "dono — market + meri business" ko supersede kiya) | Pawan | `PROJECT.md` sec 1 |
+| 2026-10-21 | Khanderao | Online order lega? | **Nahi.** Saara order Baroda Fresh pe. Khanderao sirf content, knowledge aur pehchaan ke liye | Pawan | `PROJECT.md` sec 2 |
+| 2026-10-21 | Khanderao | Content kya banega | Knowledge videos (fruits, vegetables, flowers) · quality kaise pehchane · hidden things · market ka mahaul reel · festival/seasonal | Pawan | `CONTENT-PLAN.md` |
+| 2026-10-21 | Khanderao | Platform | Instagram · Facebook · Google Business Profile. WhatsApp aur YouTube nahi | Pawan | `PROJECT.md` sec 4 |
+| 2026-10-21 | Khanderao | Bhasha | Mix — Hindi + Gujarati + English jaisa natural chale | Pawan | `BRAND.md` |
+| 2026-10-21 | Khanderao | Frequency | Hafte mein 5–7 post. Claude ne flag kiya: knowledge video ke saath ye batch shoot aur script support ke bina nahi chalega | Pawan | `CONTENT-PLAN.md` |
 | 2026-10-21 | Accounts | App ka setup kya hai | Source PC pe local (GitHub pe nahi) · live app Netlify pe · phone browser se use · PC ka Claude Code data fill karta hai | Pawan | Accounts `PROJECT.md` sec 2 |
 | 2026-10-21 | Accounts | Koi MCP server chahiye? | Nahi. GitHub nahi (folder GitHub pe nahi), Supabase nahi (localStorage), Linear/Figma nahi. Sirf Drive (account-level) | Pawan | `mcp-configs/accounts-app/` |
 | 2026-10-21 | Tool configs | Folder naam galat the | `shopify-store`/`youtube-content`/`webapp-dev` → `baroda-fresh`/`khanderao-social`/`accounts-app`. Purane naam tab bane jab asli projects pata nahi the | Pawan | `mcp-configs/` |
