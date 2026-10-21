@@ -7,6 +7,7 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-21 | Brain system | Header block Drive mein rakhna theek hai? | Pawan ne aage badhne ko kaha. Claude ne flag kiya: `Last verified` update karne ko har baar poori file recreate karni padegi, isliye date baasi hone ka khatra | Pawan (Claude ne risk flag kiya) | 14 docs recreate hue |
 | 2026-10-21 | Accounts | Project ka scope kya hai | Pawan ka khud ka CRM aur central hisaab-kitaab. Jo bhi accounts, project ya hisaab se juda hai — sab isi ke andar. Aage updates, calendar, reports bhi | Pawan | Accounts `PROJECT.md` |
 | 2026-10-21 | Accounts | Drive ka `CHANGELOG.md` rakhein? | Nahi — trash. Repo wala `brain/CHANGELOG.md` hi single source | Pawan | Drive file trash |
 | 2026-10-21 | Brain system | Skills user-level pe copy karein? | Nahi — repo mein hi rahengi. Repo har session clone hota hai; user-level git mein nahi jaata aur copy se do ghar ban jaate | Claude (proposed) | koi change nahi — **Pawan ki confirmation baaki** |
