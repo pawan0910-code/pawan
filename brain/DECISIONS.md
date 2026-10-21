@@ -7,6 +7,10 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-21 | Accounts | App ka setup kya hai | Source PC pe local (GitHub pe nahi) · live app Netlify pe · phone browser se use · PC ka Claude Code data fill karta hai | Pawan | Accounts `PROJECT.md` sec 2 |
+| 2026-10-21 | Accounts | Koi MCP server chahiye? | Nahi. GitHub nahi (folder GitHub pe nahi), Supabase nahi (localStorage), Linear/Figma nahi. Sirf Drive (account-level) | Pawan | `mcp-configs/accounts-app/` |
+| 2026-10-21 | Tool configs | Folder naam galat the | `shopify-store`/`youtube-content`/`webapp-dev` → `baroda-fresh`/`khanderao-social`/`accounts-app`. Purane naam tab bane jab asli projects pata nahi the | Pawan | `mcp-configs/` |
+| 2026-10-21 | Tool configs | Jhoothi `.mcp.json` ka kya karein | Hata di. Usme `notion`, `slack`, `canva` the jo Pawan ne kabhi connect nahi kiye — Claude ne suggestion ko config mein likh diya tha. Jab asli server connect ho, tab banegi | Pawan | 3 `.mcp.json` delete |
 | 2026-10-21 | Brain system | Header block Drive mein rakhna theek hai? | Pawan ne aage badhne ko kaha. Claude ne flag kiya: `Last verified` update karne ko har baar poori file recreate karni padegi, isliye date baasi hone ka khatra | Pawan (Claude ne risk flag kiya) | 14 docs recreate hue |
 | 2026-10-21 | Accounts | Project ka scope kya hai | Pawan ka khud ka CRM aur central hisaab-kitaab. Jo bhi accounts, project ya hisaab se juda hai — sab isi ke andar. Aage updates, calendar, reports bhi | Pawan | Accounts `PROJECT.md` |
 | 2026-10-21 | Accounts | Drive ka `CHANGELOG.md` rakhein? | Nahi — trash. Repo wala `brain/CHANGELOG.md` hi single source | Pawan | Drive file trash |

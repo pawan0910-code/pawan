@@ -4,6 +4,9 @@ Saare project mein kab kya badla. **Append-only** — nayi entry sabse upar.
 
 | Date | Project | Kya hua | Asar |
 |---|---|---|---|
+| 2026-10-21 | Tool configs | 3 folder rename, jhoothi `.mcp.json` hatai, README aur NOTES dobara likhe | `mcp-configs/` |
+| 2026-10-21 | Accounts | `PROJECT.md` mein asli setup add kiya — PC source, Netlify, phone, PC ka Claude Code. Open items 9 se 10 hue (source ka backup) | Accounts brain |
+| 2026-10-21 | Baroda Fresh, Khanderao | brain `README.md` mein tools ka link juda (`mcp-configs/<project>/`) | dono brain |
 | 2026-10-21 | Brain system | 14 Drive docs mein header block add kiya (`Status \| Last verified \| Owner`) — recreate + purani trash | Accounts 7, Khanderao 6, Baroda Fresh 1. Verify: 19 file, koi duplicate nahi |
 | 2026-10-21 | Brain system | `work/_template/` bana — `HOW-TO-USE.md` + `brain/` ke 3 template (README, PROJECT, AGENTS) | naya project 1 min mein shuru |
 | 2026-10-21 | Baroda Fresh | `brain/README.md` mein spelling ka faisla record kiya | `PROJECT.md` sec 5 ka fix Pawan pe pending |
