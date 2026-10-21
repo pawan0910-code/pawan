@@ -1,10 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "enableAllProjectMcpServers": true,
   "enabledPlugins": {
-    "engineering@knowledge-work-plugins": true,
-    "design@knowledge-work-plugins": false,
-    "marketing@knowledge-work-plugins": false,
+    "marketing@knowledge-work-plugins": true,
+    "design@knowledge-work-plugins": true,
+    "engineering@knowledge-work-plugins": false,
     "sales@knowledge-work-plugins": false,
     "finance@knowledge-work-plugins": false
   }
