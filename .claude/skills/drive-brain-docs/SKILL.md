@@ -38,7 +38,12 @@ Drive mein line badalne ka koi tool nahi hai. Dono baatein mila ke matlab:
 **Drive ki doc ab read-only hai.** Usme kuch badalna ho to do hi raaste:
 
 1. Pawan khud editor mein badle
-2. Wo doc repo mein shift ho jaaye — wahan line edit normal kaam hai
+2. Claude batata hai ki kya likhna hai, Pawan likhta hai
+
+22 Oct 2026 se **saare brain docs Drive mein hain** (Pawan ka faisla). Matlab
+`DECISIONS.md`, `CHANGELOG.md`, khaali tables, issue status — inme Claude kuch
+nahi likh sakta. Kaam ke baad **batana zaroori hai** ki kaunsi file mein kya
+line jodni hai. Chup-chaap chhodna nahi.
 
 Teesra raasta nahi hai. Recreate-aur-trash **band hai**, chahe file chhoti ho
 aur chahe maine hi likhi ho.
