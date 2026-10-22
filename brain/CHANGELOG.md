@@ -4,6 +4,7 @@ Saare project mein kab kya badla. **Append-only** — nayi entry sabse upar.
 
 | Date | Project | Kya hua | Asar |
 |---|---|---|---|
+| 2026-10-22 | Baroda Fresh | `product-photos` skill bani — QC checklist, naming, alt text format, Shopify attach, priority | `.claude/skills/product-photos/` |
 | 2026-10-22 | Brain system | 16 brain docs Drive se repo mein shift — Accounts 9, Khanderao 6, Baroda Fresh 1. Drive ki original files chhui nahi | ab line edit possible |
 | 2026-10-22 | Brain system | `CLAUDE.md` aur `BRAIN-SYSTEM.md` nayi jagah ke hisaab se update | — |
 | 2026-10-21 | Brain system | `drive-brain-docs` skill aur `CLAUDE.md` mein no-trash / no-recreate rule daala | Drive docs ab read-only |
