@@ -4,6 +4,8 @@ Saare project mein kab kya badla. **Append-only** — nayi entry sabse upar.
 
 | Date | Project | Kya hua | Asar |
 |---|---|---|---|
+| 2026-10-22 | Brain system | 16 brain docs Drive se repo mein shift — Accounts 9, Khanderao 6, Baroda Fresh 1. Drive ki original files chhui nahi | ab line edit possible |
+| 2026-10-22 | Brain system | `CLAUDE.md` aur `BRAIN-SYSTEM.md` nayi jagah ke hisaab se update | — |
 | 2026-10-21 | Brain system | `drive-brain-docs` skill aur `CLAUDE.md` mein no-trash / no-recreate rule daala | Drive docs ab read-only |
 | 2026-10-21 | Khanderao | Core scope confirm hua — `PROJECT.md` v1.0, `CONTENT-PLAN.md` aur `BRAND.md` bhare | 5 blocker khatam. 5 content pillar, weekly calendar draft, voice tay |
 | 2026-10-21 | Tool configs | 3 folder rename, jhoothi `.mcp.json` hatai, README aur NOTES dobara likhe | `mcp-configs/` |

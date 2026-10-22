@@ -33,19 +33,26 @@ Created date se kaam nahi chalta. Jo doc mahine se verify nahi hua, shaq se dekh
 
 | File | Kaam | Kahan |
 |---|---|---|
-| `README.md` | 30-second orientation | Drive |
-| `PROJECT.md` | kya, kyun, scope, open items | Drive |
-| `AGENTS.md` | AI rules + kabhi nahi karna | Drive |
-| `DECISIONS.md` | faisle — date, sawaal, faisla, kisne | **repo** |
-| `CHANGELOG.md` | kab kya badla | **repo** |
+| `README.md` | 30-second orientation | `brain/<project>/` |
+| `PROJECT.md` | kya, kyun, scope, open items | `brain/<project>/` |
+| `AGENTS.md` | AI rules + kabhi nahi karna | `brain/<project>/` |
+| `DECISIONS.md` | faisle — date, sawaal, faisla, kisne | `brain/` — sab project ka ek |
+| `CHANGELOG.md` | kab kya badla | `brain/` — sab project ka ek |
 
 Naam same hone se file seedha kholi jaati hai, dhoondhi nahi jaati.
 
-### Kyun do jagah
+### Saara brain repo mein hai
 
-Drive connector **maujooda file mein line nahi jod sakta** — sirf nayi file bana
-sakta hai. `DECISIONS.md` aur `CHANGELOG.md` mein roz line judti hai, isliye wo
-repo mein. Baaki docs kam badalte hain, wo Drive mein projects ke saath.
+Drive connector **file ka content badal hi nahi sakta** — na line, na poori file.
+Isliye 22 Oct 2026 ko saare brain docs repo mein shift kar diye. Ab ek line
+badalna normal kaam hai: na trash, na naya file ID, na history ka nuksaan.
+
+Drive mein sirf wo rehta hai jo badalta nahi, bas jama hota hai — assets (photo,
+video, logo), backup JSON, research aur output.
+
+Ek apwaad: Baroda Fresh ke teen master docs (`PROJECT.md` 27 KB, `AGENTS.md`
+21 KB, `BRAND.md` 12 KB) Drive mein hi hain. Wo Pawan ke likhe aur bade hain;
+copy karne se do ghar ban jaate. Link `brain/baroda-fresh/README.md` mein hai.
 
 Ek file ka ek hi ghar — copy kahin nahi.
 
@@ -113,5 +120,6 @@ Placeholder: `<YOUR_KEY_HERE>`
 | # | Item | Kaun | Blocker? |
 |---|---|---|---|
 | 1 | Pending → Confirmed ka niyam Pawan confirm kare | Pawan | nahi |
-| 2 | 15 maujooda docs mein header block add karna | Claude | nahi |
-| 3 | `work/_template/` folder Drive mein banana | Claude | nahi |
+| 2 | ~~15 docs mein header block~~ — ho gaya | Claude | — |
+| 3 | ~~`work/_template/` folder~~ — ho gaya | Claude | — |
+| 4 | `work/_template/` ab purana ho gaya — repo ke hisaab se likhna hai | Claude | nahi |

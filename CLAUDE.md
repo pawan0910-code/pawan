@@ -20,21 +20,32 @@ Token bachao: zarurat se zyada file mat padho, recursive search mat karo.
 
 ## Brain system
 
-Har project ka ek `brain/` folder hai Google Drive mein — context, rules aur
-faisle wahin rehte hain. Us project ka kaam shuru karne se pehle uska brain padho.
+**Brain is repo mein hai** — `brain/`. Us project ka kaam shuru karne se pehle
+uska brain padho.
 
-| Brain | Drive folder ID |
+| Brain | Kahan |
 |---|---|
-| `work` (root) | `1Xzp9Bw1TkMN3ZPLWwCrut5HuVEswBmqO` |
-| Accounts | `1I_h-jQzI4eB8vDTlq4M4jh1dqX-_Flve` |
-| Baroda Fresh | `1mnQJtA40zzvZnt0GG5VGLNK5HiW2uOJa` |
-| Khanderao Market Social Media | `14cDMHGco65_1t7nWqb1eBXifqaer_o6D` |
+| Standard aur niyam | `brain/BRAIN-SYSTEM.md` |
+| Faisle | `brain/DECISIONS.md` |
+| History | `brain/CHANGELOG.md` |
+| Accounts | `brain/accounts/` — 9 docs |
+| Baroda Fresh | `brain/baroda-fresh/` — README (3 master docs Drive mein) |
+| Khanderao Market Social Media | `brain/khanderao-social/` — 6 docs |
+
+Wajah: Drive connector se file ka content badla nahi ja sakta. Repo mein ek line
+badalna normal kaam hai.
+
+Drive mein ab sirf ye rehta hai:
+
+| Kya | Kahan |
+|---|---|
+| Assets — photo, video, logo | `<Project>/assets/` |
+| Backup JSON | `Accounts/backups/` |
+| Research, docs, output | `<Project>/research/ docs/ output/` |
+| Baroda Fresh ke 3 master docs | Drive — bade hain, Pawan ke likhe. Link `brain/baroda-fresh/README.md` mein |
 | Archive/PRISM | `1ngLRzzkR9rYx2caXaZwJNSCBvTGJV3Xg` — **haath nahi lagana** |
 
-`DECISIONS.md` aur `CHANGELOG.md` **is repo mein** hain — `brain/` folder mein.
-Wajah: Drive connector se maujooda file mein line jodi nahi ja sakti, sirf nayi
-file banti hai. In do file mein roz line judti hai, isliye ye repo mein rehti hain.
-Drive mein wo docs rehte hain jo kam badalte hain (PROJECT, BRAND, SCHEMA) aur assets.
+Drive ka `work` folder: `1Xzp9Bw1TkMN3ZPLWwCrut5HuVEswBmqO`
 
 ### Status label — 6, har brain mein same
 

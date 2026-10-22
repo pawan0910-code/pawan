@@ -7,6 +7,8 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-22 | Brain system | Brain docs kahan rahenge | **Repo mein.** 16 docs shift ho gaye. Drive mein sirf assets, backup, research, output. Wajah: Drive mein line edit namumkin hai | Pawan | `brain/accounts/` · `brain/khanderao-social/` · `brain/baroda-fresh/` |
+| 2026-10-22 | Baroda Fresh | 3 master docs bhi shift karein? | Nahi — `PROJECT.md` (27 KB), `AGENTS.md` (21 KB), `BRAND.md` (12 KB) Drive mein hi. Pawan ke likhe aur bade hain; copy se do ghar ban jaate. Link README mein | Claude | `brain/baroda-fresh/README.md` |
 | 2026-10-21 | Brain system | Drive doc badalne ka tareeqa | **Trash aur recreate band.** Sirf line badlo. Par Drive mein line badalne ka tool nahi hai — to Drive docs ab read-only. Badalna ho to Pawan khud kare ya doc repo mein shift ho | Pawan | `CLAUDE.md`, `drive-brain-docs` skill |
 | 2026-10-21 | Khanderao | Page kiska hai | **Poore market ka** — kisi ek shop ka nahi, Pawan ki business ka nahi. (Isne pehle ke "dono — market + meri business" ko supersede kiya) | Pawan | `PROJECT.md` sec 1 |
 | 2026-10-21 | Khanderao | Online order lega? | **Nahi.** Saara order Baroda Fresh pe. Khanderao sirf content, knowledge aur pehchaan ke liye | Pawan | `PROJECT.md` sec 2 |
