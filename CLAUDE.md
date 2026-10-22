@@ -20,32 +20,36 @@ Token bachao: zarurat se zyada file mat padho, recursive search mat karo.
 
 ## Brain system
 
-**Brain is repo mein hai** — `brain/`. Us project ka kaam shuru karne se pehle
-uska brain padho.
+**Brain Google Drive mein hai.** Us project ka kaam shuru karne se pehle uska
+brain padho.
 
-| Brain | Kahan |
+| Brain | Drive folder ID |
 |---|---|
-| Standard aur niyam | `brain/BRAIN-SYSTEM.md` |
-| Faisle | `brain/DECISIONS.md` |
-| History | `brain/CHANGELOG.md` |
-| Accounts | `brain/accounts/` — 9 docs |
-| Baroda Fresh | `brain/baroda-fresh/` — README (3 master docs Drive mein) |
-| Khanderao Market Social Media | `brain/khanderao-social/` — 6 docs |
-
-Wajah: Drive connector se file ka content badla nahi ja sakta. Repo mein ek line
-badalna normal kaam hai.
-
-Drive mein ab sirf ye rehta hai:
-
-| Kya | Kahan |
-|---|---|
-| Assets — photo, video, logo | `<Project>/assets/` |
-| Backup JSON | `Accounts/backups/` |
-| Research, docs, output | `<Project>/research/ docs/ output/` |
-| Baroda Fresh ke 3 master docs | Drive — bade hain, Pawan ke likhe. Link `brain/baroda-fresh/README.md` mein |
+| Shared — `BRAIN-SYSTEM` · `DECISIONS` · `CHANGELOG` | `1uonVF-v_RxGtzzanFnMa3kjELI91Tw7Q` |
+| Accounts — 9 docs | `1I_h-jQzI4eB8vDTlq4M4jh1dqX-_Flve` |
+| Baroda Fresh — 4 docs | `1mnQJtA40zzvZnt0GG5VGLNK5HiW2uOJa` |
+| Khanderao Market Social Media — 6 docs | `14cDMHGco65_1t7nWqb1eBXifqaer_o6D` |
 | Archive/PRISM | `1ngLRzzkR9rYx2caXaZwJNSCBvTGJV3Xg` — **haath nahi lagana** |
 
 Drive ka `work` folder: `1Xzp9Bw1TkMN3ZPLWwCrut5HuVEswBmqO`
+
+### ⚠️ Brain docs mein likh nahi sakte
+
+Drive connector file ka content badal nahi sakta. Matlab `DECISIONS.md`,
+`CHANGELOG.md`, khaali tables, issue status, `Last verified` date — **inme kuch
+nahi likha ja sakta.**
+
+Isliye trigger (neeche) **apne aap nahi chalte.** Kaam khatam hone par ya faisla
+hone par: **Pawan ko batao ki kaunsi file mein kya line jodni hai.** Chup-chaap
+chhodna nahi — warna brain purana ho jaayega.
+
+Repo mein sirf ye rehta hai, kyunki ye Drive se chal nahi sakta:
+
+| Kya | Kahan |
+|---|---|
+| Skills | `.claude/skills/` — Drive mein rakhi file skill ki tarah load nahi hoti |
+| Ye file | repo root |
+| Plugin settings | `mcp-configs/<project>/.claude/` — project root mein hi kaam karte hain |
 
 ### Status label — 6, har brain mein same
 
