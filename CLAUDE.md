@@ -20,8 +20,8 @@ Token bachao: zarurat se zyada file mat padho, recursive search mat karo.
 
 ## Brain system
 
-**Brain Drive mein hai** (faisla 2026-10-22, Pawan). Naya kaam bhi **sirf Drive
-mein** save hota hai (faisla 2026-10-23, Pawan). Us project ka kaam shuru karne se
+**Sab kuch sirf Drive pe** (faisla 2026-10-23, Pawan). Brain, naya kaam, har
+change aur update — sab Drive mein. **Repo mein kuch bhi save nahi hoga.** Us project ka kaam shuru karne se
 pehle uska brain padho.
 
 | Brain | Drive mein kahan | Folder ID |
@@ -43,13 +43,16 @@ Drive mein baaki:
 
 Drive ka `work` folder: `1Xzp9Bw1TkMN3ZPLWwCrut5HuVEswBmqO`
 
-### Repo mein sirf ye
+### Repo — band hai
 
-Ye files Drive se kaam nahi karti, isliye repo mein hi rehti hain:
-`CLAUDE.md` (ye file) · `.claude/skills/` · `mcp-configs/`.
+Repo mein **kuch bhi save ya change nahi karna** — na commit, na PR, na merge.
+Ye file (`CLAUDE.md`), `.claude/skills/` aur `mcp-configs/` repo mein pade hain
+kyunki Claude Code inhe wahi se padhta hai, par inhe bhi main nahi badlunga.
 
-⚠️ Repo ka `brain/` folder **purani copy hai** — usko mat padho, mat badlo. Sach
-Drive wala hai.
+Inme kuch badalna ho to: nayi version **Drive mein** banao, aur Pawan ko batao —
+wo khud repo mein daalega.
+
+⚠️ Repo ka `brain/` folder **purani copy hai** — usko mat padho. Sach Drive wala hai.
 
 ### Status label — 6, har brain mein same
 
@@ -101,8 +104,8 @@ faisle ke khilaf** mile, to **bina poochhe theek karo**, phir Pawan ko ek line
 mein batao kya badla aur kyun.
 
 - Sirf Pawan ke faisle se milane ke liye — apne andaaze se nahi. Shak ho to poochho.
-- Repo ki file (`CLAUDE.md`, skills, `mcp-configs/`) — khud badlo, PR banao aur
-  merge karo.
-- Drive ki file — badal nahi sakta, to sahi line bana ke Pawan ko do.
+- Repo ki file — **mat chhuo.** Nayi version Drive mein banao, Pawan ko batao.
+- Drive ki purani file — badal nahi sakta, to sahi line bana ke Pawan ko do.
+- Drive mein naya — nayi file banao, sahi project folder mein.
 - Delete kabhi nahi, Archive/PRISM ko haath nahi.
 - Har aisa badlav Drive `CHANGELOG.md` ki line ke roop mein Pawan ko do.
