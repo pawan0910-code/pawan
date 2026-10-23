@@ -1,6 +1,6 @@
 # baroda-fresh
 
-Status: Confirmed | Last verified: 2026-10-21 | Owner: Pawan
+Status: Confirmed | Last verified: 2026-10-23 | Owner: Pawan
 
 Baroda Fresh — Vadodara ki online fresh-fruit brand, Shopify storefront.
 
@@ -28,7 +28,8 @@ Context aur rules Drive mein — `Baroda Fresh/brain/`. Folder ID `CLAUDE.md` me
 Kaam shuru karne se pehle wahan ka `README.md` padho. **Store ka build complete
 hai par testing pending hai** — usko live ya tested mat kehna.
 
-## `.mcp.json` nahi hai
+## `.mcp.json` — sirf Playwright
 
-Jaanbujh ke. Pehle isme `notion` aur `slack` the, jo kabhi connect hi nahi hue.
-Jab asli mein koi server connect ho, tab banegi.
+Storefront ko mobile/desktop pe browser mein test karne ke liye. Free, open-source.
+Tareeqa: `test-app` skill. Pehle wali `notion`/`slack` config jhoothi thi, wo wapas
+nahi aayi.

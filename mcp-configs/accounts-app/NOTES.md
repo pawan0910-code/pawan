@@ -1,6 +1,6 @@
 # accounts-app
 
-Status: Confirmed | Last verified: 2026-10-21 | Owner: Pawan
+Status: Confirmed | Last verified: 2026-10-23 | Owner: Pawan
 
 `ownaccounts` software ka folder — **PC pe local hai, GitHub pe nahi.**
 
@@ -27,7 +27,12 @@ karta hai → app Netlify pe deploy hoti hai → phone se use hoti hai.
 `.claude/settings.json` — sirf `engineering` plugin on, baaki off. App ka code
 yahan hai, marketing/sales/finance ka kuch kaam nahi.
 
-## Koi MCP server nahi chahiye
+`.mcp.json` — sirf **Playwright** (free, open-source, Microsoft ka). App ko browser
+mein test karne ke liye. Isko bhi software folder ke root mein copy karo.
+Test ka tareeqa: `test-app` skill (repo `.claude/skills/test-app/`) — usko bhi
+software folder ki `.claude/skills/` mein copy karna, warna wahan load nahi hogi.
+
+## Aur koi MCP server nahi chahiye
 
 - **GitHub nahi** — ye folder GitHub pe nahi hai
 - **Supabase nahi** — app localStorage pe chalti hai, koi database nahi

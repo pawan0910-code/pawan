@@ -7,6 +7,7 @@ faisla dobara bahas na bane.
 
 | Date | Project | Sawaal | Faisla | Kisne | Asar |
 |---|---|---|---|---|---|
+| 2026-10-23 | Accounts, Baroda Fresh | Playwright MCP + `test-app` skill add karein? | **Haan.** Free aur open-source. Sirf in 2 project mein — Khanderao mein nahi. Accounts ka 21 Oct wala "koi MCP nahi" isse badla, baaki (GitHub/Supabase/Linear nahi) waisa hi | Pawan | `mcp-configs/accounts-app/.mcp.json` · `mcp-configs/baroda-fresh/.mcp.json` · `.claude/skills/test-app/` |
 | 2026-10-22 | Baroda Fresh | Product photos AI se banayein? | **Nahi.** Claude image bana hi nahi sakta; free options PC pe GPU maangte hain aur is session se nahi chalte. Fresh fruit mein asli photo behtar — `PROJECT.md` sec 6 bhi AI imagery ko sirf illustrative kehta hai | Pawan | `product-photos` skill |
 | 2026-10-22 | Baroda Fresh | Photo ka kaam kaise chalega | Pawan shoot karega (guide ke hisaab se), Claude QC + naming + alt text + Shopify attach karega | Pawan | `product-photos` skill |
 | 2026-10-22 | Brain system | Brain docs kahan rahenge | **Repo mein.** 16 docs shift ho gaye. Drive mein sirf assets, backup, research, output. Wajah: Drive mein line edit namumkin hai | Pawan | `brain/accounts/` · `brain/khanderao-social/` · `brain/baroda-fresh/` |
