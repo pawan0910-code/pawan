@@ -1,6 +1,6 @@
 # Per-project tool setup
 
-Status: Confirmed | Last verified: 2026-10-21 | Owner: Pawan
+Status: Confirmed | Last verified: 2026-10-23 | Owner: Pawan
 
 Teen project, teen folder. Folder ke andar ki `.claude/` us project ke root mein
 copy karo — bas.
@@ -20,6 +20,10 @@ hote hain.
 
 Jab asli mein koi server connect ho, tab uski `.mcp.json` banegi. Jhoothi config
 rakhne se bura hota hai — agli baar koi usko sach maan leta hai.
+
+**Ab asli `.mcp.json` (23 Oct):** `accounts-app` aur `baroda-fresh` mein sirf
+**Playwright** — browser testing ke liye, `test-app` skill ke saath. Khanderao mein
+nahi (wahan test karne ko koi app nahi). Windows ke liye `cmd /c npx` likha hai.
 
 Asli faayda **`enabledPlugins`** se hai: 4 fizool plugin band karne se. Wahi bloat tha.
 
