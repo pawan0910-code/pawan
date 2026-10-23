@@ -26,7 +26,7 @@ patch ya revision-upload **nahi hai** — dhoondhne mein waqt mat barbaad karo.
 
 | Category | Kahan rakhni | Badalne ka tareeqa |
 |---|---|---|
-| Roz badalti (`DECISIONS.md`, `CHANGELOG.md`) | **repo** `brain/` | seedha edit — Drive mein rakhna hi galti hai |
+| Roz badalti (`DECISIONS.md`, `CHANGELOG.md`) | Drive `work/brain/` (faisla 22–23 Oct, Pawan) | nayi line bana ke Pawan ko do — wo sabse upar jodega |
 | Drive ki koi bhi doc | Drive | **badal hi nahi sakte** — na line, na poori file |
 
 ## ⛔ Drive doc badalna — ab bilkul nahi
@@ -38,7 +38,9 @@ Drive mein line badalne ka koi tool nahi hai. Dono baatein mila ke matlab:
 **Drive ki doc ab read-only hai.** Usme kuch badalna ho to do hi raaste:
 
 1. Pawan khud editor mein badle
-2. Wo doc repo mein shift ho jaaye — wahan line edit normal kaam hai
+2. Main sahi line bana ke Pawan ko doon, wo jod de
+
+(Pehle teesra raasta tha "doc repo mein shift karo" — 23 Oct se band. Sab Drive mein.)
 
 Teesra raasta nahi hai. Recreate-aur-trash **band hai**, chahe file chhoti ho
 aur chahe maine hi likhi ho.
@@ -95,4 +97,4 @@ Isse ghabrao nahi aur dobara move/create mat karo — pehle metadata se confirm 
 - **Koi file trash nahi karni.** Ye Pawan ka saaf rule hai
 - Trash mein padi file ko haath nahi lagana
 - Move ya create ke baad verify `get_file_metadata` se, `search_files` se nahi
-- Roz badalne wali file Drive mein kabhi na banao — wo repo mein jaati hai
+- Naya kaam = Drive mein **nayi file**, sahi project folder mein. Repo mein sirf `CLAUDE.md`, skills, `mcp-configs/`

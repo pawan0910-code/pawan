@@ -34,8 +34,8 @@ Teen mein se ek bhi `nahi` — skill nahi banani.
 2. Paas ho gaya to **pehle check karo** ki koi maujooda skill isse milti hai kya.
    Milti hai to usme section add karo.
 3. Nayi chahiye to `.claude/skills/<naam>/SKILL.md` banao (format neeche).
-4. `brain/CHANGELOG.md` mein ek line.
-5. `brain/DECISIONS.md` mein entry **sirf tab** jab ye koi faisla badalti ho.
+4. Drive `work/brain/CHANGELOG.md` ki ek line bana ke Pawan ko do.
+5. Drive `work/brain/DECISIONS.md` ki line **sirf tab** jab ye koi faisla badalti ho — wo bhi Pawan ko do.
 6. Pawan ko ek line mein batao — kaunsi skill bani aur kyun. Chup-chaap nahi.
 
 ## SKILL.md ka format
