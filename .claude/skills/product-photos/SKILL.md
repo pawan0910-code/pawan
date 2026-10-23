@@ -95,8 +95,8 @@ Shopify connector se:
 
 Phir:
 
-- `brain/CHANGELOG.md` mein ek line — kaunse product ki photo lagi
-- Progress `brain/baroda-fresh/PHOTO-STATUS.md` mein (na ho to banao)
+- Drive `work/brain/CHANGELOG.md` ki ek line Pawan ko do — kaunse product ki photo lagi
+- Progress Drive `Baroda Fresh/brain/PHOTO-STATUS.md` mein — na ho to nayi bana do; ho to update ki line Pawan ko do
 
 ## Priority — guide se
 
