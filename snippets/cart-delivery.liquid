@@ -1,0 +1,32 @@
+{%- comment -%} Delivery location strip + free-delivery progress (drawer + cart page). {%- endcomment -%}
+{%- liquid
+  assign threshold = settings.free_delivery_threshold | times: 100
+  assign remaining = threshold | minus: cart.total_price
+  assign progress = 100
+  if threshold > 0 and remaining > 0
+    assign progress = cart.total_price | times: 100 | divided_by: threshold
+  endif
+-%}
+<button type="button" class="bd-loc" data-sheet-open="LocationSheet" aria-haspopup="dialog" aria-controls="LocationSheet">
+  <span class="icon icon--20" aria-hidden="true">location_on</span>
+  <span class="bd-loc__text t-body">{{ 'cart.delivering_to' | t }} <strong data-location-label data-default="{{ settings.default_city | default: 'Vadodara' | escape }}">{{ settings.default_city | default: 'Vadodara' }}</strong></span>
+  <span class="bd-loc__change t-label">{{ 'cart.change' | t }}</span>
+</button>
+{%- if threshold > 0 -%}
+  <div class="bd-progress{% if remaining <= 0 %} is-done{% endif %}">
+    <span class="bd-progress__icon" aria-hidden="true"><span class="icon icon--20">{% if remaining > 0 %}local_shipping{% else %}celebration{% endif %}</span></span>
+    <div class="bd-progress__body">
+      <p class="t-body-sm">
+        {%- if remaining > 0 -%}
+          {%- assign remaining_money = remaining | money_without_trailing_zeros -%}
+          {{ 'cart.free_delivery_remaining_html' | t: amount: remaining_money }}
+        {%- else -%}
+          <strong>{{ 'cart.free_delivery_unlocked' | t }}</strong>
+        {%- endif -%}
+      </p>
+      <div class="bd-progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progress }}" aria-label="{{ 'cart.free_delivery_progress' | t }}">
+        <span style="width: {{ progress }}%;"></span>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

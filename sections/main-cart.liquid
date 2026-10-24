@@ -1,0 +1,73 @@
+<div class="container" data-cart-page="{{ section.id }}">
+  <header class="page-head cartp__head">
+    <h1 class="page-head__title t-display">{{ 'cart.title' | t }}</h1>
+    {%- if cart.item_count > 0 -%}
+      <span class="bcount bcount--lg">{{ 'cart.items_count' | t: count: cart.item_count }}</span>
+    {%- endif -%}
+  </header>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" id="CartForm" class="cartp" novalidate>
+      <div class="cartp__main">
+        {%- render 'cart-delivery' -%}
+        <ul class="bl-list" role="list">
+          {%- for item in cart.items -%}
+            {%- render 'cart-line', item: item -%}
+          {%- endfor -%}
+        </ul>
+        {%- if settings.cart_note -%}
+          <div class="bnote bnote--open">
+            <label for="CartNote" class="t-label-lg c-primary"><span class="icon icon--20" aria-hidden="true">edit_note</span> {{ 'cart.note_toggle' | t }}</label>
+            <textarea id="CartNote" name="note" data-cart-note rows="3" placeholder="{{ 'cart.note_placeholder' | t }}">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <aside class="cart-summary panel" aria-labelledby="CartSummaryHeading">
+        <h2 id="CartSummaryHeading" class="t-title-lg c-primary">{{ 'cart.summary' | t }}</h2>
+        <div class="cart-summary__row t-body">
+          <span>{{ 'cart.items_count' | t: count: cart.item_count }}</span>
+          <span>{{ cart.items_subtotal_price | money_without_trailing_zeros }}</span>
+        </div>
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row t-body bsave">
+            <span>{{ discount.title }}</span>
+            <span>−{{ discount.total_allocated_amount | money_without_trailing_zeros }}</span>
+          </div>
+        {%- endfor -%}
+        <div class="cart-summary__row cart-summary__row--total">
+          <span class="t-label-lg">{{ 'cart.subtotal' | t }}</span>
+          <span class="cart-summary__total">{{ cart.total_price | money_without_trailing_zeros }}</span>
+        </div>
+        <p class="t-body-sm c-muted">
+          {%- if cart.taxes_included -%}{{ 'cart.taxes_included_shipping_at_checkout' | t }}{%- else -%}{{ 'cart.taxes_and_shipping_at_checkout' | t }}{%- endif -%}
+        </p>
+        <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--block bcheckout">
+          <span class="icon icon--18" aria-hidden="true">lock</span>
+          <span>{{ 'cart.checkout' | t }}</span>
+          <span class="bcheckout__total">{{ cart.total_price | money_without_trailing_zeros }}</span>
+        </button>
+        <noscript><button type="submit" name="update" class="btn btn--outline btn--block">{{ 'cart.update' | t }}</button></noscript>
+        {%- if additional_checkout_buttons -%}
+          <div class="cart-summary__more">{{ content_for_additional_checkout_buttons }}</div>
+        {%- endif -%}
+        {%- render 'cart-perks' -%}
+        <a href="{{ routes.all_products_collection_url }}" class="drawer__view t-label">{{ 'general.continue_shopping' | t }}</a>
+      </aside>
+    </form>
+    {%- comment -%} Add-on products have their own forms, so they sit outside the cart form. {%- endcomment -%}
+    <div class="cartp__upsell">{%- render 'cart-upsell' -%}</div>
+  {%- else -%}
+    {%- render 'cart-empty' -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Free-delivery bar, add-on products, trust badges and the order note are set in Theme settings → Basket." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+<div class="container acct-page">
+  <header class="page-head"><a href="{{ routes.account_url }}" class="c-secondary t-label">← {{ 'customer.account.orders' | t }}</a><h1 class="page-head__title t-display">{{ order.name }}</h1><p class="t-body c-muted">{{ order.created_at | date: '%d %b %Y, %I:%M %p' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p></header>
+  <div class="panel">
+    <ul class="bl-list" role="list">
+      {%- for line in order.line_items -%}
+        <li class="bl"><span class="bl__media">{%- if line.image -%}{{ line.image | image_url: width: 200 | image_tag: alt: '', width: 88, height: 88 }}{%- endif -%}</span><div class="bl__info"><span class="bl__title">{{ line.title }}</span><span class="bl__unit t-body-sm">{{ line.quantity }} × {{ line.final_price | money_without_trailing_zeros }}</span><div class="bl__row"><span></span><span class="bl__price">{{ line.final_line_price | money_without_trailing_zeros }}</span></div></div></li>
+      {%- endfor -%}
+    </ul>
+    <div class="cart-summary__row cart-summary__row--total"><span class="t-label-lg">{{ 'cart.subtotal' | t }}</span><span class="cart-summary__total">{{ order.total_price | money_without_trailing_zeros }}</span></div>
+    {%- if order.shipping_address -%}<p class="t-body"><strong>{{ 'customer.order.ship_to' | t }}</strong><br>{{ order.shipping_address | format_address }}</p>{%- endif -%}
+  </div>
+</div>

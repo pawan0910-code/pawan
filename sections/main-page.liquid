@@ -1,0 +1,14 @@
+<div class="container">
+  <header class="page-head">
+    <h1 class="page-head__title t-display">{{ page.title }}</h1>
+  </header>
+  <div class="rte prose">{{ page.content }}</div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

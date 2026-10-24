@@ -1,0 +1,56 @@
+<section class="section" aria-labelledby="PurityHeading-{{ section.id }}">
+  <div class="container">
+    <div class="purity">
+      <div class="purity__head">
+        {%- if section.settings.icon != blank -%}
+          <span class="icon icon--24" aria-hidden="true">{{ section.settings.icon | strip }}</span>
+        {%- endif -%}
+        <h2 id="PurityHeading-{{ section.id }}" class="t-title-lg">{{ section.settings.heading }}</h2>
+      </div>
+      <ul class="purity__list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="purity__item" {{ block.shopify_attributes }}>
+            <span class="purity__icon" aria-hidden="true">
+              <span class="icon icon--18">{{ block.settings.icon | strip }}</span>
+            </span>
+            <div>
+              <h3 class="purity__title t-label">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p class="purity__text t-body-sm">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promise list",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our Promise" },
+    { "type": "text", "id": "icon", "label": "Heading icon (Material Symbols name)", "default": "eco" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Promise",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (Material Symbols name)", "default": "nature" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Promise title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise list",
+      "blocks": [{ "type": "point" }, { "type": "point" }, { "type": "point" }]
+    }
+  ]
+}
+{% endschema %}

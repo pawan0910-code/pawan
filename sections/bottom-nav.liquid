@@ -1,0 +1,110 @@
+{%- liquid
+  # Highlight the single tab whose link best matches the current URL (longest prefix wins),
+  # so /collections and /collections/in-season-now never light up together.
+  assign current_block = ''
+  assign best_length = 0
+  for block in section.blocks
+    assign url = block.settings.link | default: routes.root_url
+    if url == routes.root_url
+      if request.page_type == 'index'
+        assign current_block = forloop.index
+        assign best_length = 9999
+      endif
+      continue
+    endif
+    assign url_length = url | size
+    assign path_prefix = request.path | slice: 0, url_length
+    if path_prefix == url and url_length > best_length
+      assign next_char = request.path | slice: url_length
+      if next_char == blank or next_char == '/'
+        assign current_block = forloop.index
+        assign best_length = url_length
+      endif
+    endif
+  endfor
+  # Product pages belong to the catalogue tab (a link to /collections), if there is one.
+  assign catalogue_page = false
+  if request.page_type == 'product' or request.page_type == 'search'
+    assign catalogue_page = true
+  endif
+  if current_block == '' and catalogue_page
+    for block in section.blocks
+      if block.settings.link == routes.collections_url
+        assign current_block = forloop.index
+        break
+      endif
+    endfor
+  endif
+-%}
+<nav class="bottom-nav" aria-label="{{ 'general.navigation.tabs' | t }}">
+  <ul class="bottom-nav__list" role="list">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign url = block.settings.link | default: routes.root_url
+        assign is_cart = false
+        assign is_account = false
+        if url == routes.cart_url
+          assign is_cart = true
+        elsif url == routes.account_url and shop.customer_accounts_enabled
+          assign is_account = true
+        endif
+      -%}
+      <li class="bottom-nav__item" {{ block.shopify_attributes }}>
+        <a
+          href="{{ url }}"
+          class="bottom-nav__link"
+          {% if forloop.index == current_block %}aria-current="page"{% endif %}
+          {% if is_cart %}data-cart-open aria-haspopup="dialog" aria-controls="CartDrawer"{% endif %}
+          {% if is_account %}data-sheet-open="AccountSheet" aria-haspopup="dialog" aria-controls="AccountSheet"{% endif %}
+        >
+          <span class="bottom-nav__icon">
+            <span class="icon" aria-hidden="true">{{ block.settings.icon | strip }}</span>
+            {%- if is_cart -%}
+              <span class="icon-btn__count" data-cart-count aria-hidden="true" {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+            {%- endif -%}
+          </span>
+          <span class="t-label-sm">
+            {{- block.settings.label -}}
+            {%- if is_cart -%}
+              <span class="visually-hidden">, <span data-cart-count-text>{{ cart.item_count }}</span> {{ 'cart.items' | t }}</span>
+            {%- endif -%}
+          </span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+
+{% schema %}
+{
+  "name": "Mobile tab bar",
+  "tag": "div",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "paragraph", "content": "Fixed tab bar on phones and tablets. Hidden on desktop, where the header menu is shown." }
+  ],
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop" },
+        { "type": "text", "id": "icon", "label": "Icon (Material Symbols name)", "default": "eco", "info": "e.g. eco, grid_view, auto_awesome, event_repeat, person, redeem" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Link to the cart (/cart) to make this tab open the basket drawer with a live item count." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile tab bar",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Shop", "icon": "eco", "link": "/" } },
+        { "type": "tab", "settings": { "label": "Categories", "icon": "grid_view", "link": "/collections" } },
+        { "type": "tab", "settings": { "label": "Basket", "icon": "shopping_basket", "link": "/cart" } },
+        { "type": "tab", "settings": { "label": "Account", "icon": "person", "link": "/account" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

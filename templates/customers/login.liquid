@@ -1,0 +1,30 @@
+{%- capture recover_form -%}
+  {%- form 'recover_customer_password', class: 'acct-form' -%}
+    {%- if form.posted_successfully? -%}
+      {%- assign recover_success = true -%}
+      <p class="t-body c-secondary">{{ 'customer.recover.sent' | t }}</p>
+    {%- endif -%}
+    {{ form.errors | default_errors }}
+    <div class="field"><label for="RecoverEmail" class="t-label">{{ 'customer.fields.email' | t }}</label><input id="RecoverEmail" type="email" name="email" autocomplete="email" required></div>
+    <button type="submit" class="btn btn--primary btn--block">{{ 'customer.recover.submit' | t }}</button>
+  {%- endform -%}
+{%- endcapture -%}
+<div class="container acct-page">
+  <div class="panel acct-card">
+    <h1 class="t-display c-primary">{{ 'customer.login.title' | t }}</h1>
+    <div data-acct-login {% if recover_success %}hidden{% endif %}>
+      {%- form 'customer_login', class: 'acct-form' -%}
+        {{ form.errors | default_errors }}
+        <div class="field"><label for="LoginEmail" class="t-label">{{ 'customer.fields.email' | t }}</label><input id="LoginEmail" type="email" name="customer[email]" autocomplete="email" required></div>
+        <div class="field"><label for="LoginPassword" class="t-label">{{ 'customer.fields.password' | t }}</label><input id="LoginPassword" type="password" name="customer[password]" autocomplete="current-password" required></div>
+        <button type="submit" class="btn btn--primary btn--lg btn--block">{{ 'customer.login.submit' | t }}</button>
+      {%- endform -%}
+      <p class="t-body"><button type="button" class="link-btn c-secondary" onclick="document.getElementById('Recover').hidden=false;this.closest('[data-acct-login]').hidden=true;">{{ 'customer.login.forgot' | t }}</button></p>
+      <p class="t-body">{{ 'customer.login.new' | t }} <a href="{{ routes.account_register_url }}" class="c-secondary">{{ 'customer.register.title' | t }}</a></p>
+    </div>
+    <div id="Recover" {% unless recover_success %}hidden{% endunless %}>{{ recover_form }}</div>
+    {%- if shop.checkout.guest_login -%}
+      {%- form 'guest_login' -%}<button type="submit" class="btn btn--outline btn--block">{{ 'customer.login.guest' | t }}</button>{%- endform -%}
+    {%- endif -%}
+  </div>
+</div>

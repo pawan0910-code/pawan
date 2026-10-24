@@ -1,0 +1,228 @@
+{%- liquid
+  assign brand_name = section.settings.brand_name | default: shop.name
+  assign menu = linklists[section.settings.menu]
+  assign default_location = section.settings.location_default | default: 'Vadodara'
+  if customer
+    assign customer_name = customer.first_name | default: customer.email
+    assign customer_initial = customer_name | slice: 0 | upcase
+  endif
+-%}
+<header class="site-header" data-header>
+  <div class="site-header__inner container">
+    <div class="site-header__brand">
+      {%- if settings.logo != blank -%}
+        <a href="{{ routes.root_url }}" tabindex="-1" aria-hidden="true">
+          {{
+            settings.logo
+            | image_url: width: 160, height: 160, crop: 'center'
+            | image_tag: class: 'site-header__logo', width: 40, height: 40, alt: '', loading: 'eager'
+          }}
+        </a>
+      {%- endif -%}
+      <div class="site-header__id">
+        {%- if request.page_type == 'index' -%}
+          <h1 class="site-header__name"><a href="{{ routes.root_url }}">{{ brand_name }}</a></h1>
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="site-header__name">{{ brand_name }}</a>
+        {%- endif -%}
+
+        {%- if section.settings.show_location -%}
+          <button type="button" class="site-header__location" data-sheet-open="LocationSheet" aria-haspopup="dialog" aria-controls="LocationSheet">
+            <span class="icon icon--14" aria-hidden="true">location_on</span>
+            <span class="visually-hidden">{{ 'location.deliver_to' | t }}</span>
+            <span class="site-header__location-text t-label-sm" data-location-label data-default="{{ default_location | escape }}">{{ default_location }}</span>
+            {%- if section.settings.delivery_eta != blank -%}
+              <span class="site-header__eta t-label-sm">&nbsp;• {{ section.settings.delivery_eta }}</span>
+            {%- endif -%}
+            <span class="icon icon--14" aria-hidden="true">expand_more</span>
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if menu.links.size > 0 -%}
+      <nav class="site-header__nav" aria-label="{{ 'general.navigation.main' | t }}">
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    <div class="site-header__actions">
+      <a href="{{ routes.search_url }}" class="icon-btn" data-search-toggle aria-label="{{ 'general.search.title' | t }}">
+        <span class="icon" aria-hidden="true">search</span>
+      </a>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="icon-btn{% if customer %} icon-btn--avatar{% endif %}" data-sheet-open="AccountSheet" aria-haspopup="dialog" aria-controls="AccountSheet">
+          {%- if customer -%}
+            <span class="avatar" aria-hidden="true">{{ customer_initial }}</span>
+            <span class="visually-hidden">{{ 'customer.account.signed_in_as' | t: name: customer_name }}</span>
+          {%- else -%}
+            <span class="icon" aria-hidden="true">person</span>
+            <span class="visually-hidden">{{ 'customer.account.log_in' | t }}</span>
+          {%- endif -%}
+        </a>
+      {%- endif -%}
+
+      <a href="{{ routes.cart_url }}" class="icon-btn" data-cart-open aria-haspopup="dialog" aria-controls="CartDrawer">
+        <span class="icon" aria-hidden="true">shopping_bag</span>
+        <span class="visually-hidden">{{ 'cart.title' | t }}, <span data-cart-count-text>{{ cart.item_count }}</span> {{ 'cart.items' | t }}</span>
+        <span class="icon-btn__count" data-cart-count aria-hidden="true" {% if cart.item_count == 0 %}hidden{% endif %}>
+          {{- cart.item_count -}}
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Delivery location sheet {%- endcomment -%}
+{%- if section.settings.show_location -%}
+  <dialog
+    class="drawer drawer--sheet sheet--bottom"
+    id="LocationSheet"
+    aria-labelledby="LocationSheetTitle"
+    data-location-sheet
+    data-city="{{ section.settings.city | escape }}"
+    data-center="{{ section.settings.center_lat }},{{ section.settings.center_lng }}"
+    data-radius="{{ section.settings.radius_km }}"
+    data-pincodes="{{ section.settings.pincodes | escape }}"
+    data-reverse-geocode="{{ section.settings.reverse_geocode }}"
+  >
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <h2 id="LocationSheetTitle" class="drawer__title t-title-lg">{{ 'location.title' | t }}</h2>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="{{ 'general.close' | t }}"><span class="icon" aria-hidden="true">close</span></button>
+      </div>
+      <div class="drawer__body loc">
+        <p class="loc__current t-body">
+          <span class="icon icon--20" aria-hidden="true">location_on</span>
+          <span>{{ 'location.current' | t }} <strong data-location-label data-default="{{ default_location | escape }}">{{ default_location }}</strong></span>
+        </p>
+
+        <button type="button" class="btn btn--outline btn--block" data-location-gps>
+          <span class="icon icon--18" aria-hidden="true">my_location</span>
+          {{ 'location.use_gps' | t }}
+        </button>
+
+        <form class="loc__pin" data-location-pin novalidate>
+          <label for="LocationPin" class="t-label">{{ 'location.pincode_label' | t }}</label>
+          <div class="loc__pin-row">
+            <input id="LocationPin" name="pincode" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code" placeholder="390007">
+            <button type="submit" class="btn btn--primary">{{ 'location.check' | t }}</button>
+          </div>
+        </form>
+
+        <p class="loc__status t-body" role="status" aria-live="polite" data-location-status hidden></p>
+
+        {%- assign areas = section.settings.areas | newline_to_br | split: '<br />' -%}
+        {%- if areas.size > 0 -%}
+          <div class="loc__areas">
+            <p class="t-label c-muted">{{ 'location.areas' | t: city: section.settings.city }}</p>
+            <input type="search" class="loc__filter" placeholder="{{ 'location.search_area' | t }}" aria-label="{{ 'location.search_area' | t }}" data-location-filter>
+            <ul class="loc__list" role="list" data-location-list>
+              {%- for area in areas -%}
+                {%- assign area_name = area | strip -%}
+                {%- if area_name != blank -%}
+                  <li><button type="button" class="quick-pill quick-pill--neutral" data-location-area="{{ area_name | escape }}">{{ area_name }}</button></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+        <p class="t-body-sm c-muted">{{ 'location.note' | t }}</p>
+      </div>
+    </div>
+  </dialog>
+{%- endif -%}
+
+{%- comment -%} Account sheet (log in / log out) {%- endcomment -%}
+{%- if shop.customer_accounts_enabled -%}
+  <dialog class="drawer drawer--sheet sheet--bottom" id="AccountSheet" aria-labelledby="AccountSheetTitle">
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <h2 id="AccountSheetTitle" class="drawer__title t-title-lg">
+          {%- if customer -%}
+            {{ 'customer.account.hello' | t: name: customer_name }}
+          {%- else -%}
+            {{ 'customer.account.title' | t }}
+          {%- endif -%}
+        </h2>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="{{ 'general.close' | t }}"><span class="icon" aria-hidden="true">close</span></button>
+      </div>
+      <div class="drawer__body acct">
+        {%- if customer -%}
+          <div class="acct__who">
+            <span class="avatar avatar--lg" aria-hidden="true">{{ customer_initial }}</span>
+            <div>
+              <p class="t-title c-primary">{{ customer.name | default: customer.email }}</p>
+              <p class="t-body-sm c-muted">{{ customer.email }}</p>
+            </div>
+          </div>
+          <nav class="acct__links" aria-label="{{ 'customer.account.title' | t }}">
+            <a href="{{ routes.account_url }}" class="acct__link"><span class="icon" aria-hidden="true">receipt_long</span><span>{{ 'customer.account.orders' | t }}</span><span class="icon icon--18" aria-hidden="true">chevron_right</span></a>
+            <a href="{{ routes.account_addresses_url }}" class="acct__link"><span class="icon" aria-hidden="true">home_pin</span><span>{{ 'customer.account.addresses' | t }}</span><span class="icon icon--18" aria-hidden="true">chevron_right</span></a>
+            <a href="{{ routes.account_logout_url }}" class="acct__link acct__link--muted"><span class="icon" aria-hidden="true">logout</span><span>{{ 'customer.account.log_out' | t }}</span></a>
+          </nav>
+        {%- else -%}
+          <div class="acct__intro">
+            <span class="acct__badge" aria-hidden="true"><span class="icon">person</span></span>
+            <p class="t-title c-primary">{{ 'customer.account.intro_title' | t }}</p>
+            <ul class="acct__perks" role="list">
+              <li><span class="icon icon--18" aria-hidden="true">check</span>{{ 'customer.account.perk_orders' | t }}</li>
+              <li><span class="icon icon--18" aria-hidden="true">check</span>{{ 'customer.account.perk_address' | t }}</li>
+              <li><span class="icon icon--18" aria-hidden="true">check</span>{{ 'customer.account.perk_reorder' | t }}</li>
+            </ul>
+          </div>
+          <a href="{{ routes.account_login_url }}" class="btn btn--primary btn--lg btn--block"><span class="icon icon--18" aria-hidden="true">login</span>{{ 'customer.account.log_in_signup' | t }}</a>
+          <p class="t-body-sm c-muted acct__guest">{{ 'customer.account.guest_note' | t }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </dialog>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Store name",
+      "info": "Leave blank to use the store name from Settings. The logo is set in Theme settings → Logo & favicon."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Desktop menu",
+      "default": "main-menu",
+      "info": "Shown inline on desktop. On mobile, navigation uses the bottom tab bar."
+    },
+    { "type": "header", "content": "Delivery location" },
+    { "type": "checkbox", "id": "show_location", "label": "Show delivery location picker", "default": true },
+    { "type": "text", "id": "location_default", "label": "Default location", "default": "Vadodara" },
+    { "type": "text", "id": "delivery_eta", "label": "Delivery promise", "info": "Short text after the location, e.g. “Same-day delivery”. Only add a promise you always keep.", "default": "Same-day delivery" },
+    { "type": "text", "id": "city", "label": "City", "default": "Vadodara" },
+    {
+      "type": "textarea",
+      "id": "areas",
+      "label": "Delivery areas (one per line)",
+      "default": "Akota\nAlkapuri\nAtladra\nBhayli\nChhani\nDiwalipura\nFatehgunj\nGorwa\nGotri\nHarni\nKarelibaug\nMakarpura\nManjalpur\nNew VIP Road\nNizampura\nOld Padra Road\nRace Course\nSama\nSayajigunj\nSubhanpura\nTandalja\nTarsali\nVasna Road\nWaghodia Road"
+    },
+    {
+      "type": "textarea",
+      "id": "pincodes",
+      "label": "Serviceable pincodes",
+      "info": "Ranges and single codes, separated by commas — e.g. 390001-390025, 391101. Used by the pincode check.",
+      "default": "390001-390025"
+    },
+    { "type": "text", "id": "center_lat", "label": "City centre latitude", "default": "22.3072" },
+    { "type": "text", "id": "center_lng", "label": "City centre longitude", "default": "73.1812" },
+    { "type": "range", "id": "radius_km", "label": "Delivery radius for “Use my current location”", "min": 3, "max": 40, "step": 1, "unit": "km", "default": 15 },
+    { "type": "checkbox", "id": "reverse_geocode", "label": "Show the area name for “Use my current location”", "info": "Looks up the area name from OpenStreetMap after the customer allows location access.", "default": true }
+  ]
+}
+{% endschema %}

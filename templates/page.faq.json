@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "faq-list",
+      "settings": {
+        "contact_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

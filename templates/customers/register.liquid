@@ -1,0 +1,14 @@
+<div class="container acct-page">
+  <div class="panel acct-card">
+    <h1 class="t-display c-primary">{{ 'customer.register.title' | t }}</h1>
+    {%- form 'create_customer', class: 'acct-form' -%}
+      {{ form.errors | default_errors }}
+      <div class="field"><label for="RegFirst" class="t-label">{{ 'customer.fields.first_name' | t }}</label><input id="RegFirst" type="text" name="customer[first_name]" autocomplete="given-name"></div>
+      <div class="field"><label for="RegLast" class="t-label">{{ 'customer.fields.last_name' | t }}</label><input id="RegLast" type="text" name="customer[last_name]" autocomplete="family-name"></div>
+      <div class="field"><label for="RegEmail" class="t-label">{{ 'customer.fields.email' | t }}</label><input id="RegEmail" type="email" name="customer[email]" autocomplete="email" required></div>
+      <div class="field"><label for="RegPassword" class="t-label">{{ 'customer.fields.password' | t }}</label><input id="RegPassword" type="password" name="customer[password]" autocomplete="new-password" required></div>
+      <button type="submit" class="btn btn--primary btn--lg btn--block">{{ 'customer.register.submit' | t }}</button>
+    {%- endform -%}
+    <p class="t-body">{{ 'customer.register.have_account' | t }} <a href="{{ routes.account_login_url }}" class="c-secondary">{{ 'customer.login.title' | t }}</a></p>
+  </div>
+</div>

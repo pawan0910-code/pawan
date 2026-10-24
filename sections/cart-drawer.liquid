@@ -1,0 +1,78 @@
+{%- comment -%}
+  Basket drawer. Rendered once from layout/theme.liquid and re-rendered through the
+  Section Rendering API (sections=cart-drawer) after every add / change.
+  Shared pieces: snippets/cart-line, cart-delivery, cart-upsell, cart-perks, cart-empty.
+  Settings: Theme settings → Basket.
+{%- endcomment -%}
+<dialog class="drawer" id="CartDrawer" data-cart-drawer aria-labelledby="CartDrawerTitle">
+  <div class="drawer__panel" data-cart-drawer-inner data-item-count="{{ cart.item_count }}">
+    <div class="drawer__head">
+      <h2 id="CartDrawerTitle" class="drawer__title t-title-lg">
+        {{- 'cart.title' | t -}}
+        {%- if cart.item_count > 0 %} <span class="bcount">{{ cart.item_count }}</span>{% endif -%}
+      </h2>
+      <button type="button" class="icon-btn" data-cart-close aria-label="{{ 'cart.close' | t }}">
+        <span class="icon" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="drawer__body drawer__body--empty">
+        {%- render 'cart-empty', close_attr: true -%}
+      </div>
+    {%- else -%}
+      <div class="drawer__body">
+        {%- render 'cart-delivery' -%}
+        <ul class="bl-list" role="list">
+          {%- for item in cart.items -%}
+            {%- render 'cart-line', item: item -%}
+          {%- endfor -%}
+        </ul>
+        {%- render 'cart-upsell' -%}
+        {%- if settings.cart_note -%}
+          <details class="bnote" {% if cart.note != blank %}open{% endif %}>
+            <summary><span class="icon icon--20" aria-hidden="true">edit_note</span><span>{{ 'cart.note_toggle' | t }}</span><span class="icon icon--18" aria-hidden="true">expand_more</span></summary>
+            <label class="visually-hidden" for="DrawerNote">{{ 'cart.note' | t }}</label>
+            <textarea id="DrawerNote" data-cart-note rows="2" placeholder="{{ 'cart.note_placeholder' | t }}">{{ cart.note }}</textarea>
+          </details>
+        {%- endif -%}
+      </div>
+
+      <div class="drawer__foot">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-summary__row t-body-sm bsave">
+            <span>{{ discount.title }}</span>
+            <span>−{{ discount.total_allocated_amount | money_without_trailing_zeros }}</span>
+          </div>
+        {%- endfor -%}
+        <div class="cart-summary__row">
+          <span class="t-label-lg">{{ 'cart.subtotal' | t }}</span>
+          <span class="cart-summary__total">{{ cart.total_price | money_without_trailing_zeros }}</span>
+        </div>
+        <p class="t-body-sm c-muted">
+          {%- if cart.taxes_included -%}{{ 'cart.taxes_included_shipping_at_checkout' | t }}{%- else -%}{{ 'cart.taxes_and_shipping_at_checkout' | t }}{%- endif -%}
+        </p>
+        <form action="{{ routes.cart_url }}" method="post" class="drawer__checkout">
+          <button type="submit" name="checkout" class="btn btn--primary btn--lg btn--block bcheckout">
+            <span class="icon icon--18" aria-hidden="true">lock</span>
+            <span>{{ 'cart.checkout' | t }}</span>
+            <span class="bcheckout__total">{{ cart.total_price | money_without_trailing_zeros }}</span>
+          </button>
+        </form>
+        {%- render 'cart-perks' -%}
+        <a href="{{ routes.cart_url }}" class="drawer__view t-label">{{ 'cart.view' | t }}</a>
+      </div>
+    {%- endif -%}
+    <p class="drawer__error t-body-sm" role="alert" data-cart-error></p>
+  </div>
+</dialog>
+
+{% schema %}
+{
+  "name": "Basket drawer",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Free-delivery bar, add-on products, trust badges and the order note are set in Theme settings → Basket, so the drawer and the cart page always match." }
+  ]
+}
+{% endschema %}

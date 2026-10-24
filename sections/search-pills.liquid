@@ -1,0 +1,118 @@
+<section class="section section--tight-top" aria-label="{{ 'general.search.title' | t }}">
+  <div class="container">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="searchbar" data-searchbar>
+      <span class="icon icon--20" aria-hidden="true">search</span>
+      <label class="visually-hidden" for="Search-{{ section.id }}">{{ 'general.search.title' | t }}</label>
+      <input
+        id="Search-{{ section.id }}"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ section.settings.placeholder | escape }}"
+        autocomplete="off"
+        enterkeyhint="search"
+      >
+      <input type="hidden" name="type" value="product">
+      <input type="hidden" name="options[prefix]" value="last">
+      <div class="searchbar__tools">
+        {%- if section.settings.show_voice -%}
+          <button type="button" class="searchbar__tool" data-voice-search hidden aria-label="{{ 'general.search.voice' | t }}">
+            <span class="icon icon--18" aria-hidden="true">mic</span>
+          </button>
+        {%- endif -%}
+        {%- if section.settings.scan_link != blank -%}
+          <a href="{{ section.settings.scan_link }}" class="searchbar__tool searchbar__tool--accent" aria-label="{{ section.settings.scan_label | escape }}">
+            <span class="icon icon--17" aria-hidden="true">qr_code_scanner</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </form>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="quick-pills scroller" role="list">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            {%- capture pill_inner -%}
+              {%- if block.settings.icon != blank -%}
+                <span class="icon icon--14" aria-hidden="true">{{ block.settings.icon | strip }}</span>
+              {%- endif -%}
+              <span>{{ block.settings.label }}</span>
+            {%- endcapture -%}
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" class="quick-pill quick-pill--{{ block.settings.style }}">{{ pill_inner }}</a>
+            {%- else -%}
+              <span class="quick-pill quick-pill--{{ block.settings.style }}">{{ pill_inner }}</span>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search & quick pills",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Search placeholder",
+      "default": "Search apples, kiwi, blueberries, fruit bowls..."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_voice",
+      "label": "Show voice search (microphone)",
+      "info": "Only appears in browsers that support speech recognition.",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "scan_link",
+      "label": "Scanner button link",
+      "info": "The green scanner button appears only when a link is set (e.g. your app or a QR landing page)."
+    },
+    {
+      "type": "text",
+      "id": "scan_label",
+      "label": "Scanner button accessible label",
+      "default": "Scan"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Quick pill",
+      "limit": 10,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Quick link", "info": "Emoji are supported, e.g. 🍎 Fresh Fruits" },
+        { "type": "text", "id": "icon", "label": "Icon (Material Symbols name)", "info": "Optional, e.g. bolt, verified, eco" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "neutral",
+          "options": [
+            { "value": "amber", "label": "Amber (highlight)" },
+            { "value": "neutral", "label": "Neutral" },
+            { "value": "mint", "label": "Mint" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Search & quick pills",
+      "blocks": [
+        { "type": "pill", "settings": { "label": "Fast delivery", "icon": "bolt", "style": "amber" } },
+        { "type": "pill", "settings": { "label": "🍎 Fresh Fruits", "style": "neutral" } },
+        { "type": "pill", "settings": { "label": "Bestsellers", "icon": "verified", "style": "mint" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{%- comment -%}
+  Month-by-month season calendar. Uses the "Best months" field of each Fruit Guide.
+{%- endcomment -%}
+<div class="container" data-fruit-season>
+  <header class="page-head">
+    <p class="ft-eyebrow t-label-sm">{{ section.settings.eyebrow }}</p>
+    <h1 class="page-head__title t-display">{{ section.settings.heading | default: page.title }}</h1>
+    {%- if section.settings.text != blank -%}
+      <p class="page-head__text t-body-lg">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="scroller quick-pills ft-months" role="group" aria-label="{{ 'fruit_tools.season.months' | t }}" data-season-months></div>
+
+  <h2 class="t-title-lg c-primary ft-subhead" data-season-title></h2>
+  <ul class="ft-grid" role="list" data-season-list>
+    <noscript><li class="t-body c-muted">{{ 'fruit_tools.needs_js' | t }}</li></noscript>
+  </ul>
+
+  <h2 class="t-title-lg c-primary ft-subhead">{{ 'fruit_tools.season.year_round' | t }}</h2>
+  <ul class="ft-grid ft-grid--compact" role="list" data-season-all></ul>
+  <p class="t-body-sm c-muted ft-note">{{ 'fruit_tools.season.note' | t }}</p>
+</div>
+
+{% render 'fruit-data' %}
+<script src="{{ 'fruit-tools.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Fruit season calendar",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "In season" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What’s at its best right now" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Seasonal fruit tastes better and costs less. Tap a month to see what’s fresh." }
+  ],
+  "presets": [{ "name": "Fruit season calendar" }]
+}
+{% endschema %}

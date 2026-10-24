@@ -1,0 +1,51 @@
+{%- comment -%}
+  Add-on rail: up to 6 available products from the chosen collection that aren't in the basket.
+{%- endcomment -%}
+{%- liquid
+  assign upsell = settings.upsell_collection
+  # A freshly uploaded theme can return the stored handle instead of the collection object.
+  if upsell != blank and upsell.handle == blank
+    assign upsell = collections[upsell]
+  endif
+-%}
+{%- if upsell != blank and settings.upsell_heading != blank -%}
+  {%- assign shown = 0 -%}
+  {%- capture upsell_items -%}
+    {%- for product in upsell.products limit: 20 -%}
+      {%- if shown >= 6 -%}{%- break -%}{%- endif -%}
+      {%- assign in_cart = false -%}
+      {%- for item in cart.items -%}
+        {%- if item.product_id == product.id -%}{%- assign in_cart = true -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if in_cart or product.available == false -%}{%- continue -%}{%- endif -%}
+      {%- assign shown = shown | plus: 1 -%}
+      {%- assign up_variant = product.selected_or_first_available_variant -%}
+      <li class="bup__item">
+        <a href="{{ product.url }}" class="bup__media" tabindex="-1" aria-hidden="true">
+          {%- if product.featured_media -%}
+            {{ product.featured_media | image_url: width: 240 | image_tag: alt: '', loading: 'lazy', width: 96, height: 96 }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </a>
+        <a href="{{ product.url }}" class="bup__title t-label-lg">{{ product.title }}</a>
+        <div class="bup__foot">
+          <span class="bup__price">{{ up_variant.price | money_without_trailing_zeros }}</span>
+          {%- form 'product', product, class: 'card__form', data-product-form: '' -%}
+            <input type="hidden" name="id" value="{{ up_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" name="add" class="card__add card__add--round" aria-label="{{ 'products.product.add_to_cart_aria' | t: title: product.title, variant: '' | escape }}">
+              <span class="icon icon--18" aria-hidden="true">add</span>
+            </button>
+          {%- endform -%}
+        </div>
+      </li>
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if shown > 0 -%}
+    <div class="bup">
+      <p class="bup__heading t-title c-primary">{{ settings.upsell_heading }}</p>
+      <ul class="bup__list scroller" role="list">{{ upsell_items }}</ul>
+    </div>
+  {%- endif -%}
+{%- endif -%}
